@@ -1,163 +1,94 @@
-// TODO This needs to be refactored and integrated in the library, maybe rewrite from 0
+/**
+ * Parser for the Domain Modelling Files
+ * 
+ * @author Alejandro Montes Garcia
+ */
+var domainParser = (function DomainParser() {
+    var instance;
+    
+    function getIterableLength(concept, iterable, callback, forContent) {
+        var loopLength = 10; // TODO Calculate properly
+        callback(loopLength, forContent, iterable);
+    }
+    
+    function addIndexToLabels(forContent, iterable, index) {
+        var tags = forContent.match(/{{.*?}}/g);
+        for(var i in tags) {
+            var tagContent = tags[i].replace(/[{}]/g, "").trim();
+            if(!tagContent.startsWith("/")) {
+                var replacement = "{{";
+                if(tagContent.startsWith("for ")){
+                    replacement += "for ";
+                    tagContent = tagContent.replace(/^for\s+/, "");
+                } else if(tagContent.startsWith("if ")) {
+                    replacement += "if ";
+                    tagContent = tagContent.replace(/^if\s+/, "");
+                }
+                replacement += iterable + "[" + index + "]." + tagContent + "}}";
+                forContent = forContent.replace(tags[i], replacement);
+            }
+        }
+        return forContent;
+    }
+    
+    function getContentInsideFor(text, startPosition, callback) {
+        var closeTagLength = "{{/for}}".length;
+        var content = "";
+        var openedFors = 0;
+        for(var i = startPosition; i < text.length - closeTagLength; i++){
+            var substr = text.substring(i, i + closeTagLength);
+            if(substr === "{{/for}}") {
+                if(openedFors === 0) {
+                    break;
+                } else {
+                    openedFors--;
+                }
+            }
+            substr = text.substring(i, i + "{{for ".length);
+            if(substr === "{{for ") {
+                openedFors++;
+            }
+            content += text[i];
+        }
+        return content;
+    }
+    
+    function expandLoops(concept, callback) {
+        var regexp = /{{for\s.+?}}/;
+        var text = document.body.innerHTML;
+        if(regexp.test(text)) {
+            var loop = text.match(regexp)[0];
+            var index = text.search(regexp);
+            var iterable = loop.replace(/^{{for\s+/, "").replace(/\s*}}$/, "").trim();
+            getIterableLength(concept, iterable, function(loopLength, forContent, iterable) {
+                var toReplace = "";
+                for(var i = 0; i < loopLength; i++) {
+                    toReplace += addIndexToLabels(forContent, iterable, i);
+                }
+                var newHTML = document.body.innerHTML.replace(loop + forContent + "{{/for}}", toReplace);
+                document.body.innerHTML = newHTML;
+            }, getContentInsideFor(text, index + loop.length));
+        }
+    }
+    
+    function init() {
+        return {
+            loadData : function(conceptURL, callback) {
+                $.get(conceptURL, function(fileContent) {
+                    var concept = JSON.parse(fileContent);
+                    expandLoops(concept);
+                }, "html");
+            }
+        };
+    }
+    
+    return {
+        getInstance : function() {
+            if (!instance) {
+                instance = init();
+            }
+            return instance;
+        }
+    };
+})();
 
-function fill_from_dm(concept, callback) {
-	$.get(concept + ".jsonld", function(fileContent) {
-		fileContent = fileContent.replace(/'/g, "\'");
-		var concept = JSON.parse(fileContent);
-		evaluateIfs(concept, function() {
-			evaluateLoops(concept, function() {
-				var tags =  document.documentElement.innerHTML.match(/{{.*?}}/g);
-				tags = tags.filter(function(item, pos, self) {
-					return self.indexOf(item) == pos;
-				});
-				for (i in tags) {
-					var property = tags[i].replace(/[{}]/g, "");
-					getValue(property, concept, function(value, args) {
-						document.documentElement.innerHTML = document.documentElement.innerHTML.replace(new RegExp("{{" + args[0] + "}}", "g"), value);
-						if(args[1] == tags.length -1 && callback) {
-							callback();
-						}
-					}, [property, i]);
-				}
-			});
-		});
-	}, "html");
-}
-
-function evaluateIfs(concept, callback) {
-	var ifs = document.documentElement.innerHTML.match(/{{\?.*}}/g);
-	for (var i in ifs) {
-		var expr = ifs[i];
-		expr = expr.replace(/\..*/, "");
-		var closeTag = "{{/?" + expr.replace(/[{\?\!}]/g, "") + "}}";
-		var re = new RegExp(ifs[i].replace("\?", "\\\?") + "(.|\\n)*?" + closeTag.replace("\/", "\\\/").replace("\?", "\\\?"));
-		var content = document.documentElement.innerHTML.match(re)[0];
-		evaluateExpression(ifs[i].replace(/[{\?}]/g, ""), concept, function(value, executeCallback) {
-			if (value) {
-				document.documentElement.innerHTML = document.documentElement.innerHTML.replace(content, content.replace(ifs[i], "").replace(closeTag, "").trim());
-			} else {
-				document.documentElement.innerHTML = document.documentElement.innerHTML.replace(content, "");
-			}
-			if(executeCallback && callback) {
-				callback();
-			}
-		}, false, i == ifs.length - 1);
-	}
-	if (ifs == undefined) {
-	    if (callback) {
-	        callback();
-	    }
-	}
-}
-
-function evaluateLoops(concept, callback) {
-	var loops = document.documentElement.innerHTML.match(/{{#.*}}/g);
-	if(loops && loops.length > 0) {
-		for (var i in loops) {
-			var loop = loops[i];
-			var loopProp = loop.replace(/[{#}]/g, "").replace(/\..*/, "");
-			var closeTag = "{{/#" + loopProp + "}}";
-			var re = new RegExp(loop + "(.|\\n)*?" + closeTag.replace("\/", "\\\/"));
-			var content = document.documentElement.innerHTML.match(re)[0];
-			var innerContent = content.replace(loop, "").replace(closeTag, "").trim();
-			getValue(loop.replace(/[{#}]/g, ""), concept, function(values) {
-				replaceLoop(values, innerContent, loop, content, callback, i == loops.length - 1);
-			});
-		}
-	} else {
-		callback();
-	}
-}
-
-function replaceLoop(values, innerContent, loop, content, callback, executeCallback) {
-	var urlFinished = 0;
-	for (var j in values) {
-		var value = values[j];
-		base = innerContent.replace("{{\.}}", value);
-		properties = base.match(/{{.*?}}/g);
-		if(properties.length > 0) {
-			$.get(value, function(fileContent) {
-				var loopConcept = JSON.parse(fileContent.replace(/'/g, "\'"));
-				var newContent = base;
-				var propertiesFinished = 0;
-				for(var k in properties) {
-					property = properties[k];
-					getValue(property.replace(/[{}]/g, ""), loopConcept, function(value) {
-						newContent = newContent.replace(property, value);
-						propertiesFinished++;
-						if(propertiesFinished == properties.length) {
-							document.documentElement.innerHTML = document.documentElement.innerHTML.replace(loop, newContent + loop);
-							urlFinished++;
-							if(urlFinished == values.length) {
-								document.documentElement.innerHTML = document.documentElement.innerHTML.replace(content, "");
-								if(executeCallback) {
-									callback();
-								}
-							}
-						}
-					});
-				}
-			});
-		} else {
-			document.documentElement.innerHTML = document.documentElement.innerHTML.replace(loop, base + loop);
-			urlFinished++;
-			if(urlFinished == values.length) {
-				document.documentElement.innerHTML = document.documentElement.innerHTML.replace(content, "");
-				if(executeCallback) {
-					callback();
-				}
-			}
-		}
-	}
-}
-
-function evaluateExpression(expr, concept, callback, invertResult, executeCallback) {
-	getValue(expr.split(" ")[0].trim().replace(/!/g, ""), concept, function(value, args) {
-		var expr = args[0];
-		var concept = args[1];
-		var result;
-		if (expr.indexOf("&gt;") > -1) {
-			result = value > parseFloat(expr.split(" ")[2]);
-		} else if (expr.indexOf("==") > -1) {
-			result = value == parseFloat(expr.split(" ")[2]);
-		} else if (expr.indexOf("&lt;") > -1) {
-			result = value < parseFloat(expr.split(" ")[2]);
-		} else if (expr.indexOf("!=") > -1) {
-			result = value != parseFloat(expr.split(" ")[2]);
-		} else if (expr.indexOf("!") == 0) {
-			evaluateExpression(expr.replace("!", ""), concept, callback, !invertResult);
-		} else {
-			if (value) {
-				result = ( value instanceof Array && value.length > 0) || (!( value instanceof Array) && value != "false");
-			} else {
-				result = false;
-			}
-		}
-		invertResult ? callback(!result, executeCallback) : callback(result, executeCallback);
-	}, [expr, concept]);
-}
-
-function getValue(expr, concept, callback, args) {
-	var firstDot = expr.indexOf("\.");
-	if (expr.indexOf("\.length") > -1 && expr.indexOf("\.length") == firstDot) {
-		expr = expr.replace("\.length", "");
-		if (concept[expr] && concept[expr] instanceof Array) {
-			callback(concept[expr].length, args);
-		} else {
-			callback(null, args);
-		}
-	} else if (firstDot > -1) {
-		var url = concept[expr.substring(0, firstDot)];
-		var subexpr = expr.substring(firstDot + 1, expr.length);
-		if (url) {
-			$.get(url, function(fileContent) {
-				fileContent = fileContent.replace(/'/g, "\'");
-				getValue(subexpr, JSON.parse(fileContent), callback, args);
-			});
-		} else {
-			callback(null, args);
-		}
-	} else {
-		callback(concept[expr], args);
-	}
-}
