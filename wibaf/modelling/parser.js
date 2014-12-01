@@ -263,11 +263,9 @@ var modellingParser = (function ModellingParser() {
 				for (var i = 0; i < args.eventsToCall.length; i++) {
 					window[args.eventsToCall[i]].apply(window);        // The onLoad events are executed inmediately
 				}
-				/*
-				 * The accessed parameter is incremented here, otherwise it cannot be granted that it will be
-				 * updated before the execution of the callback.
-				 */
-				userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
+			}, 
+			addVisit : function() {
+			    userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
 			}
 		};
 	};
