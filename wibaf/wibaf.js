@@ -47,6 +47,10 @@ var wibaf = function() {
     };
 
     function parseModellingFile(srcs, callback, amSrcs) {
+        /*
+         * The visited counter is updated here because the onload events are not granted to finish before the execution of the callback.
+         */
+        modellingParser.getInstance().addVisit();
         if (srcs && srcs.length > 0) {
             var src = srcs.pop();
             $.get(src, function(fileContent) {
