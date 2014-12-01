@@ -256,8 +256,8 @@ var modellingParser = (function ModellingParser() {
 					if (token.length > 0) {
 						result = automata[state].executeTransition(token, args);
 						state = result.newState;
-						args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
 					}
+					args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
 				}
 				document.body.appendChild(args.script);
 				for (var i = 0; i < args.eventsToCall.length; i++) {

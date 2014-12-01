@@ -235,8 +235,8 @@ var adaptationParser = (function AdaptationParser() {
                     if (token.length > 0) {
                         result = automata[state].executeTransition(token, args);
                         state = result.newState;
-                        args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
                     }
+                    args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
                 }
                 if (callback) {
                     callback(arg);
