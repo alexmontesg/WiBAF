@@ -10,24 +10,24 @@ var rules = (function RulesManager() {
 	function init() {
 	    
 	    function addRule(rule) {
-	        
+	        database.get("privacyRules", function(rules) {
+                if(!rules) {
+                    database.add({
+                        name : "privacyRules",
+                        value : [rule]
+                    }, "settings");
+                } else {
+                    var ruleArr = rules.value;
+                    ruleArr.push(value);
+                    database.update("privacyRules", "value", ruleArr, "settings");
+                }
+            });
 	    }
 		
-		database.get("privacyRules", function(value) {
-		    if(!value) {
-		        database.add({
-		            name : "privacyRules",
-		            value : []
-		        }, "settings");
-		        addRule(new Rule("default", 1));
-		    }
-		});
+		addRule(new Rule("default", 1));
 		
 		return {
-			addRule : addRule,
-			remove : remove,
-			get : get,
-			getAll : getAll,
+			addRule : addRule
 		};
 	}
 	
