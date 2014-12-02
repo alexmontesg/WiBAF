@@ -256,18 +256,16 @@ var modellingParser = (function ModellingParser() {
 					if (token.length > 0) {
 						result = automata[state].executeTransition(token, args);
 						state = result.newState;
-						args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
 					}
+					args.tokens = args.tokens.slice(result.consumedTokens, args.tokens.length);       // Removes the tokens consumed
 				}
 				document.body.appendChild(args.script);
 				for (var i = 0; i < args.eventsToCall.length; i++) {
 					window[args.eventsToCall[i]].apply(window);        // The onLoad events are executed inmediately
 				}
-				/*
-				 * The accessed parameter is incremented here, otherwise it cannot be granted that it will be
-				 * updated before the execution of the callback.
-				 */
-				userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
+			}, 
+			addVisit : function() {
+			    userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
 			}
 		};
 	};

@@ -47,6 +47,10 @@ var wibaf = function() {
     };
 
     function parseModellingFile(srcs, callback, amSrcs) {
+        /*
+         * The visited counter is updated here because the onload events are not granted to finish before the execution of the callback.
+         */
+        modellingParser.getInstance().addVisit();
         if (srcs && srcs.length > 0) {
             var src = srcs.pop();
             $.get(src, function(fileContent) {
@@ -80,13 +84,21 @@ var wibaf = function() {
          *
          * @param {Object} callback: Code to be executed after the files
          * are parsed
+         * @param {String} conceptURL: URL to the jsonld file containing the
+         * domain model
          */
-        init : function(callback) {
+        init : function(callback, conceptURL) {
             stringManipulator.addStringMethods();
             database = databaseFactory.getInstance().createDatabase({
                 useIndexedDB : supportIndexedDB(),
                 callback : function() {
-                    parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                    if(conceptURL) {
+                        domainParser.getInstance().loadData(conceptURL, function() {
+                            parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                        });
+                    } else {
+                        parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                    }
                 }
             });
         }
