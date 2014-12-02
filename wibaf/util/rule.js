@@ -3,13 +3,13 @@
  * 
  * @param {String} name
  * @param {Object} value
- * @param {Object} filters
+ * @param {Object} type
  * @author Alejandro Montes Garcia
  */
-var Rule = function(name, value, filters) {
+var Rule = function(name, value, type) {
     this.name = name;
     this.value = value;
-    this.filters = filters;
+    this.type = type;
 };
 
 Rule.prototype.checkIfApplies = function(data) {

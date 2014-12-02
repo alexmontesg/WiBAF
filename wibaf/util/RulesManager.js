@@ -27,43 +27,68 @@ var rules = (function RulesManager() {
         function deleteRule(name, callback) {
             database.get("privacyRules", function(rules) {
                 if (rules) {
-                    var oldArr = rules.value;
-                    var newArr = [];
-                    var j = 0;
-                    for (var i = 0; i < oldArr.length; i++) {
-                        if (oldArr[i].name !== name) {
-                            newArr[j++] = oldArr[i];
+                    var ruleArr = rules.value;
+                    var index = -1;
+                    for (var i = 0; i < ruleArr.length; i++) {
+                        if (ruleArr[i].name === name) {
+                            index = i;
+                            break;
                         }
                     }
-                    database.update("privacyRules", "value", newArr, "settings", callback);
-                }
-            });
-        }
-        
-        function getRule(name, callback) {
-            database.get("privacyRules", function(rules) {
-                if (rules) {
-                    var oldArr = rules.value;
-                    var newArr = [];
-                    var j = 0;
-                    for (var i = 0; i < oldArr.length; i++) {
-                        if (oldArr[i].name === name) {
-                            newArr[j++] = oldArr[i];
-                        }
+                    if (index > -1) {
+                        ruleArr.splice(index, 1);
                     }
-                    callback(newArr);
-                } else {
-                    callback([]);
+                    database.update("privacyRules", "value", ruleArr, "settings", callback);
+                } else if (callback) {
+                    callback();
                 }
             });
         }
 
-        addRule(new Rule("default", 1));
+        function getRule(name, callback) {
+            database.get("privacyRules", function(rules) {
+                var rule;
+                if (rules) {
+                    var ruleArr = rules.value;
+                    for (var i = 0; i < ruleArr.length; i++) {
+                        if (ruleArr[i].name === name) {
+                            rule = ruleArr[i];
+                            break;
+                        }
+                    }
+                }
+                if (callback) {
+                    callback(rule);
+                }
+            });
+        }
+
+        function updateRule(name, newValue, callback) {
+            database.get("privacyRules", function(rules) {
+                if (rules) {
+                    var ruleArr = rules.value;
+                    var index = -1;
+                    for (var i = 0; i < ruleArr.length; i++) {
+                        if (ruleArr[i].name === name) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index > -1) {
+                        ruleArr[index].value = newValue;
+                    }
+                    database.update("privacyRules", "value", ruleArr, "settings", callback);
+                } else if (callback) {
+                    callback();
+                }
+            });
+        }
 
         return {
             addRule : addRule,
             deleteRule : deleteRule,
-            getRule : getRule
+            getRule : getRule,
+            updateRule : updateRule
         };
     }
 
