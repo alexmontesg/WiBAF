@@ -229,7 +229,8 @@ var modellingParser = (function ModellingParser() {
 			    "inc" : new Transition(addFunctionNameToQueue, "op"),
 			    "dec" : new Transition(addFunctionNameToQueue, "op"),
 			    "update" : new Transition(addFunctionNameToQueue, "op"),
-			    "add_obs" : new Transition(addFunctionNameToQueue, "op")
+			    "add_obs" : new Transition(addFunctionNameToQueue, "op"),
+			    "init" : new Transition(addFunctionNameToQueue, "op")
 			}),
 			"op" : new State({
 			    ";" : new Transition(addEndFunctionCallToQueue, "on3"),
