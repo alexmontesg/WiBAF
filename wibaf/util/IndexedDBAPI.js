@@ -18,7 +18,9 @@ var IndexedDBAPI = function() {
 		function add(args, collection, callback) {
 			args.times_updated = 1;
 			args.last_updated = new Date().getTime();
-			db.transaction([collection], "readwrite").objectStore(collection).add(args).onsuccess = function() {
+			var trans = db.transaction([collection], "readwrite");
+			trans.objectStore(collection).add(args);
+			trans.oncomplete = function() {
 				if (callback) {
 					callback();
 				}

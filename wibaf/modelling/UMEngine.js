@@ -20,15 +20,7 @@ var userModel = (function UMEngine() {
             }
         }
 
-        function init(name, type, url, use, domain, callback) {
-            var value = null;
-            if (type === "numeric") {
-                value = 0;
-            } else if (type === "text") {
-                value = "";
-            } else if (type === "boolean") {
-                value = false;
-            }
+        function init(name, value, type, url, use, domain, callback) {
             var object = {
                 name : name,
                 value : value,

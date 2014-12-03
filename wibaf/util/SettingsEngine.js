@@ -27,11 +27,16 @@ var settings = (function SettingsEngine() {
 			database.getAll("settings", callback);
 		}
 		
+		function update(name, newValue, callback) {
+		    database.update(name, "value", newValue, "settings", callback);
+		}
+		
 		return {
 			add : add,
 			remove : remove,
 			get : get,
 			getAll : getAll,
+			update : update
 		};
 	}
 	

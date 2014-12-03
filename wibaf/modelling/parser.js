@@ -265,8 +265,16 @@ var modellingParser = (function ModellingParser() {
 					window[args.eventsToCall[i]].apply(window);        // The onLoad events are executed inmediately
 				}
 			}, 
-			addVisit : function() {
-			    userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
+			addVisit : function(callback) {
+			    var varName = (document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
+			    userModel.getInstance().get(varName, function(value) {
+			        if(value) {
+			            userModel.getInstance().inc(varName, callback);
+			        } else {
+			            // TODO Define proper use, domain and url
+			            userModel.getInstance().init(varName, 1, "numeric", document.URL, null, null, callback);
+			        }
+			    });
 			}
 		};
 	};

@@ -10,22 +10,28 @@ var rules = (function RulesManager() {
     function init() {
 
         function addRule(rule, callback) {
-            database.get("privacyRules", function(rules) {
+            settings.getInstance().get("privacyRules", function(rules) {
                 if (!rules) {
-                    database.add({
-                        name : "privacyRules",
-                        value : [rule]
-                    }, "settings", callback);
+                    settings.getInstance().add("privacyRules", [rule], callback);
                 } else {
                     var ruleArr = rules.value;
-                    ruleArr.push(value);
-                    database.update("privacyRules", "value", ruleArr, "settings", callback);
+                    var found = false;
+                    for(var i = 0; i < ruleArr.length; i++) {
+                        if(ruleArr[i].name === rule.name) {
+                            found = true;
+                            ruleArr[i] = rule;
+                        }
+                    }
+                    if(!found) {
+                        ruleArr.push(rule);
+                    }
+                    settings.getInstance().update("privacyRules", ruleArr, callback);
                 }
             });
         }
 
         function deleteRule(name, callback) {
-            database.get("privacyRules", function(rules) {
+            settings.getInstance().get("privacyRules", function(rules) {
                 if (rules) {
                     var ruleArr = rules.value;
                     var index = -1;
@@ -38,7 +44,7 @@ var rules = (function RulesManager() {
                     if (index > -1) {
                         ruleArr.splice(index, 1);
                     }
-                    database.update("privacyRules", "value", ruleArr, "settings", callback);
+                    settings.getInstance().update("privacyRules", ruleArr, callback);
                 } else if (callback) {
                     callback();
                 }
@@ -46,7 +52,7 @@ var rules = (function RulesManager() {
         }
 
         function getRule(name, callback) {
-            database.get("privacyRules", function(rules) {
+            settings.getInstance().get("privacyRules", function(rules) {
                 var rule;
                 if (rules) {
                     var ruleArr = rules.value;
@@ -64,7 +70,7 @@ var rules = (function RulesManager() {
         }
 
         function updateRule(name, newValue, callback) {
-            database.get("privacyRules", function(rules) {
+            settings.getInstance().get("privacyRules", function(rules) {
                 if (rules) {
                     var ruleArr = rules.value;
                     var index = -1;
@@ -77,7 +83,7 @@ var rules = (function RulesManager() {
                     if (index > -1) {
                         ruleArr[index].value = newValue;
                     }
-                    database.update("privacyRules", "value", ruleArr, "settings", callback);
+                    settings.getInstance().update("privacyRules", ruleArr, callback);
                 } else if (callback) {
                     callback();
                 }

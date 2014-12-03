@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Scrutability and privacy settings</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../third -party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" href="../third -party-libs/foundation/css/foundation.min.css">
+        <link rel="stylesheet" href="./style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../third -party-libs/foundation/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="..">WiBAF: Within Browser Adaptation Framework</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">Menu</a>
+                </li>
+            </ul>
+        </nav>
+
+        <header>
+            <div class="row">
+                <h2>Privacy settings</h2>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <h3>Your current configuration</h3>
+                <div class="large-8 medium-10 columns large-centered medium-centered">
+                    <form>
+                        Privacy
+                        <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="2"/>
+                        Personalization
+                    </form>
+                    <p id="privacyExplanation"></p>
+                </div>
+            </div>
+            <div class="row">
+                <dl class="accordion" data-accordion>
+                    <dd class="accordion-navigation">
+                        <a href="#panelAdvanced">Advanced settings</a>
+                        <div id="panelAdvanced" class="content">
+                            <div class="row">
+                                <div class="small-12 large-7 columns">
+                                    <div class="row">
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Type of data
+                                            </div>
+                                            <div class="row">
+                                                <select id="type" name="type">
+                                                    <option value="music">Data from the music domain</option>
+                                                    <option value="art">Data from the art domain</option>
+                                                    <option value="demographic">Demographic data</option>
+                                                    <option value="pageviews">Data obtained from pageviews</option>
+                                                    <option value="queries">Data obtained from queries</option>
+                                                    <option value="clicks">Data obtained from clicks</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Accuracy
+                                            </div>
+                                            <div class="row collapse">
+                                                <div class="small-9 columns">
+                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100"/>
+                                                </div>
+                                                <div class="small-3 columns">
+                                                    <span class="postfix">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Use of data
+                                            </div>
+                                            <div class="row">
+                                                <select id="use" name="use">
+                                                    <option value="contentPersonalization">Personalization of content inside this website</option>
+                                                    <option value="advertismentPersonalization">Personalization of advertisment inside this website</option>
+                                                    <option value="thisWebsite">Uses different than personalization inside this website</option>
+                                                    <option value="sharing">Sharing with third parties</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                        <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
+                                    </div>
+                                </div>
+                                <div class="small-12 large-5 columns">
+                                    <div class="panel callout radius">
+                                        <h4>Current rules</h4>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <div class="row">
+                <h3>This is what we know about you</h3>
+                <table id="userModel">
+                    <thead>
+                        <tr>
+                            <th> Variable </th>
+                            <th> Value </th>
+                            <th> Stored in </th>
+                            <th> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
+                    <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <h4>With the collaboration of</h4>
+                <a href="http://www.tue.nl/"><img src="../img/logo-tue.png" alt="TU Eindhoven"/></a>
+                <a href="http://adversitement.com/"><img src="../img/adversitement.png" alt="Adversitement"/></a>
+            </div>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            privacyLevels = ["No data is tracked. No personalization is offered.", "Data is stored in your machine. Some personalization is offered.", "Data is stored in our servers. Full personalization is offered."];
+
+            function deleteUM(itemName) {
+                userModel.getInstance().remove(itemName, updateTable);
+            }
+
+            function editUM(itemName) {
+                userModel.getInstance().update(itemName, document.getElementById("newValue").value, updateTable);
+            }
+
+            function displayInput(itemName) {
+                var td = document.getElementById("row_" + itemName).lastChild;
+                while (td.firstChild) {
+                    td.removeChild(td.firstChild);
+                }
+                var input = document.createElement("input");
+                // TODO If numeric???
+                input.setAttribute("type", "text");
+                input.id = "newValue";
+                td.appendChild(input);
+                td.appendChild(createLinkButton("Save", "editUM", itemName));
+            }
+
+            function deleteAll(itemName) {
+                userModel.getInstance().removeAll(updateTable);
+            }
+
+            function save(callback) {
+                rules.getInstance().addRule(new Rule("default", document.getElementById("privacyvspersonalization").value, "default"), callback);
+            }
+
+            function updateRuleList() {
+                alert("TODO");
+            }
+
+            function addRule() {
+                var rule = {
+                    "type" : document.getElementById("type").value,
+                    "accuracy" : document.getElementById("accuracy").value,
+                    "use" : document.getElementById("use").value
+                };
+                settings.getInstance().get("privacyRules", function(value) {
+                    if (value && value != null) {
+                        value.value.push(rule);
+                        settings.getInstance().add("privacyRules", value.value, updateRuleList);
+                    } else {
+                        settings.getInstance().add("privacyRules", [rule], updateRuleList);
+                    }
+                });
+            }
+
+            function updateTable() {
+                var tbody = document.getElementById("userModel").getElementsByTagName("tbody")[0];
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                userModel.getInstance().getAll(function(items) {
+                    for (var i in items) {
+                        var item = items[i];
+                        var row = document.createElement("tr");
+                        row.id = "row_" + item.name;
+                        var name = document.createElement("td");
+                        var value = document.createElement("td");
+                        var stored = document.createElement("td");
+                        var actions = document.createElement("td");
+                        name.textContent = item.name;
+                        value.textContent = item.value;
+                        stored.textContent = item.server ? "Server" : "Your computer";
+                        actions.appendChild(createLinkButton("Edit", "displayInput", item.name));
+                        actions.appendChild(createLinkButton("Delete", "deleteUM", item.name));
+                        row.appendChild(name);
+                        row.appendChild(value);
+                        row.appendChild(stored);
+                        row.appendChild(actions);
+                        tbody.appendChild(row);
+                    }
+                });
+            }
+
+            function createLinkButton(text, javascriptFunction, itemName) {
+                var btn = document.createElement("a");
+                btn.className = "tiny radius button umButton";
+                btn.setAttribute("href", "javascript:void(0)");
+                btn.textContent = text;
+                btn.setAttribute("onclick", javascriptFunction + "('" + itemName + "')");
+                return btn;
+            }
+
+            function updateMainSlider() {
+                var slider = document.getElementById("privacyvspersonalization");
+                rules.getInstance().getRule("default", function(value){
+                    if(value && value != null) {
+                        slider.value = value.value;
+                    } else {
+                        value = 1;
+                        slider.value = value;
+                        save();
+                    }
+                    document.getElementById("privacyExplanation").textContent = privacyLevels[slider.value];
+                });
+            }
+
+            $(function() {
+                new wibaf().init(function() {
+                    $(document).foundation();
+                    updateTable();
+                    updateMainSlider();
+                    document.getElementById("privacyvspersonalization").onchange = function(e) {
+                        save(updateMainSlider);
+                    };
+                });
+            });
+        </script>
+    </body>
+</html>
