@@ -110,7 +110,9 @@
                                 <div class="small-12 large-5 columns">
                                     <div class="panel callout radius">
                                         <h4>Current rules</h4>
-
+                                        <ul id="toServer">
+                                            
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +204,18 @@
             }
 
             function updateRuleList() {
-                alert("TODO");
+                rules.getInstance().getRulesByType("toServer", function(rules) {
+                    var list = document.getElementById("toServer");
+                    for(var i = 0; i < rules.length; i++) {
+                        var rule = rules[i];
+                        var domain = rule.value.domain;
+                        var accuracy = rule.value.accuracy;
+                        var use = rule.value.use;
+                        var element = document.createElement("li");
+                        element.innerText = domain + " data sent to the server with " + accuracy + "% accuracy for " + use;
+                        list.appendChild(element);
+                    }
+                });
             }
 
             function addRule() {
@@ -272,6 +285,7 @@
                     $(document).foundation();
                     updateTable();
                     updateMainSlider();
+                    updateRuleList();
                     document.getElementById("privacyvspersonalization").onchange = function(e) {
                         save(updateMainSlider);
                     };

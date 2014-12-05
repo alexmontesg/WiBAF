@@ -93,19 +93,19 @@ var rules = (function RulesManager() {
         function getRulesByType(type, callback) {
             var matchingRules = [];
             settings.getInstance().get("privacyRules", function(rules) {
-                var rule;
                 if (rules) {
                     var ruleArr = rules.value;
                     for (var i = 0; i < ruleArr.length; i++) {
+                        console.log(ruleArr[i].type === type);
                         if (ruleArr[i].type === type) {
                             matchingRules.push(ruleArr[i]);
                         }
                     }
                 }
+                if (callback) {
+                    callback(matchingRules);
+                }
             });
-            if (callback) {
-                callback(matchingRules);
-            }
         }
 
         return {
