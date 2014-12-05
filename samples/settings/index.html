@@ -206,19 +206,14 @@
             }
 
             function addRule() {
-                var rule = {
-                    "type" : document.getElementById("type").value,
-                    "accuracy" : document.getElementById("accuracy").value,
-                    "use" : document.getElementById("use").value
-                };
-                settings.getInstance().get("privacyRules", function(value) {
-                    if (value && value != null) {
-                        value.value.push(rule);
-                        settings.getInstance().add("privacyRules", value.value, updateRuleList);
-                    } else {
-                        settings.getInstance().add("privacyRules", [rule], updateRuleList);
-                    }
-                });
+                var domain = document.getElementById("type").value;
+                var accuracy = document.getElementById("accuracy").value;
+                var use = document.getElementById("use").value;
+                rules.getInstance().addRule(new Rule("toServer_" + domain + "_" + use, {
+                    domain : domain,
+                    accuracy : accuracy,
+                    use : use
+                }, "toServer"), updateRuleList);
             }
 
             function updateTable() {
@@ -260,8 +255,8 @@
 
             function updateMainSlider() {
                 var slider = document.getElementById("privacyvspersonalization");
-                rules.getInstance().getRule("default", function(value){
-                    if(value && value != null) {
+                rules.getInstance().getRule("default", function(value) {
+                    if (value && value != null) {
                         slider.value = value.value;
                     } else {
                         value = 1;

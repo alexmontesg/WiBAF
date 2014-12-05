@@ -16,13 +16,13 @@ var rules = (function RulesManager() {
                 } else {
                     var ruleArr = rules.value;
                     var found = false;
-                    for(var i = 0; i < ruleArr.length; i++) {
-                        if(ruleArr[i].name === rule.name) {
+                    for (var i = 0; i < ruleArr.length; i++) {
+                        if (ruleArr[i].name === rule.name) {
                             found = true;
                             ruleArr[i] = rule;
                         }
                     }
-                    if(!found) {
+                    if (!found) {
                         ruleArr.push(rule);
                     }
                     settings.getInstance().update("privacyRules", ruleArr, callback);
@@ -90,11 +90,30 @@ var rules = (function RulesManager() {
             });
         }
 
+        function getRulesByType(type, callback) {
+            var matchingRules = [];
+            settings.getInstance().get("privacyRules", function(rules) {
+                var rule;
+                if (rules) {
+                    var ruleArr = rules.value;
+                    for (var i = 0; i < ruleArr.length; i++) {
+                        if (ruleArr[i].type === type) {
+                            matchingRules.push(ruleArr[i]);
+                        }
+                    }
+                }
+            });
+            if (callback) {
+                callback(matchingRules);
+            }
+        }
+
         return {
             addRule : addRule,
             deleteRule : deleteRule,
             getRule : getRule,
-            updateRule : updateRule
+            updateRule : updateRule,
+            getRulesByType : getRulesByType
         };
     }
 
