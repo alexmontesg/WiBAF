@@ -12,25 +12,30 @@ var userModel = (function UMEngine() {
             //TODO Implement
             return false;
         }
-        
+
         function showError(varName, callback) {
             console.error("Error " + varName + " not found");
-            if(callback) {
+            if (callback) {
                 callback();
             }
         }
 
         function init(name, value, type, url, use, domain, callback) {
-            var object = {
-                name : name,
-                value : value,
-                url : url,
-                use : use,
-                domain : domain,
-                type : type
-            };
-            object["server"] = isServerVar(object);
-            database.add(object, "user_model", callback);
+            name = name.replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
+            database.get(name, "user_model", function(stored) {
+                if (!stored || stored === null) {
+                    var object = {
+                        name : name,
+                        value : value,
+                        url : url,
+                        use : use,
+                        domain : domain,
+                        type : type
+                    };
+                    object["server"] = isServerVar(object);
+                    database.add(object, "user_model", callback);
+                }
+            });
         }
 
         function inc(UMvar, callback) {

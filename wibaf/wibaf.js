@@ -47,26 +47,20 @@ var wibaf = function() {
     };
 
     function parseModellingFile(srcs, callback, amSrcs) {
-        /*
-         * The visited counter is updated here because the onload events are not
-         * granted to finish before the execution of the callback.
-         */
-        modellingParser.getInstance().addVisit(function() {
-            if (srcs && srcs.length > 0) {
-                var src = srcs.pop();
-                $.get(src, function(fileContent) {
-                    var tokens = fileContent.replace(/[`{}:;,]/g, function(str) {
-                        // Makes sure that special characters are treated as
-                        // tokens
-                        return " " + str + " ";
-                    }).tokenize();
-                    parseModellingFile(srcs, callback, amSrcs);
-                    modellingParser.getInstance().parse(tokens);
-                });
-            } else {
-                parseAdaptationFile(amSrcs, callback);
-            }
-        });
+        if (srcs && srcs.length > 0) {
+            var src = srcs.pop();
+            $.get(src, function(fileContent) {
+                var tokens = fileContent.replace(/[`{}:;,]/g, function(str) {
+                    // Makes sure that special characters are treated as
+                    // tokens
+                    return " " + str + " ";
+                }).tokenize();
+                parseModellingFile(srcs, callback, amSrcs);
+                modellingParser.getInstance().parse(tokens);
+            });
+        } else {
+            parseAdaptationFile(amSrcs, callback);
+        }
     };
 
     function getSources(type) {
@@ -97,10 +91,18 @@ var wibaf = function() {
                 callback : function() {
                     if (conceptURL) {
                         domainParser.getInstance().loadData(conceptURL, function() {
-                            parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                            /*
+                             * The visited counter is updated here because the onload events are not
+                             * granted to finish before the execution of the callback.
+                             */
+                            modellingParser.getInstance().addVisit(function() {
+                                parseModellingFile(getSources("umf"), callback, getSources("amf"), true);
+                            });
                         });
                     } else {
-                        parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                        modellingParser.getInstance().addVisit(function() {
+                            parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                        });
                     }
                 }
             });

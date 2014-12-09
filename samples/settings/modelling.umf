@@ -1,0 +1,7 @@
+event load = `document.load`
+
+on load {
+    init "Art knowledge", 50, "numeric", "http://www.example.org/art-knowledge", 1, "art";
+    init "Music knowledge", 25, "numeric", "http://www.example.org/music-knowledge", 1, "music";
+    init "Age", 24, "numeric", "http://www.example.org/art-knowledge", 1, "demographic";
+}

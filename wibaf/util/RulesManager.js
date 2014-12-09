@@ -96,7 +96,6 @@ var rules = (function RulesManager() {
                 if (rules) {
                     var ruleArr = rules.value;
                     for (var i = 0; i < ruleArr.length; i++) {
-                        console.log(ruleArr[i].type === type);
                         if (ruleArr[i].type === type) {
                             matchingRules.push(ruleArr[i]);
                         }
