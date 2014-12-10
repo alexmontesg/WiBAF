@@ -62,44 +62,47 @@
                             <div class="row">
                                 <div class="small-12 large-7 columns">
                                     <div class="row">
-                                        <div class="small-12 large-4 columns">
-                                            <div class="row">
-                                                Type of data
-                                            </div>
-                                            <div class="row">
-                                                <select id="type" name="type">
-                                                    <option value="music">Data from the music domain</option>
-                                                    <option value="art">Data from the art domain</option>
-                                                    <option value="demographic">Demographic data</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="small-12 large-4 columns">
-                                            <div class="row">
-                                                Accuracy
-                                            </div>
-                                            <div class="row collapse">
-                                                <div class="small-9 columns">
-                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                        <fieldset>
+                                            <legend>Send some data to the server</legend>
+                                            <div class="small-12 large-4 columns">
+                                                <div class="row">
+                                                    Type of data
                                                 </div>
-                                                <div class="small-3 columns">
-                                                    <span class="postfix">%</span>
+                                                <div class="row">
+                                                    <select id="type" name="type">
+                                                        <option value="music">Data from the music domain</option>
+                                                        <option value="art">Data from the art domain</option>
+                                                        <option value="demographic">Demographic data</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="small-12 large-4 columns">
-                                            <div class="row">
-                                                Use of data
+                                            <div class="small-12 large-4 columns">
+                                                <div class="row">
+                                                    Accuracy
+                                                </div>
+                                                <div class="row collapse">
+                                                    <div class="small-9 columns">
+                                                        <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                                    </div>
+                                                    <div class="small-3 columns">
+                                                        <span class="postfix">%</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <select id="use" name="use">
-                                                    <option value="1">Personalization of content inside this website</option>
-                                                    <option value="2">Personalization of advertisment inside this website</option>
-                                                    <option value="3">Uses different than personalization inside this website</option>
-                                                    <option value="4">Sharing with third parties</option>
-                                                </select>
+                                            <div class="small-12 large-4 columns">
+                                                <div class="row">
+                                                    Use of data
+                                                </div>
+                                                <div class="row">
+                                                    <select id="use" name="use">
+                                                        <option value="1">Personalization of content inside this website</option>
+                                                        <option value="2">Personalization of advertisment inside this website</option>
+                                                        <option value="3">Uses different than personalization inside this website</option>
+                                                        <option value="4">Sharing with third parties</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </fieldset>
                                     </div>
                                     <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
                                         <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
