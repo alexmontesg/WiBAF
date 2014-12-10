@@ -13,5 +13,6 @@ var Rule = function(name, value, type) {
 };
 
 Rule.prototype.checkIfApplies = function(data) {
-    // TODO Check if data matches filters
+    //TODO Only a match by domain is checked, there could be more possibilities
+    return this.value.domain && this.value.domain.toLowerCase() === data.domain.toLowerCase();
 };
