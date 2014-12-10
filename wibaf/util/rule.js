@@ -14,5 +14,5 @@ var Rule = function(name, value, type) {
 
 Rule.prototype.checkIfApplies = function(data) {
     //TODO Only a match by domain is checked, there could be more possibilities
-    return this.value.domain && this.value.domain.toLowerCase() === data.domain.toLowerCase();
+    return this.value.domain && data.domain && this.value.domain.toLowerCase() === data.domain.toLowerCase();
 };

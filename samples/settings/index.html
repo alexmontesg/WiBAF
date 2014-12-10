@@ -96,10 +96,10 @@
                                             </div>
                                             <div class="row">
                                                 <select id="use" name="use">
-                                                    <option value="contentPersonalization">Personalization of content inside this website</option>
-                                                    <option value="advertismentPersonalization">Personalization of advertisment inside this website</option>
-                                                    <option value="thisWebsite">Uses different than personalization inside this website</option>
-                                                    <option value="sharing">Sharing with third parties</option>
+                                                    <option value="1">Personalization of content inside this website</option>
+                                                    <option value="2">Personalization of advertisment inside this website</option>
+                                                    <option value="3">Uses different than personalization inside this website</option>
+                                                    <option value="4">Sharing with third parties</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
                                     <div class="panel callout radius">
                                         <h4>Current rules</h4>
                                         <ul id="toServer">
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@
             function updateRuleList() {
                 rules.getInstance().getRulesByType("toServer", function(rules) {
                     var list = document.getElementById("toServer");
-                    for(var i = 0; i < rules.length; i++) {
+                    for (var i = 0; i < rules.length; i++) {
                         var rule = rules[i];
                         var domain = rule.value.domain;
                         var accuracy = rule.value.accuracy;
@@ -222,12 +222,15 @@
             function addRule() {
                 var domain = document.getElementById("type").value;
                 var accuracy = document.getElementById("accuracy").value;
-                var use = document.getElementById("use").value;
-                rules.getInstance().addRule(new Rule("toServer_" + domain + "_" + use, {
+                var use = parseInt(document.getElementById("use").value);
+                rules.getInstance().addRule(new Rule("toServer_" + domain, {
                     domain : domain,
                     accuracy : accuracy,
                     use : use
-                }, "toServer"), updateRuleList);
+                }, "toServer"), function() {
+                    updateRuleList();
+                    userModel.getInstance().updateServerValues(updateTable);
+                });
             }
 
             function updateTable() {
@@ -246,7 +249,7 @@
                         var actions = document.createElement("td");
                         name.textContent = item.name;
                         value.textContent = item.value;
-                        stored.textContent = item.server ? "Server" : "Your computer";
+                        stored.textContent = item.server.send ? "Server: " + item.server.accuracy + "% accuracy and use " + item.server.use : "Your computer";
                         actions.appendChild(createLinkButton("Edit", "displayInput", item.name));
                         actions.appendChild(createLinkButton("Delete", "deleteUM", item.name));
                         row.appendChild(name);

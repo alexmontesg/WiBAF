@@ -8,9 +8,28 @@ var userModel = (function UMEngine() {
     var instance;
 
     function init() {
-        function isServerVar(object) {
-            //TODO Implement
-            return false;
+        function toServerProperties(object, callback) {
+            var ruleSet = rules.getInstance().getRulesByType("toServer", function(ruleSet) {
+                var accuracy = Number.MAX_VALUE;
+                var use = Number.MAX_VALUE;
+                var server = false;
+                for (var i = 0; i < ruleSet.length; i++) {
+                    var rule = new Rule(ruleSet[i].name, ruleSet[i].value, ruleSet[i].type);
+                    if (rule.checkIfApplies(object)) {
+                        server = true;
+                        accuracy = rule.value.accuracy < accuracy ? rule.value.accuracy : accuracy;
+                        use = rule.value.use < use ? rule.value.use : use;
+                    }
+                }
+                if (callback) {
+                    object["server"] = {
+                        send : server,
+                        accuracy : accuracy,
+                        use : use
+                    };
+                    callback(object);
+                }
+            });
         }
 
         function showError(varName, callback) {
@@ -20,7 +39,7 @@ var userModel = (function UMEngine() {
             }
         }
 
-        function init(name, value, type, url, use, domain, callback) {
+        function init(name, value, type, url, feedback, domain, callback) {
             name = name.replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
             database.get(name, "user_model", function(stored) {
                 if (!stored || stored === null) {
@@ -28,12 +47,13 @@ var userModel = (function UMEngine() {
                         name : name,
                         value : value,
                         url : url,
-                        use : use,
+                        feedback : feedback,
                         domain : domain,
                         type : type
                     };
-                    object["server"] = isServerVar(object);
-                    database.add(object, "user_model", callback);
+                    toServerProperties(object, function(object) {
+                        database.add(object, "user_model", callback);
+                    });
                 }
             });
         }
@@ -94,9 +114,23 @@ var userModel = (function UMEngine() {
             database.removeAll("user_model", callback);
         }
 
-        function add(object, callback) {
-            object.server = isServerVar();
-            database.add(object, "user_model", callback);
+        function updateServerValues(callback) {
+            getAll(function(vars) {
+                var total = vars.length;
+                var done = 0;
+                function checker() {
+                    if (callback && ++done === total) {
+                        callback();
+                    }
+                }
+
+                for (var i = 0; i < vars.length; i++) {
+                    var umvar = vars[i];
+                    toServerProperties(umvar, function(object) {
+                        database.update(object.name, "server", object.server, "user_model", checker);
+                    });
+                }
+            });
         }
 
         return {
@@ -106,10 +140,10 @@ var userModel = (function UMEngine() {
             add_obs : addObs,
             get : get,
             getAll : getAll,
-            add : add,
             remove : remove,
             removeAll : removeAll,
-            init : init
+            init : init,
+            updateServerValues : updateServerValues
         };
     }
 
