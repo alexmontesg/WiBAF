@@ -71,9 +71,6 @@
                                                     <option value="music">Data from the music domain</option>
                                                     <option value="art">Data from the art domain</option>
                                                     <option value="demographic">Demographic data</option>
-                                                    <option value="pageviews">Data obtained from pageviews</option>
-                                                    <option value="queries">Data obtained from queries</option>
-                                                    <option value="clicks">Data obtained from clicks</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -83,7 +80,7 @@
                                             </div>
                                             <div class="row collapse">
                                                 <div class="small-9 columns">
-                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100"/>
+                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
                                                 </div>
                                                 <div class="small-3 columns">
                                                     <span class="postfix">%</span>
@@ -207,13 +204,16 @@
             function updateRuleList() {
                 rules.getInstance().getRulesByType("toServer", function(rules) {
                     var list = document.getElementById("toServer");
+                    while (list.firstChild) {
+                        list.removeChild(list.firstChild);
+                    }
                     for (var i = 0; i < rules.length; i++) {
                         var rule = rules[i];
                         var domain = rule.value.domain;
                         var accuracy = rule.value.accuracy;
                         var use = rule.value.use;
                         var element = document.createElement("li");
-                        element.innerText = domain + " data sent to the server with " + accuracy + "% accuracy for " + use;
+                        element.innerText = "Data from the " + domain + " domain sent to the server with " + accuracy + "% accuracy for use " + use;
                         list.appendChild(element);
                     }
                 });
