@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Tutorial</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../third -party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" href="../third -party-libs/foundation/css/foundation.min.css">
+        <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link rel="stylesheet" href="./style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../third -party-libs/foundation/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href=".">WiBAF: Within Browser Adaptation Framework</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">Menu</a>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <li>
+                        <a href="./people.html">People &amp; Publications</a>
+                    </li>
+                    <li>
+                        <a href="./settings.html">Privacy settings</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">Tutorial</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <header>
+            <div class="row">
+                <h2>WiBAF: Within Browser Adaptation Framework</h2>
+            </div>
+        </header>
+
+        <main>
+            <div class="row">
+                <p>
+                    WiBAF has been designed for making it easy to develop adaptive web applications for people who already know how to develop web applications. In this tutorial we assume that you have some basic knowledge of HTML and CSS.
+                </p>
+                <p>
+                    A basic step is to link the <code>
+                        wibaf.js</code>
+                    file in the html and initialize it this can be done inserting following code before <code>
+                        &lt;/body&gt;</code>
+                    :
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">&lt;body&gt;
+    ...
+    <span class="comment">&lt;!-- Notice that wibaf.js depends on <a href="http://jquery.com/">jQuery</a> --&gt;</span>
+    &lt;script <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</span>&gt;&lt;/script&gt;
+    &lt;script <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"wibaf.js"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        ( function() {
+            new wibaf().init(function() {
+                <span class="comment">&lt;!-- Code to be executed after the adaptation --&gt;</span>
+            });
+        }());
+    &lt;/script&gt;
+&lt;/body&gt;</div></code>
+</pre>
+                <p>
+                    Once <code>
+                        wibaf.js</code>
+                    is linked to the webpage, the adaptation model has to be defined. Optionally, the User Model and the Domain Model can be defined as well. In the next sections we will see how.
+                </p>
+            </div>
+            <div class="row">
+                <h3 data-magellan-destination="am">Adaptation Model</h3>
+                <p>
+                    <a name="am"></a>
+                </p>
+                <p>
+                    The Adaptation Model consists of the rules that the adaptation will follow, i.e. the behaviour that the adaptation engine should have. The adaptation model also takes charge of what kind of users and in which contexts the adaptation will be defined.
+                </p>
+                <p>
+                    In this tutorial we distinguish two sections namely, targeting and defining rules:
+                </p>
+                <h4>Targeting</h4>
+                <p>
+                    Targeting nodes is done with <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">CSS selectors</a>.
+                    Optionally, users and contexts can be also targeted.
+                    This is done using a syntax similar to the one used in <a href="https://developer.mozilla.org/es/docs/CSS/Media_queries">Media queries</a>.
+                </p>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user(min-art-knowledge: 50 and max-art-knowledge: 75) {
+    #artworks {
+        <span class="comment"># Rules</span>
+    }
+}</div></code>
+</pre>
+                    <p>
+                        Users can be targeted using <code>
+                            @user</code>
+                        . Several features can be specified between the parenthesis always separated by the keyword <code>
+                            and</code>.
+                        If all the features are correct, the code inside this targeting rule will be executed.
+                    </p>
+                    <p>
+                        The user model is queried to check if the features are correct. WiBAF will check in the User Model for the value of the feature with the name that the developer specifies.
+                        If the feature is numeric, the <code>
+                            min-</code>
+                        and <code>
+                            max-</code>
+                        prefixes can be used before the name of a feature to check if the value in the User Model is bigger or lower than the specified in the Adaptation Model.
+                    </p>
+                </div>
+                <div class="large-6 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@context(date: 15/09/2014) {
+    #artworks {
+        <span class="comment"># Rules</span>
+    }
+}</div></code>
+</pre>
+                    <p>
+                        Context are targeted the same way as users. The only exception is that the number of features that can be specified is limited to the following set:
+                    </p>
+                    <ul class="no-bullet">
+                        <li>
+                            <code>
+                                min-hour: HH.MM</code>
+                            / <code>
+                                max-hour: HH.MM</code>
+                            : Hour in which the adaptation will start/stop to be executed.
+                        </li>
+                        <li>
+                            <code>
+                                date: DD/MM/YYYY</code>
+                            : Date in which the adaptation will be executed.
+                        </li>
+                        <li>
+                            <code>
+                                min-date: DD/MM/YYYY</code>
+                            / <code>
+                                max-date: DD/MM/YYYY</code>
+                            : Date in which the adaptation will start/stop to be executed.
+                        </li>
+                        <li>
+                            <code>
+                                weekday: su|m|tu|w|th|f|sa</code>
+                            : Days of the week separated by semicolons (<code>
+                                ;</code>
+                            ) in which the adaptation will be executed.
+                        </li>
+                        <li>
+                            <code>
+                                centre: X.XXX;Y.YYY</code>
+                            : A point on the Earth in which the adaptation effect will be provided.
+                        </li>
+                        <li>
+                            <code>
+                                radius: X.XX m|km|ft|mi</code>
+                            : How far a user can be from the previous point.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@context(centre:54.448;5.451 and radius:5km) {
+   @user (min-art-knowledge: 50) {
+      #artworks {
+         <span class="comment"># Rules</span>
+      }
+   }
+}</div></code>
+</pre>
+                    <p>
+                        If some rules are to be applied only for specific contexts <strong>and</strong> specific users, the selections of users and contexts can be nested.
+                    </p>
+                </div>
+                <div class="large-6 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user (min-knowledge: 50), @context (max-hour: 18:00) {
+  #artworks {
+     <span class="comment"># Rules</span>
+  }
+}</div></code>
+</pre>
+                    <p>
+                        If some rules are to be applied only for specific contexts <strong>or</strong> specific users, the selections of users and contexts can be sepparated by commas.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Adaptation rules</h4>
+                <p>
+                    Once the DOM nodes (and optionally users and contexts) are targeted, it is the time to define the adaptation rules to achive the desired adaptation effect.
+                    This is also done with CSS syntax i.e. <code>
+                        property: value;</code>
+                    .
+                    Any <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference">CSS property</a> is valid.
+                    However they face some limitations, that is why we are extending this list of properties with the ones shown in the following table:
+                </p>
+                <table>
+                    <caption align="bottom">
+                        New properties to express adaptation.
+                    </caption>
+                    <tbody>
+                        <tr>
+                            <th>Property Name</th>
+                            <th>Possible Values</th>
+                            <th>Development State</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                append</code></td>
+                            <td>HTML code or a url preceeded by <code>
+                                url:</code> that contains a valid HTML code</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Appends HTML code to the selected node.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                insert</code></td>
+                            <td>HTML code or a url preceeded by <code>
+                                url:</code> that contains a valid HTML code</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Similar to <code>
+                                append</code>, but it replaces the previous content of the node.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                reorder-links</code></td>
+                            <td>Link reordering strategy</td>
+                            <td><span class="alert round label">Not Implemented</span></td>
+                            <td>Reorders links that are contained in a not ordered list according to a strategy.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                reorder-nodes</code></td>
+                            <td>Nodes reordering strategy</td>
+                            <td><span data-tooltip class="radius" title="(only one reordering strategy available)"><span class="round label">Partially Implemented</span></span></td>
+                            <td>Reorders the subnodes of the selected node according to a strategy.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                trim-at</code></td>
+                            <td>Integer</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Trims the text contained in the node at a specified position.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                fisheye-doi</code></td>
+                            <td>[0.0-1.0]</td>
+                            <td><span class="alert round label">Not Implemented</span></td>
+                            <td>Sets the value of the DOI (degree-of-interest) function in the selected node.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                update-attribute</code></td>
+                            <td>attr, val</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Sets the attribute named <code>
+                                attr</code> to be equal to <code>
+                                val</code> in the selected node.</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                delete-node</code></td>
+                            <td>Boolean</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Deletes the selected node, the boolean indicate whether the content inside the node should be kept (true) or deleted (false).</td>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                insert-um</code></td>
+                            <td>Variable name</td>
+                            <td><span class="success round label">Implemented</span></td>
+                            <td>Inserts into the node a value of the User Model variable with the given name.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    The following table explains the reordering strategies implemented so far.
+                </p>
+                <table>
+                    <caption align="bottom">
+                        Reordering strategies.
+                    </caption>
+                    <tbody>
+                        <tr>
+                            <th>Strategy Name</th>
+                            <th>Applicable to...</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td><code>
+                                data-order</code></td>
+                            <td>Nodes</td>
+                            <td> Reorders using a numeric value specified in the <code>
+                                data-order</code> attribute of the elements to be reordered.
+                            Notice that the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes">data-* attributes</a> are valid for every element since HTML5. </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Other important considerations</h4>
+                <p>
+                    After the adaptation file has been defined, it has to be linked to the HTML. To do so the following line has to be added before <code>
+                        &lt;/head&gt;</code>
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">&lt;head&gt;
+    ...
+    &lt;link <span class="attribute">href</span>=<span class="value">"adaptation.amf"</span> <span class="attribute">rel</span>=<span class="value">"prefetch"</span> <span class="attribute">type</span>=<span class="value">"text/amf"</span> /&gt;
+    ...
+&lt;/head&gt;</div></code>
+</pre>
+                <p>
+                    Javascript code can be inserted into the adaptation file.
+                    To do so it should be placed between curly brackets and with a hash as a prefix.
+                    The code will be executed before the interpretation of the file starts and the fragment code will be replaced for its result.
+                </p>
+                <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user(max-#{document.title.replace(/\s+/g, "-").replace(/[\.\(\);;,\"]/g, "").trim().toLowerCase()}-accessed: 2) {
+    <span class="comment"># Code</span>
+}</div></code>
+</pre>
+                <p>
+                    This code would be interpreted in a page with title <code>
+                        Hello world</code>
+                    as
+                </p>
+                <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user(max-hello-world-accessed: 2) {
+    <span class="comment"># Code</span>
+}</div></code>
+</pre>
+                <p>
+                    Several adaptation files could be linked to one webpage. As with CSS, they would be interpreted in order.
+                </p>
+                <p>
+                    The adaptation file is cached by the browser.
+                    Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+                </p>
+                <hr />
+            </div>
+            <div class="row">
+                <h3 data-magellan-destination="um">User Model</h3>
+                <p>
+                    <a name="um"></a>
+                </p>
+                <p>
+                    To create a user model, a different file is used.
+                    To express how the user model should be built, a extended subset of <a href="http://www.dimml.io/">DiMML</a> is used.
+                    In this tutorial we will distinguish two parts namely, event definition and event operations.
+                </p>
+                <h4>Event definition</h4>
+                <p>
+                    The most basic definition of an event will consist on the keyword <code>
+                        event</code>
+                    followed by the javascript code to select where the event will be applied and the name of the event.
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">event <span class="attribute">simple_click</span> = <span class="value">`document.getElementsByTagName('button').click`</span></div></code>
+</pre>
+                <p>
+                    Sometimes, the value of a variable has to be collected, in the code below we show how to capture, for instance, the id of the clicked button.
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">event <span class="attribute">collection_click</span> = <span class="value">`document.getElementsByTagName('button').click`</span> => <span class="value">`{btn_id: this.id}`</span></div></code>
+</pre>
+                <p>
+                    Finally, conditional execution of events can also be specified if and only if no variables are collected.
+                    This is done as shown in the code below (notice that there are no curly brackets).
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">event <span class="attribute">condition_click</span> = <span class="value">`document.getElementsByTagName('button').click`</span> => <span class="value">`this.id == 'button1'`</span></div></code>
+</pre>
+                <h4>Event operations</h4>
+                <p>
+                    After a event is defined, the operations that should be done when such event is triggered can be coded. This is done as shown in the example below.
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">on <span class="attribute">collection_click</span> {
+    inc <span class="attribute">btn_id</span>; <span class="comment"># Increments the UM variable with the name collected in btn_id</span>
+    dec <span class="value">#var1</span>; <span class="comment"># Decrements the UM variable named "var1"</span>
+    update <span class="value">#var2, 2</span>; <span class="comment"># Sets to 2 the value of the UM variable named "var2"</span>
+    add_obs <span class="value">#var3, 3</span>; <span class="comment"># Adds the ovservation 3 to the UM variable named "var3".
+                       # The value of "var3" is the average of all the observations.</span>
+}</div></code>
+</pre>
+                <h4>Other important considerations</h4>
+                <p>
+                    After the user modelling file has been coded, it has to be linked to the HTML. To do so the following line has to be added before <code>
+                        &lt;/head&gt;</code>
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">&lt;head&gt;
+    ...
+    &lt;link <span class="attribute">href</span>=<span class="value">"modelling.umf"</span> <span class="attribute">rel</span>=<span class="value">"prefetch"</span> <span class="attribute">type</span>=<span class="value">"text/umf"</span> /&gt;
+    ...
+&lt;/head&gt;</div></code>
+</pre>
+                <p>
+                    As it happened with adaptation files, several adaptation files could be linked to one webpage and those would be interpreted in order.
+                </p>
+                <p>
+                    If a <code>
+                        document.load</code>
+                    event is defined, this will be executed as soon as possible, but its execution is not guaranteed to finish before the adaptation starts.
+                    However, if you need to keep track of the accessed webpages, you do not need to do it in the user modelling file, as this is done automatically by <code>
+                        wibaf.js</code>
+                    , and it is guaranteed to be updated before the adaptation starts.
+                </p>
+                <p>
+                    The user model is stored in the IndexedDB of your browser or in the local storage if IndexedDB is not supported.
+                    You can check it at everytime using your browser's developer tools.
+                </p>
+                <p>
+                    The modelling file is cached by the browser.
+                    Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+                </p>
+                <hr />
+            </div>
+            <div class="row">
+                <h3 data-magellan-destination="dm">Domain Model</h3>
+                <p>
+                    <a name="dm"></a>
+                </p>
+                <p>
+                    The definition of a domain model is not yet fully developed, nor in functionality neither integrated with <code>
+                        wibaf.js</code>.
+                    If you take a look at the milkyway example, you can see all the functionality that is currently implemented but we pretend to go further.
+                </p>
+                <p>
+                    To express the domain model any JSON file would work for now.
+                    However, you are encouraged to use <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a> as it extends the capabilities of JSON and is recommended by the <a href="http://www.w3.org/">W3C</a>.
+                </p>
+                <p>
+                    In the HTML template you can use <code>
+                        {{JSON_key}}</code>
+                    . This will be replaced by the value of that key in the JSON file.
+                    If that value is a URL to another jsonld file, you can use the <code>
+                        .</code>
+                    operator to access to a property of that jsonld file, for instance <code>
+                        parent.title</code>
+                    .
+                </p>
+                <p>
+                    Conditional fragments are also allowed as well as the operators <code>
+                        !</code>
+                    , <code>
+                        ==</code>
+                    , <code>
+                        !=</code>
+                    , <code>
+                        &amp;gt;</code>
+                    and <code>
+                        &amp;lt;</code>
+                    .
+                    The following piece of code will check if the key <code>
+                        description_advanced</code>
+                    exists. If it does it will be inserted, otherwise the key <code>
+                        description</code> will be placed.
+                    Notice the question mark before the curly brackets to open the condition and the slash and question mark to close it.
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">{{?<span class="attribute">description_advanced</span>}}
+    {{<span class="attribute">description_advanced</span>}}
+{{/?<span class="attribute">description_advanced</span>}}
+{{?!<span class="attribute">description_advanced</span>}}
+    {{<span class="attribute">description</span>}}
+{{/?<span class="attribute">description_advanced</span>}}</div></code>
+</pre>
+                <p>
+                    Similarly, loops can be inserted using a hash simbol instead of a question mark.
+                    They have the limitation of being only possible to iterate over lists of URLs to other jsonld files.
+                    The tags inside a loop will refer to the jsonld file contained in the list, not to the global one.
+                    The code below will create a list with the titles of the jsonld files contained in the list <code>
+                        hasPart</code>
+                    .
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">&lt;ul&gt;
+    {{#<span class="attribute">hasPart</span>}}
+        &lt;li>{{<span class="attribute">title</span>}}&lt;/li&gt;
+    {{/#<span class="attribute">hasPart</span>}}
+&lt;/ul&gt;</div></code>
+</pre>
+                <p>
+                    It is intended loops and conditions could be nested in the future.
+                    However, this is not yet possible with the exception of nesting a loop inside of a condition.
+                </p>
+                <p>
+                    For the domain model to be loaded you will need to specify the path to the jsonld file (without the file extension) and call the function <code>
+                        fill_from_dm</code>.
+                    In this function you can also specify what to do after the data from the domain has been loaded in the template.
+                    Usually, it is interesting to initialize <code>
+                        wibaf.js</code> in this point and not before.
+                    If you take a look at the milkyway example there is more code, which is used to create the reading data from another file.
+                    However, the simplest piece of code to initialize <code>
+                        wibaf.js</code>
+                    when using templates is the following one.
+                </p>
+                <pre class="html-pre">
+<code class="html-code">
+<div class="code-container">&lt;body&gt;
+    ...
+    <span class="comment">&lt;!-- Notice that wibaf.js depends on <a href="http://jquery.com/">jQuery</a> --&gt;</span>
+    &lt;script <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</span>&gt;&lt;/script&gt;
+    &lt;script <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"wibaf.js"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        ( function() {
+            fill_from_dm(concept, function() {
+                new wibaf().init(function() {
+                    <span class="comment">&lt;!-- Code to be executed after the adaptation --&gt;</span>
+                });
+            }
+        }());
+    &lt;/script&gt;
+&lt;/body&gt;</div></code>
+</pre>
+            </div>
+            <div class="row">
+                <h2>Downloads</h2>
+                <p>
+                    Here you can download the code of the Milkyway example, you can also download a version of <code>
+                        wibaf.js</code> merged in one file to make it easier for you to insert it in the HTML.
+                    This production version has not been thoroughly tested but it should work.
+                    If it does not or if you want to change something you can download de development version with all the sources separated into different files depending on its functionality.
+                </p>
+                <div class="row">
+                    <div class="large-4 medium-12 small-12 columns">
+                        <a href="./downloads/milkyway.zip" class="button expand">Milkyway example</a>
+                    </div>
+                    <div class="large-4 medium-6 small-12 columns">
+                        <a href="./downloads/wibaf.zip" class="button expand">WiBAF (prod)</a>
+                    </div>
+                    <div class="large-4 medium-6 small-12 columns">
+                        <a href="./downloads/wibaf_latest.js" class="button expand">WiBAF (devel)</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <h4>With the collaboration of</h4>
+                <a href="http://www.tue.nl/"><img src="../img/logo-tue.png" alt="TU Eindhoven"/></a>
+                <a href="http://adversitement.com/"><img src="../img/adversitement.png" alt="Adversitement"/></a>
+            </div>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../third -party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            $(function() {
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+    </body>
+</html>
