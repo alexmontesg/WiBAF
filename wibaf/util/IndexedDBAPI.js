@@ -81,8 +81,8 @@ var IndexedDBAPI = function() {
 		};
 		
 		function createDB(callback) {
-			var req = indexedDB.open("WiBAF", 1);
-			req.onsuccess = function(e) {
+			var req = window.indexedDB.open("WiBAF", 1);
+			req.onsuccess = function(event) {
 				db = req.result;
 				db.onerror = onError;
 				callback();
@@ -90,7 +90,6 @@ var IndexedDBAPI = function() {
 			req.onupgradeneeded = function(e) {
 				if (!db) {
 					db = req.result;
-					callback();
 				}
 				var collections = ["user_model", "settings"];
 				for(var i = 0; i < collections.length; i++) {
