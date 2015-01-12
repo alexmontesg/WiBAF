@@ -62,78 +62,75 @@
                 <div class="large-8 medium-10 columns large-centered medium-centered">
                     <form>
                         Privacy
-                        <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="2"/>
+                        <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="3"/>
                         Personalization
                     </form>
                     <p id="privacyExplanation"></p>
                 </div>
             </div>
-            <div class="row">
-                <dl class="accordion" data-accordion>
-                    <dd class="accordion-navigation">
-                        <a href="#panelAdvanced">Advanced settings</a>
-                        <div id="panelAdvanced" class="content">
+            <div id="divToServer" class="row">
+                <div id="panelAdvanced" class="content">
+                    <div class="row">
+                        <div class="small-12 large-7 columns">
                             <div class="row">
-                                <div class="small-12 large-7 columns">
-                                    <div class="row">
-                                        <fieldset>
-                                            <legend>Send some data to the server</legend>
-                                            <div class="small-12 large-4 columns">
-                                                <div class="row">
-                                                    Type of data
-                                                </div>
-                                                <div class="row">
-                                                    <select id="type" name="type">
-                                                        <option value="music">Data from the music domain</option>
-                                                        <option value="art">Data from the art domain</option>
-                                                        <option value="demographic">Demographic data</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="small-12 large-4 columns">
-                                                <div class="row">
-                                                    Accuracy
-                                                </div>
-                                                <div class="row collapse">
-                                                    <div class="small-9 columns">
-                                                        <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
-                                                    </div>
-                                                    <div class="small-3 columns">
-                                                        <span class="postfix">%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="small-12 large-4 columns">
-                                                <div class="row">
-                                                    Use of data
-                                                </div>
-                                                <div class="row">
-                                                    <select id="use" name="use">
-                                                        <option value="1">Personalization of content inside this website</option>
-                                                        <option value="2">Personalization of advertisment inside this website</option>
-                                                        <option value="3">Uses different than personalization inside this website</option>
-                                                        <option value="4">Sharing with third parties</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </fieldset>
+                                <fieldset>
+                                    <legend>
+                                        Send some data to the server
+                                    </legend>
+                                    <div class="small-12 large-4 columns">
+                                        <div class="row">
+                                            Type of data
+                                        </div>
+                                        <div class="row">
+                                            <select id="type" name="type">
+                                                <option value="music">Data from the music domain</option>
+                                                <option value="art">Data from the art domain</option>
+                                                <option value="demographic">Demographic data</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
-                                        <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
+                                    <div class="small-12 large-4 columns">
+                                        <div class="row">
+                                            Accuracy
+                                        </div>
+                                        <div class="row collapse">
+                                            <div class="small-9 columns">
+                                                <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                            </div>
+                                            <div class="small-3 columns">
+                                                <span class="postfix">%</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="small-12 large-5 columns">
-                                    <div class="panel callout radius">
-                                        <h4>Current rules</h4>
-                                        <ul id="toServer">
-
-                                        </ul>
+                                    <div class="small-12 large-4 columns">
+                                        <div class="row">
+                                            Use of data
+                                        </div>
+                                        <div class="row">
+                                            <select id="use" name="use">
+                                                <option value="1">Personalization of content inside this website</option>
+                                                <option value="2">Personalization of advertisment inside this website</option>
+                                                <option value="3">Uses different than personalization inside this website</option>
+                                                <option value="4">Sharing with third parties</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                </fieldset>
+                            </div>
+                            <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
                             </div>
                         </div>
-                    </dd>
-                </dl>
+                        <div class="small-12 large-5 columns">
+                            <div class="panel callout radius">
+                                <h4>Current rules</h4>
+                                <ul id="toServer">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <h3>This is what we know about you</h3>
@@ -187,7 +184,7 @@
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
-            privacyLevels = ["No data is tracked. No personalization is offered.", "Data is stored in your machine. Some personalization is offered.", "Data is stored in our servers. Full personalization is offered."];
+            privacyLevels = ["No data is tracked. No personalization is offered. (You can delete your current user model using the button below).", "Data is stored in your machine. Some personalization is offered.", "Custom. Data is stored on both sides depending on the rules you define below", "Data is stored in our servers. Full personalization is offered."];
 
             function deleteUM(itemName) {
                 userModel.getInstance().remove(itemName, updateTable);
@@ -298,6 +295,13 @@
                         save();
                     }
                     document.getElementById("privacyExplanation").textContent = privacyLevels[slider.value];
+                    var rulesDiv = document.getElementById("divToServer");
+                    if(slider.value == 2) {
+                        rulesDiv.style.display = "block";
+                    } else {
+                        rulesDiv.style.display = "none";
+                    }
+                    userModel.getInstance().updateServerValues(updateTable);
                 });
             }
 

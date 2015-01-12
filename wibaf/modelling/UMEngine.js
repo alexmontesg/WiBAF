@@ -9,25 +9,48 @@ var userModel = (function UMEngine() {
 
     function init() {
         function toServerProperties(object, callback) {
-            var ruleSet = rules.getInstance().getRulesByType("toServer", function(ruleSet) {
-                var accuracy = Number.MAX_VALUE;
-                var use = Number.MAX_VALUE;
-                var server = false;
-                for (var i = 0; i < ruleSet.length; i++) {
-                    var rule = new Rule(ruleSet[i].name, ruleSet[i].value, ruleSet[i].type);
-                    if (rule.checkIfApplies(object)) {
-                        server = true;
-                        accuracy = rule.value.accuracy < accuracy ? rule.value.accuracy : accuracy;
-                        use = rule.value.use < use ? rule.value.use : use;
+            rules.getInstance().getRule("default", function(generalRule) {
+                switch (generalRule.value) {
+                case "1":
+                    object["server"] = false;
+                    if (callback) {
+                        callback(object);
                     }
-                }
-                if (callback) {
+                    break;
+                case "2":
+                    var ruleSet = rules.getInstance().getRulesByType("toServer", function(ruleSet) {
+                        var accuracy = Number.MAX_VALUE;
+                        var use = Number.MAX_VALUE;
+                        var server = false;
+                        for (var i = 0; i < ruleSet.length; i++) {
+                            var rule = new Rule(ruleSet[i].name, ruleSet[i].value, ruleSet[i].type);
+                            if (rule.checkIfApplies(object)) {
+                                server = true;
+                                accuracy = rule.value.accuracy < accuracy ? rule.value.accuracy : accuracy;
+                                use = rule.value.use < use ? rule.value.use : use;
+                            }
+                        }
+                        if (callback) {
+                            object["server"] = {
+                                send : server,
+                                accuracy : accuracy,
+                                use : use
+                            };
+                            callback(object);
+                        }
+                    });
+                    break;
+                case "3":
                     object["server"] = {
-                        send : server,
-                        accuracy : accuracy,
-                        use : use
+                        send : true,
+                        accuracy : 100,
+                        use : 4
                     };
-                    callback(object);
+                    if (callback) {
+                        callback(object);
+                    }
+                    break;
+                    break;
                 }
             });
         }
