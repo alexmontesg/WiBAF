@@ -71,88 +71,112 @@
             <div id="divToServer" class="row">
                 <div id="panelAdvanced" class="content">
                     <div class="row">
-                        <div class="small-12 large-7 columns">
+                        <div class="small-12 large-12 columns">
                             <div class="row">
                                 <fieldset>
                                     <legend>
                                         Send some data to the server
                                     </legend>
-                                    <div class="small-12 large-4 columns">
-                                        <div class="row">
-                                            Type of data
-                                        </div>
-                                        <div class="row">
-                                            <select id="type" name="type">
-                                                <option value="music">Data from the music domain</option>
-                                                <option value="art">Data from the art domain</option>
-                                                <option value="demographic">Demographic data</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="small-12 large-4 columns">
-                                        <div class="row">
-                                            Accuracy
-                                        </div>
-                                        <div class="row collapse">
-                                            <div class="small-9 columns">
-                                                <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                    <div class="small-12 large-7 columns">
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Type of data
                                             </div>
-                                            <div class="small-3 columns">
-                                                <span class="postfix">%</span>
+                                            <div class="row">
+                                                <select id="type" name="type">
+                                                    <option value="music">Data from the music domain</option>
+                                                    <option value="art">Data from the art domain</option>
+                                                    <option value="demographic">Demographic data</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="small-12 large-4 columns">
-                                        <div class="row">
-                                            Use of data
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Accuracy
+                                            </div>
+                                            <div class="row collapse">
+                                                <div class="small-9 columns">
+                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                                </div>
+                                                <div class="small-3 columns">
+                                                    <span class="postfix">%</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row">
-                                            <select id="use" name="use">
-                                                <option value="1">Personalization of content inside this website</option>
-                                                <option value="2">Personalization of advertisment inside this website</option>
-                                                <option value="3">Uses different than personalization inside this website</option>
-                                                <option value="4">Sharing with third parties</option>
-                                            </select>
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Use of data
+                                            </div>
+                                            <div class="row">
+                                                <select id="use" name="use">
+                                                    <option value="1">Personalization of content inside this website</option>
+                                                    <option value="2">Personalization of advertisment inside this website</option>
+                                                    <option value="3">Uses different than personalization inside this website</option>
+                                                    <option value="4">Sharing with third parties</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                            <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 large-5 columns">
+                                        <div class="panel callout radius">
+                                            <h4>Current rules</h4>
+                                            <ul id="toServer">
+
+                                            </ul>
                                         </div>
                                     </div>
                                 </fieldset>
-                            </div>
-                            <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
-                                <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
-                            </div>
-                        </div>
-                        <div class="small-12 large-5 columns">
-                            <div class="panel callout radius">
-                                <h4>Current rules</h4>
-                                <ul id="toServer">
-
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <h3>This is what we know about you</h3>
-                <table id="userModel">
-                    <thead>
-                        <tr>
-                            <th> Variable </th>
-                            <th> Value </th>
-                            <th> Stored in </th>
-                            <th> Actions </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
-                    <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
+            <div id="divTracking" class="row">
+                <div id="panelTracking" class="content">
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="row">
+                                <fieldset>
+                                    <legend> <!-- TODO Be more flexible here -->
+                                        Do not track me in the following situations
+                                    </legend>
+                                    <input id="cb1" type="checkbox" value="abroad"/>
+                                    <label for="cb1">When I'm abroad</label>
+                                    <br/>
+                                    <input id="cb2" type="checkbox" value="work"/>
+                                    <label for="cb2">On work hours</label>
+                                    <br/>
+                                    <input id="cb3" type="checkbox" value="nonwork"/>
+                                    <label for="cb3">On non-work hours</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <h3>This is what we know about you</h3>
+                    <table id="userModel">
+                        <thead>
+                            <tr>
+                                <th> Variable </th>
+                                <th> Value </th>
+                                <th> Stored in </th>
+                                <th> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
+                        <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
+                    </div>
+                </div>
         </main>
 
         <footer>
@@ -238,7 +262,7 @@
                     }
                 });
             }
-            
+
             function deleteRuleCallback() {
                 updateRuleList();
                 userModel.getInstance().updateServerValues(updateTable);
@@ -307,10 +331,16 @@
                     }
                     document.getElementById("privacyExplanation").textContent = privacyLevels[slider.value];
                     var rulesDiv = document.getElementById("divToServer");
-                    if(slider.value == 2) {
+                    var trackingDiv = document.getElementById("divTracking");
+                    if (slider.value == 0) {
+                        rulesDiv.style.display = "none";
+                        trackingDiv.style.display = "none";
+                    } else if (slider.value == 2) {
                         rulesDiv.style.display = "block";
+                        trackingDiv.style.display = "block";
                     } else {
                         rulesDiv.style.display = "none";
+                        trackingDiv.style.display = "block";
                     }
                     userModel.getInstance().updateServerValues(updateTable);
                 });
