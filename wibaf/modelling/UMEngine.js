@@ -50,7 +50,6 @@ var userModel = (function UMEngine() {
                         callback(object);
                     }
                     break;
-                    break;
                 }
             });
         }

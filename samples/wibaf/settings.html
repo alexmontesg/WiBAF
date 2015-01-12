@@ -227,10 +227,21 @@
                         var accuracy = rule.value.accuracy;
                         var use = rule.value.use;
                         var element = document.createElement("li");
-                        element.innerText = "Data from the " + domain + " domain sent to the server with " + accuracy + "% accuracy for use " + use;
+                        element.innerText = "Data from the " + domain + " domain sent to the server with " + accuracy + "% accuracy for use " + use + " ";
+                        var deleteButton = document.createElement("a");
+                        deleteButton.setAttribute("href", "#");
+                        deleteButton.className = "tiny button round";
+                        deleteButton.setAttribute("onclick", "rules.getInstance().deleteRule('" + rule.name + "', deleteRuleCallback);");
+                        deleteButton.innerText = "Delete";
+                        element.appendChild(deleteButton);
                         list.appendChild(element);
                     }
                 });
+            }
+            
+            function deleteRuleCallback() {
+                updateRuleList();
+                userModel.getInstance().updateServerValues(updateTable);
             }
 
             function addRule() {
