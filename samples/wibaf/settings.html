@@ -12,10 +12,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="stylesheet" href="../third-party-libs/foundation/css/normalize.css">
-        <link rel="stylesheet" href="../third-party-libs/foundation/css/foundation.min.css">
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/datetimepicker/jquery.datetimepicker.css"/ >
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/foundation/css/foundation.min.css">
         <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" type="text/css" href="./style.css">
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
@@ -140,43 +141,57 @@
                         <div class="small-12 large-12 columns">
                             <div class="row">
                                 <fieldset>
-                                    <legend> <!-- TODO Be more flexible here -->
+                                    <legend>
                                         Do not track me in the following situations
                                     </legend>
-                                    <input id="cb1" type="checkbox" value="abroad"/>
-                                    <label for="cb1">When I'm abroad</label>
-                                    <br/>
-                                    <input id="cb2" type="checkbox" value="work"/>
-                                    <label for="cb2">On work hours</label>
-                                    <br/>
-                                    <input id="cb3" type="checkbox" value="nonwork"/>
-                                    <label for="cb3">On non-work hours</label>
+                                    <div class="small-12 large-7 columns">
+                                        <div class="small-12 large-6 medium-6 columns">
+                                            <label for="from">From</label>
+                                            <input id="from" class="dateTimePicker" type="text" >
+                                        </div>
+                                        <div class="small-12 large-6 medium-6 columns">
+                                            <label for="from">To</label>
+                                            <input id="to" class="dateTimePicker" type="text" >
+                                        </div>
+                                        <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                            <a href="javascript:void(addNotTrackRule())" class= "button expand"> Add rule </a>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 large-5 columns">
+                                        <div class="panel callout radius">
+                                            <h4>Current rules</h4>
+                                            <ul id="notTrackList">
+
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <h3>This is what we know about you</h3>
-                    <table id="userModel">
-                        <thead>
-                            <tr>
-                                <th> Variable </th>
-                                <th> Value </th>
-                                <th> Stored in </th>
-                                <th> Actions </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            </div>
+            <div class="row">
+                <h3>This is what we know about you</h3>
+                <table id="userModel">
+                    <thead>
+                        <tr>
+                            <th> Variable </th>
+                            <th> Value </th>
+                            <th> Stored in </th>
+                            <th> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
+                    <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
                 </div>
-                <div class="row">
-                    <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
-                        <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
-                    </div>
-                </div>
+            </div>
         </main>
 
         <footer>
@@ -188,6 +203,7 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../third-party-libs/datetimepicker/jquery.datetimepicker.js"></script>
         <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
         <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
         <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
@@ -206,7 +222,6 @@
         <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation.min.js"></script>
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
-        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
             privacyLevels = ["No data is tracked. No personalization is offered. (You can delete your current user model using the button below).", "Data is stored in your machine. Some personalization is offered.", "Custom. Data is stored on both sides depending on the rules you define below", "Data is stored in our servers. Full personalization is offered."];
 
@@ -282,6 +297,38 @@
                 });
             }
 
+            function addNotTrackRule() {
+                var from = document.getElementById("from").value;
+                var to = document.getElementById("to").value;
+                rules.getInstance().addRule(new Rule(from + to, {
+                    from : from,
+                    to : to
+                }, "doNotTrack"), updateTrackList);
+            }
+
+            function updateTrackList() {
+                rules.getInstance().getRulesByType("doNotTrack", function(rules) {
+                    var list = document.getElementById("notTrackList");
+                    while (list.firstChild) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < rules.length; i++) {
+                        var rule = rules[i];
+                        var from = rule.value.from;
+                        var to = rule.value.to;
+                        var element = document.createElement("li");
+                        element.innerText = "Do not track me from " + from + " to " + to + " ";
+                        var deleteButton = document.createElement("a");
+                        deleteButton.setAttribute("href", "#");
+                        deleteButton.className = "tiny button round";
+                        deleteButton.setAttribute("onclick", "rules.getInstance().deleteRule('" + rule.name + "', updateTrackList);");
+                        deleteButton.innerText = "Delete";
+                        element.appendChild(deleteButton);
+                        list.appendChild(element);
+                    }
+                });
+            }
+
             function updateTable() {
                 var tbody = document.getElementById("userModel").getElementsByTagName("tbody")[0];
                 while (tbody.firstChild) {
@@ -349,9 +396,14 @@
             $(function() {
                 new wibaf().init(function() {
                     $(document).foundation();
+                    $(".dateTimePicker").datetimepicker({
+                        format : 'd/m/Y H:i',
+                        mask : true
+                    });
                     updateTable();
                     updateMainSlider();
                     updateRuleList();
+                    updateTrackList();
                     document.getElementById("privacyvspersonalization").onchange = function(e) {
                         save(updateMainSlider);
                     };
