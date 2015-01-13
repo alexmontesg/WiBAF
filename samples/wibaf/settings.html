@@ -118,7 +118,7 @@
                                             </div>
                                         </div>
                                         <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
-                                            <a href="javascript:void(addRule())" class= "button expand"> Add rule </a>
+                                            <a href="javascript:void(addRule())" class= "tiny button expand"> Add rule </a>
                                         </div>
                                     </div>
                                     <div class="small-12 large-5 columns">
@@ -150,11 +150,45 @@
                                             <input id="from" class="dateTimePicker" type="text" >
                                         </div>
                                         <div class="small-12 large-6 medium-6 columns">
-                                            <label for="from">To</label>
+                                            <label for="to">To</label>
                                             <input id="to" class="dateTimePicker" type="text" >
                                         </div>
                                         <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
-                                            <a href="javascript:void(addNotTrackRule())" class= "button expand"> Add rule </a>
+                                            <a href="javascript:void(addNotTrackRule())" class= "tiny button expand"> Add rule </a>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="small-12 large-6 medium-6 columns">
+                                                <input type="checkbox" value="su" id="su" />
+                                                <label for="su">Sunday</label>
+                                                <br/>
+                                                <input type="checkbox" value="m" id="m" />
+                                                <label for="m">Monday</label>
+                                                <br/>
+                                                <input type="checkbox" value="tu" id="tu" />
+                                                <label for="tu">Tuesday</label>
+                                                <br/>
+                                                <input type="checkbox" value="w" id="w" />
+                                                <label for="w">Wednesday</label>
+                                                <br/>
+                                                <input type="checkbox" value="th" id="th" />
+                                                <label for="th">Thursday</label>
+                                                <br/>
+                                                <input type="checkbox" value="f" id="f" />
+                                                <label for="f">Friday</label>
+                                                <br/>
+                                                <input type="checkbox" value="sa" id="sa" />
+                                                <label for="sa">Saturday</label>
+                                            </div>
+                                            <div class="small-12 large-6 medium-6 columns">
+                                                <label for="fromPeriod">From</label>
+                                                <input id="fromPeriod" class="timePicker" type="text" >
+                                                <label for="toPeriod">To</label>
+                                                <input id="toPeriod" class="timePicker" type="text" >
+                                            </div>
+                                            <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                                <a href="javascript:void(addNotTrackPeriodRule())" class= "tiny button expand"> Add rule </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="small-12 large-5 columns">
@@ -306,6 +340,26 @@
                 }, "doNotTrack"), updateTrackList);
             }
 
+            function addNotTrackPeriodRule() {
+                var from = document.getElementById("fromPeriod").value;
+                var to = document.getElementById("toPeriod").value;
+                var selectedWeekdays = [];
+                var weekdaysArray = ["su", "m", "tu", "w", "th", "f", "sa"];
+                for (var i = 0; i < weekdaysArray.length; i++) {
+                    var current = weekdaysArray[i];
+                    if (document.getElementById(current).checked) {
+                        selectedWeekdays.push(current);
+                    }
+                }
+                if (selectedWeekdays.length > 0) {
+                    rules.getInstance().addRule(new Rule(from + to + selectedWeekdays.join(""), {
+                        from : from,
+                        to : to,
+                        weekdays : selectedWeekdays
+                    }, "doNotTrack"), updateTrackList);
+                }
+            }
+
             function updateTrackList() {
                 rules.getInstance().getRulesByType("doNotTrack", function(rules) {
                     var list = document.getElementById("notTrackList");
@@ -316,8 +370,12 @@
                         var rule = rules[i];
                         var from = rule.value.from;
                         var to = rule.value.to;
+                        var weekdays = rule.value.weekdays;
                         var element = document.createElement("li");
                         element.innerText = "Do not track me from " + from + " to " + to + " ";
+                        if (weekdays) {
+                            element.innerText += "on " + weekdays.join(",") + " ";
+                        }
                         var deleteButton = document.createElement("a");
                         deleteButton.setAttribute("href", "#");
                         deleteButton.className = "tiny button round";
@@ -398,6 +456,11 @@
                     $(document).foundation();
                     $(".dateTimePicker").datetimepicker({
                         format : 'd/m/Y H:i',
+                        mask : true
+                    });
+                    $(".timePicker").datetimepicker({
+                        datepicker : false,
+                        format : 'H:i',
                         mask : true
                     });
                     updateTable();
