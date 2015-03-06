@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+<h2>Setting up an adaptive site with AHA!</h2>
+Setting up an AHA! site is easy thanks to friendly browser-based configuration interfaces. 
+<ol>
+<li>AHA! uses Java Servlets. The easiest way to use servlets is by installing the Open Source Tomcat server. This server is available from the Apache Foundation, but we have used the Java Web Services Developer Pack or JWSDP. It works with Windows and Linux alike.</li>
+<li>AHA! can be downloaded from aha.win.tue.nl. (AHA! version supporting Learning Styles can b downloaded from <a href="http://wwwis.win.tue.nl/~nstach/PhDThesis/assignment/">http://wwwis.win.tue.nl/~nstach/PhDThesis/assignment/</a>) We use a prerelease of AHA! 3.0. You can unpack the archive in any directory, but in our examples we will sometimes use the path c:/aha.</li>
+<li>Before you start up the Tomcat server (using startup.bin or startup.sh in the bin directory) it is best to disconnect the network interface until you have configured AHA! and changed the password.</li>
+<li>In Tomcat you should create a context for AHA!.</li>
+<object name="AHAtutorialLS.CreatingContext" type= "aha/type" />
+<li>AHA! has an automatic configuration program that edits its own configuration file based on information from the AHA! context.</li>
+<li>Once the Tomcat server is restarted the configuration can really begin. You can create authors and applications and use the authoring tools.</li>
+<object name="AHAtutorialLS.AHAConfigurator" type= "aha/type" />
+</ol>
+</main>
+</body>
+</html>

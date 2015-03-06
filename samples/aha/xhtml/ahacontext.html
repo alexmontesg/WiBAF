@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+<h2>Creating the AHA! Context</h2>
+<p>We assume that you have the TomCat server
+<if expr="AHAtutorialLS.firstconfig.knowledge==0">
+<block>
+(for instance Sun's version JWDSP from
+<a href="http://java.sun.com/webservices/downloads/webservicespack.html"
+target="_blank">http://java.sun.com/webservices/downloads/webservicespack.html</a>)
+</block>
+</if>
+installed and running.
+You need to create a "context" for AHA! so that TomCat knows where
+the documents and servlets of AHA! are located.
+</p>
+
+<p>
+In the sequel we will assume that the directory in which you unpacked the
+AHA! zip archive is "c:\aha". On a Windows system "d:\aha" might also
+be a good choice and on Linux "/usr/local/aha" or "$HOME/aha" might be
+good choices. AHA! is completely independent of the directory in which
+it is installed, but once installed it cannot easily be moved.
+There is also no need to install AHA! in a location that is related
+to where Tomcat is installed.
+</p>
+
+<p>
+Creating the AHA! context involves the following steps:
+</p>
+<object name="AHAtutorialLS.contextsteps" type="aha/text" />
+</main>
+</body>
+</html>

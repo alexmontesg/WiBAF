@@ -152,7 +152,6 @@ var userModel = (function UMEngine() {
                         callback();
                     }
                 }
-
                 for (var i = 0; i < vars.length; i++) {
                     var umvar = vars[i];
                     toServerProperties(umvar, function(object) {

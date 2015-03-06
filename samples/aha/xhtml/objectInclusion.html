@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+<h2>Object Inclusion in DM/AM</h2>
+<p>We illustrate how conditional object inclusion is represented in the AHA! author format.</p> 
+Here is an example of part of a DM/AM for object inclusion:
+<concept>
+   <name>tutorial.object1</name>
+   <attribute name="showability" type="int" isPersistent="true" isSystem="true">
+   <casegroup>
+
+<defaultfragment>file:/AHAtutorialLS/xhtml/empty.xhtml</defaultfragment>
+
+<casevalue><value>1</value>
+
+<returnfragment>file:/AHAtutorialLS/xhtml/frag1.xhtml</returnfragment>
+
+</casevalue>
+
+<casevalue><value>2</value>
+
+<returnfragment>file:/AHAtutorialLS/xhtml/frag2.xhtml</returnfragment>
+
+</casevalue>
+   </casegroup>
+  </attribute>
+</concept>
+<p>This format is produced by the authoring tools. As an author you normally never have to write or even inspect the domain and adaptation model written in this syntax.
+What we see is that the object inclusion for the concept "tutorial.object1" is part of the attribute "showability".</p>
+<p>The "casegroup" construct uses the value of the "showability" attribute to determine whether to include the file frag1.xhtml (for value 1), frag2.xhtml (for value 2) or empty.xhtml for any other value.</p>
+<p>So in order to specify the desired fragment selection you must write adaptation rules that give the "showability" attribute the right value under the right circumstances. We will see more about these adaptation rules when we discuss the authoring formats and tools.</p>
+</main>
+</body>
+</html>

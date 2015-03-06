@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="../third-party-libs/foundation/css/normalize.css" />
         <link rel="stylesheet" href="../third-party-libs/foundation/css/foundation.min.css"/>
         <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link href="adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
         <link rel="stylesheet" href="./style.css"/>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'/>
@@ -43,13 +44,7 @@
                         <a href="./all_change/">All Change!</a>
                     </li>
                     <li>
-                        <a href="./talking_each_other/">Talking to Each Other</a>
-                    </li>
-                    <li>
-                        <a href="./dealing_with_emotions/">Deling with Emotions</a>
-                    </li>
-                    <li>
-                        <a href="./making_sense/">Making Sense</a>
+                        <a href="./settings.html">Settings</a>
                     </li>
                 </ul>
             </section>
@@ -70,6 +65,26 @@
                 <p>
                     ...
                 </p>
+            </div>
+            <div class="row">
+                <form>
+                    <fieldset>
+                        <legend>Please fill in some data about you</legend>
+                        <label>What is your name?
+                            <input type="text" id="name" />
+                        </label>
+                        <label>What language do you speak?
+                            <select id="language">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                            </select>
+                        </label>
+                        <label>How old are you?
+                            <input type="number" id="age" />
+                        </label>
+                        <a href="#" id="submit-pre-questionnaire" class="button">Submit</a>
+                    </fieldset>
+                </form>
             </div>
         </div>
 
@@ -128,6 +143,9 @@
             $(function() {
                 new wibaf().init(function() {
                     $(document).foundation();
+                    document.getElementById('submit-pre-questionnaire').addEventListener('click', function(e) {
+                        document.getElementsByTagName('form')[0].style.display = 'none';
+                    }, false);
                 });
             });
         </script>

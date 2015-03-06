@@ -5,7 +5,7 @@
  */
 var AdaptationEngine = function() {
 	function getContent(arg) {
-		var div = $("<div>", {
+		var div = $("<span>", {
 			class : "wibafGenerated"
 		});
 		if (isUrl(arg)) {
@@ -232,6 +232,7 @@ var AdaptationEngine = function() {
 					for (a in data[q].a) {
 						if(data[q].a[a].c && one) {
 								multi = true;
+								break;
 						} else if(data[q].a[a].c) {
 								one = true;
 						}

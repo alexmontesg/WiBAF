@@ -52,10 +52,10 @@ var adaptationParser = (function AdaptationParser() {
                         var featureValue = args["featureValue"];
                         var value = 0;
                         if (val) {
-                            value = parseInt(val.value);
+                            value = val.value;
                         }
-                        if ((feature.endsWith("-gt") && value > featureValue) ||
-                                (feature.endsWith("-lt") && value < featureValue) ||
+                        if ((feature.endsWith("-gt") && parseInt(value) > parseInt(featureValue)) ||
+                                (feature.endsWith("-lt") && parseInt(value) < parseInt(featureValue)) ||
                                 (value == featureValue && !feature.endsWith("-lt") && !feature.endsWith("-gt"))) {      // The expression is true
                             // All the expressions from the and are true therefore the or containing it can be executed
                             if (++trueExpressions === totalAndExpressions) {
@@ -67,7 +67,7 @@ var adaptationParser = (function AdaptationParser() {
                             orChecker();
                             andExpressionsChecked = 0;
                         }
-                    }, {feature : feature, featureValue : parseInt(features[feature]), totalAnd : totalAndExpressions});
+                    }, {feature : feature, featureValue : features[feature], totalAnd : totalAndExpressions});
                 }
             }
             return consumed;

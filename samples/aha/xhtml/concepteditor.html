@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+
+<h2>The Concept Editor</h2>
+
+<p>
+The Concept Editor is an authoring tool for defining concepts and
+<if expr="AHAtutorialLS.DomainAdaptationModel.knowledge&gt;50">
+<block>
+event-condition-action rules.
+</block>
+<block>
+adaptation rules.
+</block>
+</if>
+We briefly describe the use of the Concept Editor here,
+using a series of screen dumps to guide you through the process.
+We assume that you are already familiar with the
+<a href="graphauthor.xhtml" class="conditional">Graph Author</a>
+which is easier to use and intended for less technical authors.
+</p>
+<ul>
+<li>
+When you start the Concept Editor it asks for a login and password.
+<if expr="AHAtutorialLS.graphauthor.knowledge &gt; 0">
+<block>
+As of AHA! 2.0 authors are identified and have separate work spaces.
+The manager can add new authors, either as part of the
+<a href="install.xhtml" class="conditional">initial installation</a>
+or at a later time using the
+<a href="ahaconfig.xhtml" class="conditional">configuration</a> menu.
+</block>
+</if>
+</li>
+<li>
+After logging in the
+<a href="/aha/AHAtutorialLS/images/concepteditor.gif" target="_blank"
+class="unconditional">main Concept Editor window</a>
+appears. Through the "File" menu you can create a new application,
+open an existing one and save it.
+</li>
+<li>
+Unlike with the Graph Author the Concept Editor shows concepts
+with their full name which includes the application name.
+The Graph Author hides the application name, but does generate it
+when you save the application.
+</li>
+<li>
+The Concept Editor shows a complete list of concepts (not a hierarchy
+like the Graph Editor does). Each concept can be "opened up" to reveal
+its attributes. The
+<a href="/aha/AHAtutorialLS/images/conceptlist.gif" target="_blank"
+class="unconditional">list of concepts with attributes</a> resembles
+a windows explorer view.
+A <a href="templates.xhtml" class="conditional">template</a> determines
+which attributes are created automatically for every new concept.
+</li>
+<li>
+When selecting a concept the Concept Editor shows information about
+the concept, including the <em>requirement</em> for the concept
+to be <em>suitable</em>.
+For the <a href="/aha/AHAtutorialLS/images/welcomeconcept.gif" target="_blank"
+class="unconditional">welcome concept</a> from this tutorial we
+have a screendump of what would be shown.
+</li>
+<li>
+One can select an attribute (or create one) and then edit the
+<a href="rules.xhtml">adaptation rules</a> associated with that attribute.
+The <a href="/aha/AHAtutorialLS/images/accessattribute.gif" target="_blank"
+class="unconditional">access attribute screendump</a>
+shows the following information (and more):
+<ul>
+<li>
+<b>Type</b>: Each attribute is of type "int", "string" or "bool".
+</li>
+<li>
+<b>Changeable</b>: This flag indicates whether the end-user is allowed
+to change the value of the attribute (through a form) or not.
+</li>
+<li>
+<b>Persistent</b>: This flag indicates whether the attribute value
+is used during the rule execution for one event (page access) only,
+or whether the value is retained, like for "knowledge" for instance.
+</li>
+<li>
+<b>System</b>: This flag indicates whether the attribute has a special
+meaning to the AHA! system. The <em>access</em> attribute for instance
+has the special meaning that it temporarily becomes true when the
+page is accessed.
+</li>
+<li>
+<b>Generate list item</b>: Each line in this list contains the condition
+of an adaptation rule.
+You can select a condition and then edit the rule.
+</li>
+</ul>
+</li>
+<li>
+The <a href="/aha/AHAtutorialLS/images/rulescreendump.gif" target="_blank"
+class="unconditional">adaptation rule form</a> shows that for
+a rule the condition can be edited, the action to be performed
+if the condition is true and the optional action if the condition
+is false. Through the "Propagating" flag you can indicate that
+changes made to the user model by this rule may trigger other rules.
+</li>
+</ul>
+<p>
+Note that most authors will never need to use the Concept Editor.
+The entire concept and rule structure for this tutorial was created
+using only the Graph Author.
+</p>
+</main>
+</body>
+</html>

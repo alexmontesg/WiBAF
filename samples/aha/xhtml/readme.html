@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+<p>
+<b>Warning:</b>
+If you see this text it means you are not viewing the page through
+the AHA! system.
+</p>
+</object>
+<h2>What you need to know first:</h2>
+<p>
+In order to enjoy learning about and using
+AHA!, please go over these instructions on how to deal with differences
+between computing environments and browsers.
+</p>
+
+<p>
+When you installed the AHA! distribution on your own system,
+going through the tutorial is a good way to check whether the
+system is functioning properly.
+</p>
+
+<p>There are a number of things you should pay attention to
+when installing AHA! and using it, either as an end-user or as an author:
+</p>
+<ul>
+<li>
+AHA! is implemented entirely in Java, and works with the Java-based
+webserver Tomcat and with Java servlets. You need recent versions of
+Tomcat and of the Java SDK to make AHA! work. On the browser side
+you should use recent versions to ensure full support of (X)HTML and
+HTTP. If you experience problems with AHA! in combination with your
+browser, please make sure you access the AHA! server right after
+starting the browser (without visiting any other pages).
+Some browsers, especially Internet Explorer, sometimes do not work
+with AHA! after their internal memory has become corrupted through
+visits to other Websites. There is no problem when AHA! is the first
+site you visit.
+</li>
+<li>
+AHA! provides <em>content adaptation</em> by conditionally
+including fragments and <em>link adaptation</em> by conditionally
+changing the color of link anchors. The adaptation is performed
+each time a page is requested from the server.
+With most browsers a page is <em>not</em> requested from the server
+when the user navigates through the browsing history (using the
+<em>back</em> and <em>forward</em> buttons). Also, when a page is
+opened in a new browser window only the newly opened window shows
+adaptation. The other window will continue to show the previous page
+in its "old" state. Thus, as an author you should be aware that users
+will not see any new adaptations when they navigate through the history.
+The AHA! distribution contains a Javascript program "autoreload.js"
+to circumvent the problem in the case of history navigation.
+But as Javascript is not browser-independent
+the use of this program is at your own risk.
+This tutorial does not use the autoreload trick.
+</li>
+<li>
+The <em>link adaptation</em> is performed through the use of
+a <em>style sheet</em>. The browser must be configured to accept
+colors which the html page requests. With most browsers this is the
+default setting.
+In this tutorial you will see that links are sometimes <em>blue</em>
+and sometimes <em>purple</em>. These colors are determined by the
+style sheet, not by the browser's history mechanism.
+Links may also be <em>black</em> (actually <em>dark grey</em>)
+meaning that according to the adaptive application the user is not
+ready to follow them.
+You may also see <em>bright red</em> or <em>dark red</em> links;
+they point to pages that are not part of the tutorial.
+</li>
+<li>
+AHA! pages can (but need not) have a <em>header</em> and/or
+<em>footer</em>,
+showing a progress report and access to forms for changing the
+user profile, color preferences or password, or to log out.
+If this header does not show up when you expect it, it probably
+means that the page was not served through AHA! but straight
+through the web server. (As a result there is then no adaptation.)
+</li>
+<li>
+AHA! runs on any full implementation of the Java 2 platform.
+It is frequently tested on Microsoft Windows (2000 and XP)
+and Linux. Linux is the preferred platform, not just because it
+is Open Source like AHA! itself, but also because it is better
+at multitasking. This is especially noticeable on dual cpu machines.
+AHA! can be used on slow computers with little memory.
+(We have tested it on a Pentium 166 with 32 MB ram running Windows'98.)
+However, for an enjoyable experience a faster server is recommended.
+We find the performance on a laptop with Pentium III 650 sufficient
+for a single-user application.
+You can judge the performance of a reasonably fast server by using
+the AHA! tutorial on the AHA! website,
+which uses Linux on a dual Athlon MP 2000+ with 1GB of ram.
+</li>
+</ul>
+</main>
+</body>
+</html>

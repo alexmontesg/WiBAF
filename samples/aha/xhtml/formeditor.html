@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+
+<h2>The Form Editor</h2>
+
+<p>
+The Form Editor enables you to create custom forms
+to let end-users change values of attributes of concepts in
+their user model.
+To this end the Form Editor offers the following features:
+<ul>
+<li>
+You can choose an application name and load the concept structure
+of that application. You can only create forms that let end-users
+modify attribute values of concepts of a single application.
+The concepts and attributes are shown in a ay that
+resembles the Windows explorer.
+</li>
+<li>
+For each attribute that is marked as <em>changeable</em> in the
+concept structure a field can be created in the form.
+You first have to select the attribute of the concept,
+and then you can create the form field.
+A form can contain the following types of fields:
+<ul>
+<li>
+<a href="/aha/AHAtutorialLS/images/form-input.gif" target="_blank"
+class="unconditional">Input</a>:
+This is used to create a textfield, intended to enter numbers or strings.
+A text field has a visible "Size", a "maxLength" to indicate how
+many characters can be typed (can be more than the "Size"),
+and 
+</li>
+<li>
+<a href="/aha/AHAtutorialLS/images/form-select.gif" target="_blank"
+class="unconditional">Select</a>:
+This is used to create a list of possible values of which
+one can be selected. The width of the list is determined by "Size".
+The "EnumList" field is used to enter the possible values
+as a semicolon-separated list.
+</li>
+<li>
+<a href="/aha/AHAtutorialLS/images/form-option.gif" target="_blank"
+class="unconditional">Option</a>:
+This is used to create <em>radio buttons</em> (only one
+choice allowed) or <em>check boxes</em> (more than one choice allowed).<br />
+The "Allowed" field should have a value of 1 to create radio buttons.<br />
+The "EnumList" is the list of choices, which must be a semicolon-separated list.
+</li>
+<li>
+<a href="/aha/AHAtutorialLS/images/form-button.gif" target="_blank"
+class="unconditional">Button</a>:
+This is used to create the "submit" or "reset" buttons.
+</li>
+</ul>
+</li>
+<li>
+The FormEditor shows an editable view of the XML file it will
+create for the form.
+You can add text, xhtml code or move pieces around.
+There is also a "Preview" that shows more or less what the form
+will look like. This Preview is created using a "standard" Java
+Swing class. Its understanding of html and xhtml is somewhat limited.
+The FormEditor assumes that a "header.xml" and "footer.xml" file
+can be included, but you can edit that part out.
+</li>
+<li>
+When saving the form an XML file is created in the directory
+assigned to you as author. You have to manually move the form
+to the directory containing the pages of your application.
+</li>
+</ul>
+</p>
+
+<p>
+We have a small
+<a href="LS-form.frm" class="unconditional">example form</a>
+in which you can see different form elements in action.
+Changing the "menu" has no effect (as it is reset on the fly by
+every page), but changing the "knowledge" value for "author" and
+"readme" changes the link presentation due to the prerequisite
+relationships that are defined in this tutorial.
+</p>
+</main>
+</body>
+</html>

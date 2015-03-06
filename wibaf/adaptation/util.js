@@ -93,6 +93,12 @@ function correctTest(formId) {
 		}
 		e.parentNode.appendChild(feedback);
 	});
-	userModel.getInstance().update(formId, (correct / total).toFixed(2));
+	userModel.getInstance().get(formId, function(item, value) {
+                if(item) {
+                    userModel.getInstance().update(formId, value);
+                } else {
+                    userModel.getInstance().init(formId, value, "numeric"); //TODO Add the other parameters
+                }
+            }, (correct / total).toFixed(2));
 	return false;
 }

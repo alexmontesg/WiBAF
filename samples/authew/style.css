@@ -141,6 +141,9 @@ code {
     height: 18em;
 }
 
+select {
+    display: block;
+}
 
 
 footer {
