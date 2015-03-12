@@ -2,32 +2,97 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
-<h2>Adaptation Engine</h2>
-<p>We present the overall system architecture of AHA! through this diagram.</p>
-<img src="/aha/AHAtutorialLS/images/adaptationEngine.gif" />
-<li>The end-user interacts with AHA! through a browser, accessing a webserver through the http protocol. Apart from some oddities in the URLs of the visited pages, the user need not be aware that the visited website is adaptive.</li>
-<li>The webserver uses the Java Servlet technology to activate the adaptation engine.</li>
-<li>In the current version of AHA! the requested URL identifies a page directly. In future versions the URL may identify a concept that has to be "resolved" to a page.</li> 
-<p>The page may be local on the webserver or may refer to another webserver. For AHA! it makes no difference where the page comes from as long as its URL is known to the domain model.</p>
-<li>In AHA! the domain- and adaptation models are combined. When the user requests a page the associated concept in the domain and adaptation model is used to start the rule execution.</li>
-<li>The adaptation rules read and write attribute values of concepts in the user model.</li>
-<li>When the rule engine has determined the new user model instance it starts filtering the page based on that instance. Each time a conditionally included object is encountered the rule engine also executes the rules associated with the object. These updates may influence the filtering of the remainder of the page.</li>
-</main>
-</body>
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>adaptationEngine</title>
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Adaptation Engine</h2>
+            <p>
+                We present the overall system architecture of AHA! through this diagram.
+            </p>
+            <img src="../images/adaptationEngine.gif" />
+            <li>
+                The end-user interacts with AHA! through a browser, accessing a webserver through the http protocol. Apart from some oddities in the URLs of the visited pages, the user need not be aware that the visited website is adaptive.
+            </li>
+            <li>
+                The webserver uses the Java Servlet technology to activate the adaptation engine.
+            </li>
+            <li>
+                In the current version of AHA! the requested URL identifies a page directly. In future versions the URL may identify a concept that has to be "resolved" to a page.
+            </li>
+            <p>
+                The page may be local on the webserver or may refer to another webserver. For AHA! it makes no difference where the page comes from as long as its URL is known to the domain model.
+            </p>
+            <li>
+                In AHA! the domain- and adaptation models are combined. When the user requests a page the associated concept in the domain and adaptation model is used to start the rule execution.
+            </li>
+            <li>
+                The adaptation rules read and write attribute values of concepts in the user model.
+            </li>
+            <li>
+                When the rule engine has determined the new user model instance it starts filtering the page based on that instance. Each time a conditionally included object is encountered the rule engine also executes the rules associated with the object. These updates may influence the filtering of the remainder of the page.
+            </li>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

@@ -1,0 +1,95 @@
+.wibaf-not-working {
+    delete-node: true;
+}
+
+#contextvaluestext {
+    insert: url:contextvalues.html;
+}
+
+@user (verb-vs-visual-gt: 2) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Text.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_text.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_text.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_text.html;
+    }
+}
+
+@user (verb-vs-visual-lt: -2) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Image.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_image.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_image.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_image.html;
+    }
+}
+
+@user (verb-vs-visual-lt: 3 and verb-vs-visual-gt: -3) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Text.html;
+        append: url:AHA_Adaptation_Image.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_text.html;
+        append: url:contextsteps_image.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_text.html;
+        append: url:firstconfig_image.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_text.html;
+        append: url:pageProcessing_image.html;
+    }
+}
+
+@user (firstconfig-accessed-gt: 0) {
+    .hide-firstconfig-visited {
+        display: none;
+    }
+}
+
+@user (ahacontext-accessed-gt: 0) {
+    .hide-ahacontext-visited {
+        display: none;
+    }
+}
+
+@user (DomainAdaptationModel-accessed-lt: 1) {
+    .DomainAdaptationModel-visited {
+        insert: adaptation rules;
+    }
+}
+
+@user (DomainAdaptationModel-accessed-gt: 0) {
+    .DomainAdaptationModel-not-visited {
+        display: none;
+    }
+}
+
+@user (graphauthor-accessed-lt: 1) {
+    .hide-graphauthor-not-visited {
+        display: none;
+    }
+}

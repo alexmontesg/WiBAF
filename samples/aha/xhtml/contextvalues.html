@@ -1,50 +1,51 @@
 <span>
-<p>The values that you may have or wish to change are:</p>
-<ul>
-<li>
-<em>Document Base</em>: for example, "c:\aha" (this should be the
-full pathname of the directory where you unpacked the AHA! zipfile).
-</li>
-<li>
-<em>Path</em>: "/aha". In theory this can be any string you want.
-We recommend "/aha" because this makes all AHA! paths start with
-the word "/aha" and this is also the assumption we made in this
-tutorial, which is accessible through /aha/AHAtutorialLS/
-only if "/aha" is chosen as the path value.
-<br />
-Note that an empty path "/" is allowed in TomCat. It means that
-all pathnames not explicitly configured to refer to another context
-will be handled by AHA!. However, such context already exists and
-AHA! can thus only be configured to use "/" by modifying that
-existing context instead of creating a new one.
-<br />
-Also note that the "path" is part of a URL, and must thus be
-written with a forward slash (/), not a backslash (\) like
-for directories in Windows.
-</li>
-<li>
-<em>Reloadable</em> (Context Properties):
-True or False. When you set this value to True
-the TomCat server will notice changes to AHA!'s (web.xml) configuration file.
-This makes the installation procedure a bit smoother but causes
-overhead. For a long-term AHA! installation it is best to set this
-value to False.
-</li>
-<li>
-<em>Use Naming</em>: This must be set to True. It enables a naming
-feature that AHA! uses to read its own configuration.
-</li>
-<li>
-<em>Reloadable</em> (Loader Properties): True or False.
-When you set this value to True the TomCat server will notice
-changes to AHA!'s class files. This enables you to experiment with
-changes in the AHA! software without the need to restart the server
-after each compile phase. But it generates overhead so for a
-long-term AHA! installation it is best to set this value to False.
-</li>
-<li>
-<em>Session ID Initializer</em>: This must be a unique string,
-but can otherwise be anything. We have used "AHADISTR20" as an example.
-</li>
-</ul>
-</span>
+    <p>
+        The values that you may have or wish to change are:
+    </p>
+    <ul>
+        <li>
+            <em>Document Base</em>: for example, "c:\aha" (this should be the
+            full pathname of the directory where you unpacked the AHA! zipfile).
+        </li>
+        <li>
+            <em>Path</em>: "/aha". In theory this can be any string you want.
+            We recommend "/aha" because this makes all AHA! paths start with
+            the word "/aha" and this is also the assumption we made in this
+            tutorial, which is accessible through /aha/AHAtutorialLS/
+            only if "/aha" is chosen as the path value.
+            <br />
+            Note that an empty path "/" is allowed in TomCat. It means that
+            all pathnames not explicitly configured to refer to another context
+            will be handled by AHA!. However, such context already exists and
+            AHA! can thus only be configured to use "/" by modifying that
+            existing context instead of creating a new one.
+            <br />
+            Also note that the "path" is part of a URL, and must thus be
+            written with a forward slash (/), not a backslash (\) like
+            for directories in Windows.
+        </li>
+        <li>
+            <em>Reloadable</em> (Context Properties):
+            True or False. When you set this value to True
+            the TomCat server will notice changes to AHA!'s (web.xml) configuration file.
+            This makes the installation procedure a bit smoother but causes
+            overhead. For a long-term AHA! installation it is best to set this
+            value to False.
+        </li>
+        <li>
+            <em>Use Naming</em>: This must be set to True. It enables a naming
+            feature that AHA! uses to read its own configuration.
+        </li>
+        <li>
+            <em>Reloadable</em> (Loader Properties): True or False.
+            When you set this value to True the TomCat server will notice
+            changes to AHA!'s class files. This enables you to experiment with
+            changes in the AHA! software without the need to restart the server
+            after each compile phase. But it generates overhead so for a
+            long-term AHA! installation it is best to set this value to False.
+        </li>
+        <li>
+            <em>Session ID Initializer</em>: This must be a unique string,
+            but can otherwise be anything. We have used "AHADISTR20" as an example.
+        </li>
+    </ul> </span>

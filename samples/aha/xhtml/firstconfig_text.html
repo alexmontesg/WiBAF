@@ -1,46 +1,42 @@
 <ol>
-<li>
-In the browser you go to the address /aha/Config.
-The first time you do this a page appears that says
-"Installing Configuration file".
-This step actually executes a servlet that creates the AHA!
-configuration files containing the information you entered
-when <a href="ahacontext.xhtml" class="conditional">creating
-the AHA! context</a> for TomCat.
-</li>
-<li>
-Because the first step overwrites the initial configuration file,
-the next step only works if you configured the AHA! context to be
-reloadable. If you click on the "Configuration" link you go to "AhaConfig" page.
-If the context is not reloadable you have to restart the TomCat server
-first.
-<if expr="AHAtutorialLS.ahacontext.knowledge==0">
-<block>
-(Execute shutdown.sh and
-startup.sh on Linux or shutdown.bat and startup.bat on Windows.)
-</block>
-</if>
-<br />
-You can always go to the "AhaConfig" page later, using the
-link /aha/Config.
-You will never see the "Installing Configuration file" page again.
-</li>
-<li>
-When you try to go to AhaConfig page you are prompted for a
-login and password. Initially you should use "aha" as login and no password.
-</li>
-<li>
-The first thing to do when shown the AhaConfig page is to select
-"Manager Configuration" and then select "Change an existing user"
-from the Manager administration menu,
-in order to change the "aha" <em>login</em> to a name you prefer,
-and to add a password.
-This is important for security reasons, because everyone who knows
-AHA! also knows that it comes with "aha" as the default manager
-without a password.
-</li>
-<li>
-Through the "Author menu" you can create authors
-and assign applications to authors.
-</li>
+    <li>
+        In the browser you go to the address /aha/Config.
+        The first time you do this a page appears that says
+        "Installing Configuration file".
+        This step actually executes a servlet that creates the AHA!
+        configuration files containing the information you entered
+        when <a href="ahacontext.xhtml" class="conditional">creating
+        the AHA! context</a> for TomCat.
+    </li>
+    <li>
+        Because the first step overwrites the initial configuration file,
+        the next step only works if you configured the AHA! context to be
+        reloadable. If you click on the "Configuration" link you go to "AhaConfig" page.
+        If the context is not reloadable you have to restart the TomCat server
+        first.
+        <span class="hide-ahacontext-visited">(Execute shutdown.sh and
+            startup.sh on Linux or shutdown.bat and startup.bat on Windows.) </span>
+        <br />
+        You can always go to the "AhaConfig" page later, using the
+        link /aha/Config.
+        You will never see the "Installing Configuration file" page again.
+    </li>
+    <li>
+        When you try to go to AhaConfig page you are prompted for a
+        login and password. Initially you should use "aha" as login and no password.
+    </li>
+    <li>
+        The first thing to do when shown the AhaConfig page is to select
+        "Manager Configuration" and then select "Change an existing user"
+        from the Manager administration menu,
+        in order to change the "aha" <em>login</em> to a name you prefer,
+        and to add a password.
+        This is important for security reasons, because everyone who knows
+        AHA! also knows that it comes with "aha" as the default manager
+        without a password.
+    </li>
+    <li>
+        Through the "Author menu" you can create authors
+        and assign applications to authors.
+    </li>
 </ol>

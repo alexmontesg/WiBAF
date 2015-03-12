@@ -2,146 +2,187 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>author</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
 
-<h2>Authoring AHA! Applications</h2>
+            <h2>Authoring AHA! Applications</h2>
 
-<p>
-Authors in AHA! are special users, created by the manager
-(who installs AHA!).
-As an author you can access the authoring tools and your account
-information through the
-<a href="/aha/AuthorWorkplace" target="_blank"
-class="unconditional">"Author Workplace"</a>.
-</p>
-<p>
-Creating AHA! applications involves four main steps:
-writing <a href="pages.xhtml" class="conditional">pages</a>,
-creating a <a href="concepts.xhtml" class="conditional">conceptual
-structure</a> of the aplication,
-defining the
-adaptation rules,
-and defining the look and feel or layout of the application.
-</p>
-<ul>
-<li>
-For each application you must create a directory tree of which the root
-(like "AHAtutorialLS" for this tutorial) we will refer to as the "course"
-(for historical reasons).
-In the root directory you must create an "index.html" file
-with a login form and a link to another file to register as a new user.
-In this tutorial this file is "Registration.html".
-The forms must adhere to the login form syntax
-which is fairly obvious from looking at the tutorial version.
-From the forms the servlets "Login", "Register" or "Anonymous"
-are called. Some form elements create variables that can
-be retrieved and used in a
-<a href="headerfooter.xhtml" class="conditional">header or footer</a>.
-Additional elements can be added. They will create attributes
-for the <tt>personal</tt> pseudo-concept in the
-<a href="usermodel.xhtml" class="conditional">user model</a>.
-</li>
-<li>
-AHA! version 2.0 requires pages to be written in
-<a href="http://www.w3.org/MarkUp/" target="_blank">XHTML</a>, the standard
-markup language defined by the
-<a href="http://www.w3.org/" target="_blank">World Wide Web Consortium</a>.
-We have a brief explanation of the differences between the "old"
-plain html and <a href="xhtml.xhtml" class="conditional">xhtml</a>.
-AHA! 2.0 added some tags to this language for the generation of optional
-<a href="headerfooter.xhtml" class="conditional">headers and footers</a>
-and for the
-<a href="fragments.xhtml" class="conditional">conditional inclusion
-of fragments</a>.
-In AHA! 3.0 the standard XHTML "object" tag can be used to achieve
-the same functionality (and more) without using an AHA!-extended document
-format.
-</li>
-<li>
-Each application deals with
-<a href="concepts.xhtml" class="conditional">concepts</a>.
-In the simplest case each page is a concept and vice versa.
-But often you wish to consider "higher level" concepts.
-AHA! comes with a "high level" graph author tool
-to define the structure of concepts and pages.
-You can define <em>relationships</em> of different types between
-concepts. The tool generates the rules
-<if expr="AHAtutorialLS.DomainAdaptationModel.knowledge&gt;50">
-<block>
-event-condition-action rules
-</block>
-<block>
-adaptation rules
-</block>
-</if>
-from this graph.
-</li>
-<li>
-The adaptation in AHA! is a two-stage process.
-As an author you define rules
-that translate user interactions (page accesses) into
-<a href="usermodel.xhtml" class="conditional">user model</a> updates.
-The user model instance is then used to determine how the presentation
-is adapted. There are three ways to author the adaptation rules:
-you can generate rules
-from concept relationships using the graph author,
-you can manually create rules
-using the concept editor,
-or you can manually edit an XML file containing the concepts and adaptation rules.
-</li>
-<li>
-An additional part of AHA! consists of <em>forms</em> for letting end-users
-change their user model. There is a
-Form Editor
-through which you can define such forms and thus control which parts
-of the user model an end-user can update and which part remains under
-strict control of the AHA! system. For updates to <em>color preferences</em>
-and <em>knowledge about concepts</em> there are standard forms that
-can be accessed through the
-<a href="headerfooter.xhtml" class="conditional">header or footer</a>.
-</li>
-<li>
-For educational applications AHA! also offers the possibility
-to present and evaluate multiple-choice tests.
-The tests can be randomized to avoid circulation of lists of answers
-among students.
-</li>
-</ul>
+            <p>
+                Authors in AHA! are special users, created by the manager
+                (who installs AHA!).
+                As an author you can access the authoring tools and your account
+                information through the "Author Workplace".
+            </p>
+            <p>
+                Creating AHA! applications involves four main steps:
+                writing <a href="pages.html" class="conditional">pages</a>,
+                creating a <a href="concepts.html" class="conditional">conceptual
+                structure</a> of the aplication,
+                defining the
+                adaptation rules,
+                and defining the look and feel or layout of the application.
+            </p>
+            <ul>
+                <li>
+                    For each application you must create a directory tree of which the root
+                    (like "AHAtutorialLS" for this tutorial) we will refer to as the "course"
+                    (for historical reasons).
+                    In the root directory you must create an "index.html" file
+                    with a login form and a link to another file to register as a new user.
+                    In this tutorial this file is "Registration.html".
+                    The forms must adhere to the login form syntax
+                    which is fairly obvious from looking at the tutorial version.
+                    From the forms the servlets "Login", "Register" or "Anonymous"
+                    are called. Some form elements create variables that can
+                    be retrieved and used in a
+                    <a href="headerfooter.html" class="conditional">header or footer</a>.
+                    Additional elements can be added. They will create attributes
+                    for the <tt>personal</tt> pseudo-concept in the <a href="usermodel.html" class="conditional">user model</a>.
+                </li>
+                <li>
+                    AHA! version 2.0 requires pages to be written in
+                    <a href="http://www.w3.org/MarkUp/" target="_blank">XHTML</a>, the standard
+                    markup language defined by the
+                    <a href="http://www.w3.org/" target="_blank">World Wide Web Consortium</a>.
+                    We have a brief explanation of the differences between the "old"
+                    plain html and <a href="xhtml.html" class="conditional">xhtml</a>.
+                    AHA! 2.0 added some tags to this language for the generation of optional
+                    <a href="headerfooter.html" class="conditional">headers and footers</a>
+                    and for the
+                    <a href="fragments.html" class="conditional">conditional inclusion
+                    of fragments</a>.
+                    In AHA! 3.0 the standard XHTML "object" tag can be used to achieve
+                    the same functionality (and more) without using an AHA!-extended document
+                    format.
+                </li>
+                <li>
+                    Each application deals with
+                    <a href="concepts.html" class="conditional">concepts</a>.
+                    In the simplest case each page is a concept and vice versa.
+                    But often you wish to consider "higher level" concepts.
+                    AHA! comes with a "high level" graph author tool
+                    to define the structure of concepts and pages.
+                    You can define <em>relationships</em> of different types between
+                    concepts. The tool generates the rules
+                    <span class="DomainAdaptationModel-visited">
+                            event-condition-action rules
+                    </span>
+                    from this graph.
+                </li>
+                <li>
+                    The adaptation in AHA! is a two-stage process.
+                    As an author you define rules
+                    that translate user interactions (page accesses) into
+                    <a href="usermodel.html" class="conditional">user model</a> updates.
+                    The user model instance is then used to determine how the presentation
+                    is adapted. There are three ways to author the adaptation rules:
+                    you can generate rules
+                    from concept relationships using the graph author,
+                    you can manually create rules
+                    using the concept editor,
+                    or you can manually edit an XML file containing the concepts and adaptation rules.
+                </li>
+                <li>
+                    An additional part of AHA! consists of <em>forms</em> for letting end-users
+                    change their user model. There is a
+                    Form Editor
+                    through which you can define such forms and thus control which parts
+                    of the user model an end-user can update and which part remains under
+                    strict control of the AHA! system. For updates to <em>color preferences</em>
+                    and <em>knowledge about concepts</em> there are standard forms that
+                    can be accessed through the
+                    <a href="headerfooter.html" class="conditional">header or footer</a>.
+                </li>
+                <li>
+                    For educational applications AHA! also offers the possibility
+                    to present and evaluate multiple-choice tests.
+                    The tests can be randomized to avoid circulation of lists of answers
+                    among students.
+                </li>
+            </ul>
 
-<p>
-The authoring tools all interact with XML files stored in a special
-directory for "author files". This directory, called "graphauthorfiles" in
-the AHA! configuration file is predefined as "/author/authorfiles".
-When you make changes to these files (with or without AHA! tools) you
-need to convert the XML files to AHA!'s internal format,
-as described on the <a href="manager.xhtml" class="conditional">manager page</a>.
-<br />
-Note that for the Form Editor
-you need to (manually) copy or move the created files to the directory
-containing the pages of your application.
-</p>
+            <p>
+                The authoring tools all interact with XML files stored in a special
+                directory for "author files". This directory, called "graphauthorfiles" in
+                the AHA! configuration file is predefined as "/author/authorfiles".
+                When you make changes to these files (with or without AHA! tools) you
+                need to convert the XML files to AHA!'s internal format,
+                as described on the <a href="manager.html" class="conditional">manager page</a>.
+                <br />
+                Note that for the Form Editor
+                you need to (manually) copy or move the created files to the directory
+                containing the pages of your application.
+            </p>
 
-<p>
-Warning: the graph author <em>generates</em> a file that can be read by the
-concept editor, but it
-does not read these files. Changes made to the concept/rule structure
-in the concept editor are lost when you later make changes using the graph author.
-</p>
-</main>
-</body>
+            <p>
+                Warning: the graph author <em>generates</em> a file that can be read by the
+                concept editor, but it
+                does not read these files. Changes made to the concept/rule structure
+                in the concept editor are lost when you later make changes using the graph author.
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

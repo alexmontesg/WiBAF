@@ -2,134 +2,170 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
+    <!--<![endif]-->
+    <head>
+        end-user
+    </head>
+    <body>
+        <header>
 
-<h2>AHA! for End-Users</h2>
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
 
-<p>
-As an end-user there are only a few things you have to know
-about the AHA! system. How the adaptation works in an application
-largely depends on the
-adaptation rules
-<if expr="AHAtutorialLS.DomainAdaptationModel.knowledge&gt;50">
-<block>
-(event-condition-action rules)
-</block>
-</if>
-an author creates, so we concentrate
-here on aspects that are application independent.
-</p>
+            <h2>AHA! for End-Users</h2>
 
-<ul>
-<li>
-In order for AHA! to perform adaptation each user must be known
-through a unique <em>identity</em>, which is chosen in the
-registration form. Anonymous users are assigned a unique
-randomly chosen identity. That identity is remembered by the
-browser through the "cookie" mechanism. You can restart an
-anonymous session only from the same machine using the same browser.
-Non-anonymous (normal) users have a <em>password</em> to prevent
-unauthorized use of their login. An application may offer a
-form (called "password" in this tutorial) to let you change the password.
-</li>
-<li>
-One AHA! server can contain several applications. You can reuse
-your identity when you go from one application to another.
-You can also return to the first application or go back and forth.
-However, you should not try to use two applications simultaneously
-from different browsers or browser windows, because AHA! maintains
-only one session per user at a time. Using multiple applications
-simultaneously can lead to unexpected results (like the name of
-one application being displayed in the other application,
-or the wrong background image on pages).
-</li>
-<li>
-AHA! registers every page access (every click on a link anchor).
-A set of rules (written by the author) determines how a
-<a href="usermodel.xhtml" class="conditional">user model</a> is updated.
-This user model consists of
-<em>concepts</em> with <em>attributes</em>. There may (or may not)
-be forms in the application that let you inspect and change
-certain attributes of certain concepts.
-This tutorial has a standard form ("knowledge of tutorial")
-that lets you change the knowledge value of certain concepts.
-(The author determines which concepts
-have a user-changeable knowledge value.)
-</li>
-<li>
-The
-<if expr="AHAtutorialLS.DomainAdaptationModel.knowledge&gt;50">
-<block>
-event-condition-action rules
-</block>
-<block>
-adaptation rules
-</block>
-</if>
-an author writes determine whether pages are considered <em>suitable</em>.
-The presentation of a link anchor depends on the suitability
-of the page it links to. The presentation can be:
-<ul>
-<li>
-GOOD: the link points to a suitable page you have not visited before.
-The standard color for such link anchors is blue.
-</li>
-<li>
-NEUTRAL: the link points to a suitable page you have visited before.
-The standard color for such link anchors is purple.
-</li>
-<li>
-BAD: the link points to an unsuitable page. Whether or not you visited
-this page before the standard color for such link anchors is
-(almost) black.
-</li>
-</ul>
-An application may offer a form through which you can change this
-color scheme. (This tutorial offers such a form: "link colors").<br />
-Each time you visit a page the suitability of all the links on that
-page is determined. As a result the set of links you see may differ
-each time.
-</li>
-<li>
-<a href="pages.xhtml" class="conditional">Pages</a>
-may also contain rules (or conditions) to determine the suitability of
-<a href="fragments.xhtml" class="conditional">fragments</a>
-(like sentences or paragraphs).
-Each time you visit a page the suitability of each fragment is
-determined. As a result the information you see on the page
-may differ each time.
-</li>
-<li>
-When you navigate through your browser's history (using the
-<em>back</em> and <em>forward</em> buttons) the browser may not request the
-pages you revisit from the AHA! server but may use cached versions.
-This results in pages being shown exactly as you saw them before,
-and not in the "new" form that would correspond to the most recent
-user model. When in doubt you can use the browser's <em>reload</em>
-function to retrieve a newly adapted page.
-</li>
-<li>
-Apart from information pages an AHA! application may contain
-<em>forms</em> that let you change settings in your
-<a href="usermodel.xhtml" class="conditional">user model</a>.
-There can also be forms that are intended as multiple-choice tests.
-</li>
-</ul>
-</main>
-</body>
+            <p>
+                As an end-user there are only a few things you have to know
+                about the AHA! system. How the adaptation works in an application
+                largely depends on the
+                <span class="DomainAdaptationModel-visited"> event-condition-action rules </span>
+                an author creates, so we concentrate
+                here on aspects that are application independent.
+            </p>
+
+            <ul>
+                <li>
+                    In order for AHA! to perform adaptation each user must be known
+                    through a unique <em>identity</em>, which is chosen in the
+                    registration form. Anonymous users are assigned a unique
+                    randomly chosen identity. That identity is remembered by the
+                    browser through the "cookie" mechanism. You can restart an
+                    anonymous session only from the same machine using the same browser.
+                    Non-anonymous (normal) users have a <em>password</em> to prevent
+                    unauthorized use of their login. An application may offer a
+                    form (called "password" in this tutorial) to let you change the password.
+                </li>
+                <li>
+                    One AHA! server can contain several applications. You can reuse
+                    your identity when you go from one application to another.
+                    You can also return to the first application or go back and forth.
+                    However, you should not try to use two applications simultaneously
+                    from different browsers or browser windows, because AHA! maintains
+                    only one session per user at a time. Using multiple applications
+                    simultaneously can lead to unexpected results (like the name of
+                    one application being displayed in the other application,
+                    or the wrong background image on pages).
+                </li>
+                <li>
+                    AHA! registers every page access (every click on a link anchor).
+                    A set of rules (written by the author) determines how a
+                    <a href="usermodel.xhtml" class="conditional">user model</a> is updated.
+                    This user model consists of
+                    <em>concepts</em> with <em>attributes</em>. There may (or may not)
+                    be forms in the application that let you inspect and change
+                    certain attributes of certain concepts.
+                    This tutorial has a standard form ("knowledge of tutorial")
+                    that lets you change the knowledge value of certain concepts.
+                    (The author determines which concepts
+                    have a user-changeable knowledge value.)
+                </li>
+                <li>
+                    The
+                    <span class="DomainAdaptationModel-visited"> event-condition-action rules </span>
+                    an author writes determine whether pages are considered <em>suitable</em>.
+                    The presentation of a link anchor depends on the suitability
+                    of the page it links to. The presentation can be:
+                    <ul>
+                        <li>
+                            GOOD: the link points to a suitable page you have not visited before.
+                            The standard color for such link anchors is blue.
+                        </li>
+                        <li>
+                            NEUTRAL: the link points to a suitable page you have visited before.
+                            The standard color for such link anchors is purple.
+                        </li>
+                        <li>
+                            BAD: the link points to an unsuitable page. Whether or not you visited
+                            this page before the standard color for such link anchors is
+                            (almost) black.
+                        </li>
+                    </ul>
+                    An application may offer a form through which you can change this
+                    color scheme. (This tutorial offers such a form: "link colors").
+                    <br />
+                    Each time you visit a page the suitability of all the links on that
+                    page is determined. As a result the set of links you see may differ
+                    each time.
+                </li>
+                <li>
+                    <a href="pages.xhtml" class="conditional">Pages</a>
+                    may also contain rules (or conditions) to determine the suitability of
+                    <a href="fragments.xhtml" class="conditional">fragments</a>
+                    (like sentences or paragraphs).
+                    Each time you visit a page the suitability of each fragment is
+                    determined. As a result the information you see on the page
+                    may differ each time.
+                </li>
+                <li>
+                    When you navigate through your browser's history (using the
+                    <em>back</em> and <em>forward</em> buttons) the browser may not request the
+                    pages you revisit from the AHA! server but may use cached versions.
+                    This results in pages being shown exactly as you saw them before,
+                    and not in the "new" form that would correspond to the most recent
+                    user model. When in doubt you can use the browser's <em>reload</em>
+                    function to retrieve a newly adapted page.
+                </li>
+                <li>
+                    Apart from information pages an AHA! application may contain
+                    <em>forms</em> that let you change settings in your <a href="usermodel.xhtml" class="conditional">user model</a>.
+                    There can also be forms that are intended as multiple-choice tests.
+                </li>
+            </ul>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

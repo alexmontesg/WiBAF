@@ -2,50 +2,97 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
-<h2>Creating the AHA! Context</h2>
-<p>We assume that you have the TomCat server
-<if expr="AHAtutorialLS.firstconfig.knowledge==0">
-<block>
-(for instance Sun's version JWDSP from
-<a href="http://java.sun.com/webservices/downloads/webservicespack.html"
-target="_blank">http://java.sun.com/webservices/downloads/webservicespack.html</a>)
-</block>
-</if>
-installed and running.
-You need to create a "context" for AHA! so that TomCat knows where
-the documents and servlets of AHA! are located.
-</p>
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>ahacontext</title>
+    </head>
+    <body>
+        <header>
 
-<p>
-In the sequel we will assume that the directory in which you unpacked the
-AHA! zip archive is "c:\aha". On a Windows system "d:\aha" might also
-be a good choice and on Linux "/usr/local/aha" or "$HOME/aha" might be
-good choices. AHA! is completely independent of the directory in which
-it is installed, but once installed it cannot easily be moved.
-There is also no need to install AHA! in a location that is related
-to where Tomcat is installed.
-</p>
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Creating the AHA! Context</h2>
+            <p>
+                We assume that you have the TomCat server
+                <span class="hide-firstconfig-visited"> (for instance Sun's version JWDSP from <a href="http://java.sun.com/webservices/downloads/webservicespack.html"
+                    target="_blank">http://java.sun.com/webservices/downloads/webservicespack.html</a>) </span>
+                installed and running.
+                You need to create a "context" for AHA! so that TomCat knows where
+                the documents and servlets of AHA! are located.
+            </p>
 
-<p>
-Creating the AHA! context involves the following steps:
-</p>
-<object name="AHAtutorialLS.contextsteps" type="aha/text" />
-</main>
-</body>
+            <p>
+                In the sequel we will assume that the directory in which you unpacked the
+                AHA! zip archive is "c:\aha". On a Windows system "d:\aha" might also
+                be a good choice and on Linux "/usr/local/aha" or "$HOME/aha" might be
+                good choices. AHA! is completely independent of the directory in which
+                it is installed, but once installed it cannot easily be moved.
+                There is also no need to install AHA! in a location that is related
+                to where Tomcat is installed.
+            </p>
+
+            <p>
+                Creating the AHA! context involves the following steps:
+            </p>
+            <div id="contextSteps">
+
+            </div>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

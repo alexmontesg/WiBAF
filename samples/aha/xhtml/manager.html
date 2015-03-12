@@ -2,86 +2,135 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
-<h2>AHA! manager</h2>
-<p>
-After installing and using AHA! it is possible to change
-the configuration again by going back to the
-<a href="/aha/Config" target="_blank" class="unconditional">/aha/Config</a>
-page and logging
-in as the AHA! manager. This page lets you perform the following
-four actions:
-</p>
-<ul>
-<li>
-The "Configure Database" link leads to a form that lets you choose
-between XML and mySQL for storing the concept information and the
-user profiles. When changing this setting AHA! will offer the
-possibility to convert the data to the new format.
-When switching to mySQL for the first time you should check the
-box to create the database.
-For experimental and stand-alone AHA! installations it is easiest
-to choose XML, whereas for multi-user servers it is probably better to
-choose mySQL. Our experience shows that this does not make the
-system faster, but it does allow querying of the
-<a href="usermodel.xhtml" class="conditional">user model</a> database.
-<br />
-<b>Warning:</b> When you change the database setting (switch from
-XML to mySQL or back, or change the database name) you have to
-restart the TomCat server before the settings will work.
-</li>
-<li>
-The "Manager Configuration" link leads to a form that lets you
-add or change AHA! managers. If you are studying the tutorial on
-your own installed AHA! server you should already have changed the default
-manager's password, but if you did not we must remind you that this
-is very important. Every AHA! installation has "aha" as the
-default manager, with an empty password. Everyone who knows about
-AHA! will use this combination as a first guess to try and break
-into an existing AHA! server. Note that creating a new manager
-does not remove the default one, so you should modify the existing
-"aha" manager, give it a password, and optionally change its name.
-</li>
-<li>
-The "Authors" link leads to a form that lets you add or change
-AHA! authors. The concept structure of an application can only
-be modified by its author(s).
-AHA! currently does not include content management for the
-document tree associated with an application.
-</li>
-<li>
-The "Convert concept list from internal format to XML file" link
-performs the translation of the concept information
-from the internal XML or mySQL format
-(whichever is active) to a single XML file or a set of XML files
-in the format used by the authoring tools. (A single AHA! server
-can contain several top-level hyperdocuments and each will be
-represented by a separate authoring XML file so that different
-authors can work simultaneously on their own hyperdocument.)
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>manager</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>AHA! manager</h2>
+            <p>
+                After installing and using AHA! it is possible to change
+                the configuration again by going back to the
+                <a href="/aha/Config" target="_blank" class="unconditional">/aha/Config</a>
+                page and logging
+                in as the AHA! manager. This page lets you perform the following
+                four actions:
+            </p>
+            <ul>
+                <li>
+                    The "Configure Database" link leads to a form that lets you choose
+                    between XML and mySQL for storing the concept information and the
+                    user profiles. When changing this setting AHA! will offer the
+                    possibility to convert the data to the new format.
+                    When switching to mySQL for the first time you should check the
+                    box to create the database.
+                    For experimental and stand-alone AHA! installations it is easiest
+                    to choose XML, whereas for multi-user servers it is probably better to
+                    choose mySQL. Our experience shows that this does not make the
+                    system faster, but it does allow querying of the
+                    <a href="usermodel.xhtml" class="conditional">user model</a> database.
+                    <br />
+                    <b>Warning:</b> When you change the database setting (switch from
+                    XML to mySQL or back, or change the database name) you have to
+                    restart the TomCat server before the settings will work.
+                </li>
+                <li>
+                    The "Manager Configuration" link leads to a form that lets you
+                    add or change AHA! managers. If you are studying the tutorial on
+                    your own installed AHA! server you should already have changed the default
+                    manager's password, but if you did not we must remind you that this
+                    is very important. Every AHA! installation has "aha" as the
+                    default manager, with an empty password. Everyone who knows about
+                    AHA! will use this combination as a first guess to try and break
+                    into an existing AHA! server. Note that creating a new manager
+                    does not remove the default one, so you should modify the existing
+                    "aha" manager, give it a password, and optionally change its name.
+                </li>
+                <li>
+                    The "Authors" link leads to a form that lets you add or change
+                    AHA! authors. The concept structure of an application can only
+                    be modified by its author(s).
+                    AHA! currently does not include content management for the
+                    document tree associated with an application.
+                </li>
+                <li>
+                    The "Convert concept list from internal format to XML file" link
+                    performs the translation of the concept information
+                    from the internal XML or mySQL format
+                    (whichever is active) to a single XML file or a set of XML files
+                    in the format used by the authoring tools. (A single AHA! server
+                    can contain several top-level hyperdocuments and each will be
+                    represented by a separate authoring XML file so that different
+                    authors can work simultaneously on their own hyperdocument.)
 
-</li>
-<li>
-The "Convert concept list from XML file to internal format" link
-commits changes made by authoring tools. It converts the XML file(s)
-created by the authoring tools to the internal format which is
-a set of XML files or the mySQL database depending on the chosen setting.
-</li>
-</ul>
-</main>
-</body>
+                </li>
+                <li>
+                    The "Convert concept list from XML file to internal format" link
+                    commits changes made by authoring tools. It converts the XML file(s)
+                    created by the authoring tools to the internal format which is
+                    a set of XML files or the mySQL database depending on the chosen setting.
+                </li>
+            </ul>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

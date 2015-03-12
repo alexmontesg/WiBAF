@@ -44,12 +44,15 @@ function getFeatures(featureString) {
 	});
 	var features = {};
 	for (var i = 0; i < featuresArray.length; i++) {
-		var feature = featuresArray[i].toLowerCase().split(":");
-		if (feature.length === 2) {
-			features[feature[0].trim()] = feature[1].trim();
-		} else {
-			console.warn("Invalid feature detected: " + featuresArray[i]);
-		}
+	    var andFeatures = featuresArray[i].toLowerCase().split(" and ");
+	    for (var j = 0; j < andFeatures.length; j++) {
+	        var feature = andFeatures[j].toLowerCase().split(":");
+            if (feature.length === 2) {
+                features[feature[0].trim()] = feature[1].trim();
+            } else {
+                console.warn("Invalid feature detected: " + featuresArray[i]);
+            }
+	    }
 	}
 	return features;
 }

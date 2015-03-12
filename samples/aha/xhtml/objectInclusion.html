@@ -2,50 +2,123 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
-<h2>Object Inclusion in DM/AM</h2>
-<p>We illustrate how conditional object inclusion is represented in the AHA! author format.</p> 
-Here is an example of part of a DM/AM for object inclusion:
-<concept>
-   <name>tutorial.object1</name>
-   <attribute name="showability" type="int" isPersistent="true" isSystem="true">
-   <casegroup>
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>objectInclusion</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Object Inclusion in DM/AM</h2>
+            <p>
+                We illustrate how conditional object inclusion is represented in the AHA! author format.
+            </p>
+            Here is an example of part of a DM/AM for object inclusion:
+<pre>
+            &lt;concept&gt;
+                &lt;name&gt;
+                    tutorial.object1
+                &lt;/name&gt;
+                &lt; attribute name="showability" type="int" isPersistent="true" isSystem="true"&gt;
+                    &lt;casegroup&gt;
 
-<defaultfragment>file:/AHAtutorialLS/xhtml/empty.xhtml</defaultfragment>
+                        &lt;defaultfragment&gt;
+                            file:/AHAtutorialLS/xhtml/empty.xhtml
+                        &lt;/defaultfragment&gt;
 
-<casevalue><value>1</value>
+                        &lt;casevalue&gt;
+                            &lt;value&gt;
+                                1
+                            &lt;/value&gt;
 
-<returnfragment>file:/AHAtutorialLS/xhtml/frag1.xhtml</returnfragment>
+                            &lt;returnfragment&gt;
+                                file:/AHAtutorialLS/xhtml/frag1.xhtml
+                            &lt;/returnfragment&gt;
 
-</casevalue>
+                        &lt;/casevalue&gt;
 
-<casevalue><value>2</value>
+                        &lt;casevalue&gt;
+                            &lt;value&gt;
+                                2
+                            &lt;/value&gt;
 
-<returnfragment>file:/AHAtutorialLS/xhtml/frag2.xhtml</returnfragment>
+                            &lt;returnfragment&gt;
+                                file:/AHAtutorialLS/xhtml/frag2.xhtml
+                            &lt;/returnfragment&gt;
 
-</casevalue>
-   </casegroup>
-  </attribute>
-</concept>
-<p>This format is produced by the authoring tools. As an author you normally never have to write or even inspect the domain and adaptation model written in this syntax.
-What we see is that the object inclusion for the concept "tutorial.object1" is part of the attribute "showability".</p>
-<p>The "casegroup" construct uses the value of the "showability" attribute to determine whether to include the file frag1.xhtml (for value 1), frag2.xhtml (for value 2) or empty.xhtml for any other value.</p>
-<p>So in order to specify the desired fragment selection you must write adaptation rules that give the "showability" attribute the right value under the right circumstances. We will see more about these adaptation rules when we discuss the authoring formats and tools.</p>
-</main>
-</body>
+                        &lt;/casevalue&gt;
+                    &lt;/casegroup&gt;
+                &lt;/attribut&gt;
+            &lt;/concept&gt;
+</pre>
+            <p>
+                This format is produced by the authoring tools. As an author you normally never have to write or even inspect the domain and adaptation model written in this syntax.
+                What we see is that the object inclusion for the concept "tutorial.object1" is part of the attribute "showability".
+            </p>
+            <p>
+                The "casegroup" construct uses the value of the "showability" attribute to determine whether to include the file frag1.xhtml (for value 1), frag2.xhtml (for value 2) or empty.xhtml for any other value.
+            </p>
+            <p>
+                So in order to specify the desired fragment selection you must write adaptation rules that give the "showability" attribute the right value under the right circumstances. We will see more about these adaptation rules when we discuss the authoring formats and tools.
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>

@@ -2,85 +2,134 @@
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-   <html class="no-js lt-ie9"> <![endif]-->
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>
 <!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
-</head>
-<body>
-<header>
-</header>
-<main>
-    <div class="wibaf-not-working">
-        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
-    </div>
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>xhtml</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
 
-<h2>XHTML versus HTML</h2>
+            <h2>XHTML versus HTML</h2>
 
-<p>
-AHA! 2.0 uses pages written in
-<a href="http://www.w3.org/MarkUp/">XHTML</a>.
-Pages are validated using the XML parser.
-In many cases when an end-user (hopefully you as an author trying
-out your application) tries to load a page with a syntax error
-the parser will display a "friendly" error message indicating
-what is wrong.
-</p>
+            <p>
+                AHA! 2.0 uses pages written in
+                <a href="http://www.w3.org/MarkUp/">XHTML</a>.
+                Pages are validated using the XML parser.
+                In many cases when an end-user (hopefully you as an author trying
+                out your application) tries to load a page with a syntax error
+                the parser will display a "friendly" error message indicating
+                what is wrong.
+            </p>
 
-<p>
-For experienced HTML authors there are a few things you should
-know in order to write (mostly) correct XHTML pages that will work
-in XHTML browsers as well as older HTML browsers:
-</p>
-<ul>
-<li>
-All tags have to be properly nested. In HTML there is automatic ending
-of tags, like in the following construct:
-<pre>
+            <p>
+                For experienced HTML authors there are a few things you should
+                know in order to write (mostly) correct XHTML pages that will work
+                in XHTML browsers as well as older HTML browsers:
+            </p>
+            <ul>
+                <li>
+                    All tags have to be properly nested. In HTML there is automatic ending
+                    of tags, like in the following construct:
+                    <pre>
 &lt;ul&gt;
 &lt;li&gt; ... &lt;li&gt; ... &lt;li&gt; ... 
 &lt;/ul&gt;
-</pre>
+</pre>                    
 Where each list item is ended automatically when the next list item
 starts or when the whole list ends.
 in XHTML you have to explicitly end all tags:
-<pre>
+                     <pre>
 &lt;ul&gt;
 &lt;li&gt; ... &lt;/li&gt; &lt;li&gt; ... &lt;/li&gt; &lt;li&gt; ... &lt;/li&gt;
 &lt;/ul&gt;
 </pre>
-</li>
-<li>
-In HTML there are a number of tags that have no end tag,
-like
-<pre>
+                </li>
+                <li>
+                    In HTML there are a number of tags that have no end tag,
+                    like
+                    <pre>
 &lt;br&gt;
-</pre>
+</pre>                    
 In XHTML all tags must be ended. There are two ways to do this:
-<pre>
-&lt;br&gt;&lt;/br&gt; or &lt;br /&gt;
+                     <pre>
+&lt;br&gt;&lt;/br&gt; or &lt; br /&gt;
 </pre>
-</li>
-<li>
-Older browsers ignore explicit end tags like <tt>&lt;/br&gt;</tt>
-but may get confused by the abbreviated form <tt>&lt;br/&gt;</tt>.
-A solution is to add a space between the tag name and the /,
-as in <tt>&lt;br /&gt;</tt>.
-</li>
-</ul>
+                </li>
+                <li>
+                    Older browsers ignore explicit end tags like <tt>&lt;/br&gt;</tt>
+                    but may get confused by the abbreviated form <tt>&lt;br/&gt;</tt>.
+                    A solution is to add a space between the tag name and the /,
+                    as in <tt>&lt; br /&gt;</tt>.
+                </li>
+            </ul>
 
-<p>
-Unless you are creating an application for a known audience with
-a single known browser it is best to try all pages on several browsers,
-including some new ones (like <a href="http://www.mozilla.org/">Mozilla</a>)
-and some old ones
-(like <a href="http://wp.netscape.com/download/archive.html">Netscape
-version 4</a>).
-</p>
-</main>
-</body>
+            <p>
+                Unless you are creating an application for a known audience with
+                a single known browser it is best to try all pages on several browsers,
+                including some new ones (like <a href="http://www.mozilla.org/">Mozilla</a>)
+                and some old ones
+                (like <a href="http://wp.netscape.com/download/archive.html">Netscape
+                version 4</a>).
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            function displayAndHide(toDisplay, toHide) {
+                $("." + toDisplay).show();
+                toHide.forEach(function(hide) {
+                    $("." + hide).hide();
+                });
+            }
+
+            function restore() {
+                $(".display-1").show();
+                $(".display-2").hide();
+                $(".display-3").hide();
+                $(".display-4").hide();
+            }
+
+            $(function() {
+                restore();
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
 </html>
