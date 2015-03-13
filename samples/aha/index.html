@@ -1,126 +1,89 @@
-<html>
-<head>
-<title>Course on Adaptive Hypermedia</title>
-<script type="text/javascript">
-var var1=50;
-var var2=50;
-var var3=true;
-var var4=true;
-function changePage1(theSelect) {
-  var x = theSelect.selectedIndex;
-  var1 = theSelect.options[x].text;
-}
-function changePage2(theSelect) {
-  var x = theSelect.selectedIndex;
-  var2 = theSelect.options[x].text;
-}
-function changePage3(theSelect) {
-  var x = theSelect.selectedIndex;
-  var3 = theSelect.options[x].text;
-}
-function changePage4(theSelect) {
-  var x = theSelect.selectedIndex;
-  var4 = theSelect.options[x].text;
-}
-function setInitial(f) {
-  f.initialVERBvsIM.value = var1;
-  f.initialtraceTextvsImage.value = var3;
-  f.initialGLvsAN.value = var2;
-  f.initialtraceBFvsDF.value = var4;
-}
-</script>
-</head>
-<body background="icons/tuebg.gif">
-<table width="100%" border="0">
-  <tbody>
-    <tr>
-      <td width="125"><img alt="Logo TU/e" src="icons/tuelogo-tall.gif"></td>
-      <td width="*"><p align="center"><font size="+8"><strong>AHA! Tutorial</strong></font></p>
-      </td>
-      <td width="162"><img src="icons/nlnetlogo-small.gif" align="right"
-        alt="Logo NLnet Stichting"></td>
-    </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Aha Tutorial</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../third-party-libs/foundation/css/normalize.css" />
+        <link rel="stylesheet" href="../third-party-libs/foundation/css/foundation.min.css"/>
+        <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'/>
+        <script src="../third-party-libs/foundation/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
 
-<p>
-Thank you for choosing AHA!, the Adaptive Hypermedia Architecture.
-This tutorial is mainly aimed at authors of adaptive websites,
-but it also contains valuable information for end-users and for
-application designers.
-</p>
+        <header>
 
-<hr />
+        </header>
 
-<p>
-If you do not wish to provide personal information you can also
-use this tutorial anonymously. In order for this to work across
-multiple sessions it requires you to use the same browser and computer
-for all sessions and to preserve cookies.
-<form method="POST" action="/aha/Anonymous" onsubmit="setInitial(this)">
-<input type="hidden" name="name" value="Anonymous user" />
-<input type="hidden" name="start" value="AHAtutorialLS" />
-<input type="hidden" name="course" value="AHAtutorialLS" />
-<input type="hidden" name="directory" value="AHAtutorialLS" />
-<input type="hidden" name="title" value="AHA! 3.0 tutorial LS" />
-<input type="hidden" name="background" value="/aha/AHAtutorialLS/icons/tuebg.gif" />
-<input type="hidden" name="level" value="0" />
-<input type="hidden" name="numberConceptsLevel0" value="1" />
-<input type="hidden" name="numberConceptsLevel1" value="3" />
-<input type="hidden" name="numberConceptsLevel2" value="5" />
-<input type="hidden" name="numberConceptsLevel3" value="6" />
-<input type="hidden" name="numberConceptsLevel4" value="5" />
-<input type="hidden" name="numberConceptsLevel5" value="9" />
-<input type="hidden" name="numberConceptsLevel6" value="1" />
-<input type="hidden" name="numberConceptsVisitedLevel0" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel1" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel2" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel3" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel4" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel5" value="0" />
-<input type="hidden" name="numberConceptsVisitedLevel6" value="0" />
-<b><i>Preference for presenting the material</i></b><br>
-If you prefer to be given more textual information about the concepts of the subject domain select "100" (Verbalizer).<br />
-If, on the other hand, you prefer to be given more pictorial information select "0" (Visualizer/Imager).<br />
-If you are not sure about your preferences, enter "50" (none). <br />
-<p><select name="VERBvsIM" size="1" onchange="changePage1(this)">
-	 <option name="none">50</option>
-	 <option name="VERB">100</option>
-	 <option name="IM">0</option>
-</select>
-<input type="hidden" name="initialVERBvsIM">
-<br>
-Do you want the system to trace your preferences either for textual or pictorial material<br>
-<p><select name="traceTextvsImage" size="1" onchange="changePage3(this)">
-	 <option name="true">true</option>
-	 <option name="false">false</option>
-</select>
-<input type="hidden" name="initialtraceTextvsImage">
-<br>
-<b><i>Preference for ordering the links</i></b><br>
-If you prefer to be given an overview of all of the material at a high (global) level before introducing the detail, please select "100" (Holist).<br />
-If, on the other hand, you prefer to study each topic in detail before going to the next topic, enter "0" (Analytic).<br />
-If you are not sure about your preferences, enter "50" (none). <br />
-<p><select name="GLvsAN" size="1" onchange="changePage2(this)">
-	 <option name="none">50</option>
-	 <option name="Global">100</option>
-	 <option name="Analytic">0</option>
-</select>
-<input type="hidden" name="initialGLvsAN">
-<br>
-Do you want the system to trace your preferences for navigation<br>
-<p><select name="traceBFvsDF" size="1" onchange="changePage4(this)">
-	 <option name="true">true</option>
-	 <option name="false">false</option>
-</select>
-<input type="hidden" name="initialtraceBFvsDF">
-<input type="hidden" name="showMessage" value="false">
-<input type="hidden" name="message" value="">
-<br>
-Please select <input type="submit" name="session_button" value="New Session" />
-to start a new anonymous session.
-</form>
-</p>
+        <main>
+            <div class="row">
+                <form>
+                    <fieldset>
+                        <legend>Please fill in some data about you</legend>
+                        <label>Do you prefer to learn with images or with text?
+                            <select id="lscontent">
+                                <option value="neutral">I do not know</option>
+                                <option value="visual">With images</option>
+                                <option value="verbal">With text</option>
+                            </select>
+                        </label>
+                        <label>Do you prefer to first see the overall picture or to examine every topic to the detail before moving on?
+                            <select id="lspath">
+                                <option value="neutral">I do not know</option>
+                                <option value="global">See the overall picture</option>
+                                <option value="analytic">Go to the details</option>
+                            </select>
+                        </label>
+                        <a href="#" id="submit-pre-questionnaire" class="button">Submit</a>
+                    </fieldset>
+                </form>
+            </div>
+        </main>
 
-</body>
+        <footer>
+            
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
+        <script>
+            $(function() {
+                new wibaf().init(function() {
+                    document.getElementById('submit-pre-questionnaire').addEventListener('click', function(e) {
+                        alert("Data saved");
+                    }, false);
+                });
+            });
+        </script>
+    </body>
 </html>
+

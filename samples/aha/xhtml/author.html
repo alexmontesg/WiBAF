@@ -18,6 +18,10 @@
             
         </header>
         <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
             <div class="wibaf-not-working">
                 <p>
                     <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
@@ -82,7 +86,7 @@
                     AHA! comes with a "high level" graph author tool
                     to define the structure of concepts and pages.
                     You can define <em>relationships</em> of different types between
-                    concepts. The tool generates the rules
+                    concepts. The tool generates the
                     <span class="DomainAdaptationModel-visited">
                             event-condition-action rules
                     </span>
@@ -162,22 +166,10 @@
         <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
         <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
-            function displayAndHide(toDisplay, toHide) {
-                $("." + toDisplay).show();
-                toHide.forEach(function(hide) {
-                    $("." + hide).hide();
-                });
-            }
 
-            function restore() {
-                $(".display-1").show();
-                $(".display-2").hide();
-                $(".display-3").hide();
-                $(".display-4").hide();
-            }
 
             $(function() {
-                restore();
+
                 new wibaf().init(function() {
                     $(document).foundation();
                 });

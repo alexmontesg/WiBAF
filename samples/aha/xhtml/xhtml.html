@@ -18,6 +18,14 @@
             
         </header>
         <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
             <div class="wibaf-not-working">
                 <p>
                     <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
@@ -109,22 +117,10 @@ In XHTML all tags must be ended. There are two ways to do this:
         <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
         <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
-            function displayAndHide(toDisplay, toHide) {
-                $("." + toDisplay).show();
-                toHide.forEach(function(hide) {
-                    $("." + hide).hide();
-                });
-            }
 
-            function restore() {
-                $(".display-1").show();
-                $(".display-2").hide();
-                $(".display-3").hide();
-                $(".display-4").hide();
-            }
 
             $(function() {
-                restore();
+
                 new wibaf().init(function() {
                     $(document).foundation();
                 });
