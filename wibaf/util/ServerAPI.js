@@ -3,34 +3,25 @@
  * 
  * @author Alejandro Montes Garcia
  */
-var IndexedDBAPI = function() {
+var ServerAPI = function() {
 	var instance;
 
 	function init(endpoint, callback) {
 	    
-	    if(!endpoint.endsWith("/")) {
-	        endpoint += "/";
-	    }
-	    
-	    var services = {
-	        create: endpoint + "create",
-	        read: endpoint + "read",
-	        update: endpoint + "update",
-	        remove: endpoint + "delete",
-	        readAll: endpoint + "readAll",
-	        removeAll: endpoint + "deleteAll"
-	    };
-	    
-	    function getJSON(url, args, callback) {
-	        $.getJSON(url.read, args).done(function(result) {
+	    function getJSON(args, callback) {
+	        $.ajax({
+                type: "POST",
+                url: endpoint,
+                data: args
+            }).done(function(result) {
                 callback(result);
             });
 	    }
 		
 		function get(name, collection, callback) {
-		    getJSON(services.read, {
-			    name: name,
-			    collection: collection
+		    getJSON({
+		        method: 'getItem',
+			    name: name
 			}, function(result) {
 			    if(callback) {
 			        callback(result);
@@ -39,8 +30,8 @@ var IndexedDBAPI = function() {
 		};
 
 		function add(args, collection, callback) {
-		    args.collection = collection;
-			getJSON(services.create, args, function(result) {
+		    args.method ='addItem';
+			getJSON(args, function(result) {
                 if(callback) {
                     callback(result);
                 }
@@ -48,9 +39,9 @@ var IndexedDBAPI = function() {
 		};
 
 		function remove(name, collection, callback) {
-			getJSON(services.remove, {
-                name: name,
-                collection: collection
+			getJSON({
+			    method: 'removeItem',
+                name: name
             }, function(result) {
                 if(callback) {
                     callback(result);
@@ -59,11 +50,11 @@ var IndexedDBAPI = function() {
 		};
 		
 		function update(name, field, new_value, collection, callback) {
-			getJSON(services.update, {
+			getJSON({
+			    method: 'updateItem',
                 name: name,
-                field: field,
-                new_value: new_value,
-                collection: collection
+                valueName: field,
+                newValue: new_value
             }, function(result) {
                 if(callback) {
                     callback(result);
@@ -72,8 +63,8 @@ var IndexedDBAPI = function() {
 		};
 		
 		function getAll(collection, callback) {
-			getJSON(services.readAll, {
-                collection: collection
+			getJSON({
+                method: 'getAll'
             }, function(result) {
                 if(callback) {
                     callback(result);
@@ -82,8 +73,8 @@ var IndexedDBAPI = function() {
 		};
 	
 		function removeAll(collection, callback) {
-			getJSON(services.removeAll, {
-                collection: collection
+			getJSON({
+                method: 'removeAll'
             }, function(result) {
                 if(callback) {
                     callback(result);
@@ -106,8 +97,9 @@ var IndexedDBAPI = function() {
 	return {
 		getInstance : function(endpoint, callback) {
 			if (!instance) {
-				instance = init(endpoint, callback);
-			} else if(callback){
+				instance = init(endpoint);
+			}
+			if(callback) {
 				callback();
 			}
 			return instance;
