@@ -89,21 +89,23 @@ var wibaf = function() {
             database = databaseFactory.getInstance().createDatabase({
                 useIndexedDB : supportIndexedDB(),
                 callback : function() {
-                    if (conceptURL) {
-                        domainParser.getInstance().loadData(conceptURL, function() {
-                            /*
-                             * The visited counter is updated here because the onload events are not
-                             * granted to finish before the execution of the callback.
-                             */
-                            modellingParser.getInstance().addVisit(function() {
-                                parseModellingFile(getSources("umf"), callback, getSources("amf"), true);
+                    window.serverAPI = ServerAPI().getInstance("../server_code/update_um.php", function() {
+                        if (conceptURL) {
+                            domainParser.getInstance().loadData(conceptURL, function() {
+                                /*
+                                 * The visited counter is updated here because the onload events are not
+                                 * granted to finish before the execution of the callback.
+                                 */
+                                modellingParser.getInstance().addVisit(function() {
+                                    parseModellingFile(getSources("umf"), callback, getSources("amf"), true);
+                                });
                             });
-                        });
-                    } else {
-                        modellingParser.getInstance().addVisit(function() {
-                            parseModellingFile(getSources("umf"), callback, getSources("amf"));
-                        });
-                    }
+                        } else {
+                            modellingParser.getInstance().addVisit(function() {
+                                parseModellingFile(getSources("umf"), callback, getSources("amf"));
+                            });
+                        }
+                    });
                 }
             });
         }

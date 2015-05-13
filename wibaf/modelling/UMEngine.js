@@ -8,6 +8,37 @@ var userModel = (function UMEngine() {
     var instance;
 
     function init() {
+        
+        function distortValue(accuracy, value) {
+            accuracy = accuracy / 100;
+            var distorsion = Math.random() * (1 - accuracy) + accuracy;
+            return distortedValue = value * distorsion;
+        }
+        
+        function doUpdate(UMvar, callback, newValue, operation) {
+            database.get(UMvar, "user_model", function(item) {
+                if (item) {
+                    switch (operation) {
+                        case "+":
+                            newValue = item.value + newValue;
+                            break;
+                        case "-":
+                            newValue = item.value - newValue;
+                            break;
+                        case "avg":
+                            newValue = (item.value * item.times_updated + newValue) / (item.times_updated + 1)
+                    }
+                    if (item.server.send) {
+                        serverAPI.update(UMvar, "value", distortValue(item.server.accuracy, newValue));
+                    }
+                    database.update(UMvar, "value", newValue, "user_model", callback);
+                } else {
+                    showError(UMvar, callback);
+                }
+            });
+            
+        }
+        
         function toServerProperties(object, callback) {
             rules.getInstance().getRule("default", function(generalRule) {
                 if (generalRule) {
@@ -81,6 +112,15 @@ var userModel = (function UMEngine() {
                         type : type
                     };
                     toServerProperties(object, function(object) {
+                        if(object.server.send && object.type === "numeric") {
+                            serverAPI.add({
+                                name : name,
+                                value : distortValue(object.server.accuracy, value),
+                                url : url,
+                                type : type,
+                                use: object.server.use
+                            });
+                        }
                         database.add(object, "user_model", callback);
                     });
                 }
@@ -88,47 +128,27 @@ var userModel = (function UMEngine() {
         }
 
         function inc(UMvar, callback) {
-            database.get(UMvar, "user_model", function(item) {
-                if (item) {
-                    database.update(UMvar, "value", item.value + 1, "user_model", callback);
-                } else {
-                    showError(UMvar, callback);
-                }
-            });
+            doUpdate(UMvar, callback, 1, "+");
         }
 
         function dec(UMvar, callback) {
-            database.get(UMvar, "user_model", function(item) {
-                if (item) {
-                    database.update(UMvar, "value", item.value - 1, "user_model", callback);
-                } else {
-                    showError(UMvar, callback);
-                }
-            });
+            doUpdate(UMvar, callback, 1, "-");
         }
 
         function update(UMvar, newVal, callback) {
-            database.get(UMvar, "user_model", function(item) {
-                if (item) {
-                    database.update(UMvar, "value", newVal, "user_model", callback);
-                } else {
-                    showError(UMvar, callback);
-                }
-            });
+            doUpdate(UMvar, callback, newVal);
         }
 
         function addObs(UMvar, value, callback) {
-            database.get(UMvar, function(item) {
-                if (item) {
-                    database.update(UMvar, "value", (item.value * item.times_updated + value) / (item.times_updated + 1), "user_model", callback);
-                } else {
-                    showError(UMvar, callback);
-                }
-            });
+            doUpdate(UMvar, callback, value, "avg");
         }
 
         function get(name, callback, opt) {
             database.get(name, "user_model", callback, opt);
+        }
+        
+        function getDomain(domain, separator, callback) {
+            database.getDomain(domain, separator, "user_model", callback);
         }
 
         function getAll(callback) {
@@ -136,10 +156,12 @@ var userModel = (function UMEngine() {
         }
 
         function remove(itemName, callback) {
+            serverAPI.remove(itemName);
             database.remove(itemName, "user_model", callback);
         }
 
         function removeAll(callback) {
+            serverAPI.removeAll(itemName);
             database.removeAll("user_model", callback);
         }
 
@@ -155,6 +177,15 @@ var userModel = (function UMEngine() {
                 for (var i = 0; i < vars.length; i++) {
                     var umvar = vars[i];
                     toServerProperties(umvar, function(object) {
+                            serverAPI.get(object.name, null, function(json, obj) {
+                                if(obj.server.send && json.result === "ERR") {
+                                    serverAPI.add(obj);
+                                } else if (send) {
+                                    serverAPI.update(obj.name, "value", distortValue(obj.server.accuracy, obj.value));
+                                } else {
+                                    serverAPI.remove(obj.name);
+                                }
+                            }, object);
                         database.update(object.name, "server", object.server, "user_model", checker);
                     });
                 }
@@ -168,6 +199,7 @@ var userModel = (function UMEngine() {
             add_obs : addObs,
             get : get,
             getAll : getAll,
+            getDomain : getDomain,
             remove : remove,
             removeAll : removeAll,
             init : init,

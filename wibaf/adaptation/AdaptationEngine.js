@@ -36,11 +36,32 @@ var AdaptationEngine = function() {
          * @param {Object} selector
          * @param {Object} arg - Name of the user model variable
          */
-		insert_um : function(selector, arg) {
-			userModel.getInstance().get(arg, function(item) {
-				$(selector).html(item.value);
-			});
-		},
+        insert_um : function(selector, arg) {
+            userModel.getInstance().get(arg, function(item) {
+                $(selector).html(item.value);
+            });
+        },
+        
+        /**
+         * Inserts the user model value of the specified variable in the selected node
+         * 
+         * @param {Object} selector
+         * @param {Object} arg - domain col_separator
+         */
+        insert_um_table : function(selector, arg) {
+            arg = arg.split(" ");
+            userModel.getInstance().getDomain(arg[0], arg[1], function(items) {
+                var table = $(selector)[0];
+                for(var i = 0; i < items.length; i++) {
+                    var row = table.insertRow(-1);
+                    var item = items[i];
+                    for(var j = 0; j < item.value.length; j++) {
+                        var cell = row.insertCell(-1);
+                        cell.innerHTML = item.value[j];
+                    }
+                }
+            });
+        },
 		
         /**
          * Appends HTML code to the selected node.

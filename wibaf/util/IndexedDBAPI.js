@@ -52,6 +52,25 @@ var IndexedDBAPI = function() {
 			});
 		};
 		
+		function getDomain(domain, separator, collection, callback) {
+            if (callback) {
+                var items = [];
+                db.transaction([collection], "readonly").objectStore(collection).openCursor().onsuccess = function(e) {
+                    var cursor = e.target.result;
+                    if (cursor) {
+                        var item = cursor.value;
+                        if(item.domain === domain) {
+                            item.value = item.value.split(separator);
+                            items.push(item);
+                        }
+                        cursor.continue();
+                    } else {
+                        callback(items);
+                    }
+                };
+            }
+        };
+		
 		function getAll(collection, callback) {
 			if (callback) {
 				var items = [];
@@ -111,6 +130,7 @@ var IndexedDBAPI = function() {
 			remove : remove,
 			update : update,
 			get : get,
+			getDomain : getDomain,
 			getAll : getAll,
 			removeAll : removeAll
 		};

@@ -14,17 +14,17 @@ var ServerAPI = function() {
                 url: endpoint,
                 data: args
             }).done(function(result) {
-                callback(result);
+                callback(JSON.parse(result));
             });
 	    }
 		
-		function get(name, collection, callback) {
+		function get(name, collection, callback, opt) {
 		    getJSON({
 		        method: 'getItem',
 			    name: name
 			}, function(result) {
 			    if(callback) {
-			        callback(result);
+			        callback(result, opt);
 			    }
             });
 		};

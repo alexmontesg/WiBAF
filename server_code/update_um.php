@@ -40,8 +40,9 @@ function addItem() {
     $type = getPost('type');
     $value = getPost('value');
     $url = getPost('url');
+    $use = getPost('use');
     $user = getSession('user');
-    $query = $db -> query("INSERT INTO data(user, name, type, value, url) VALUES ('$user', '$name', '$type', '$value', '$url')");
+    $query = $db -> query("INSERT INTO data(user, name, type, value, url, use) VALUES ('$user', '$name', '$type', '$value', '$url', '$use)");
     renderGenericResult($query, 'ADD_SINGLE_ERROR');
 }
 
@@ -67,7 +68,7 @@ function getItem() {
     global $db;
     $name = getPost('name');
     $user = getSession('user');
-    $query = $db -> query("SELECT type, value, url FROM data WHERE user = '$user' AND name = '$name' LIMIT 1");
+    $query = $db -> query("SELECT type, value, url, use FROM data WHERE user = '$user' AND name = '$name' LIMIT 1");
     if($query && $query -> num_rows == 1) {
         $row = $query -> fetch_object();
         echo json_encode(array(
