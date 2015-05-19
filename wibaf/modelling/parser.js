@@ -122,6 +122,7 @@ var modellingParser = (function ModellingParser() {
 		}
 
 		function addEndFunctionCallToQueue(token, args) {
+			args.queue.push(", function(){wibaf.getInstance().refresh();}");
 			args.queue.push(");");
 			return 1;
 		}

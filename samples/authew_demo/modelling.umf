@@ -4,8 +4,7 @@ event addSubject = `document.getElementById('addSubject').click`
                 subject:document.getElementById('subject').value;
                 loc:document.getElementById('location').value;
                 str:from+" to "+to + "-" + loc + "-" + subject}`
-                
-                
+
 on addSubject {
     init subject, str, "text", "http://www.example.org/subject", "Schedule of a subject", "subjects";
 }

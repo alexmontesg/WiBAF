@@ -26,7 +26,7 @@ var userModel = (function UMEngine() {
                             newValue = item.value - newValue;
                             break;
                         case "avg":
-                            newValue = (item.value * item.times_updated + newValue) / (item.times_updated + 1)
+                            newValue = (item.value * item.times_updated + newValue) / (item.times_updated + 1);
                     }
                     if (item.server.send) {
                         serverAPI.update(UMvar, "value", distortValue(item.server.accuracy, newValue));
