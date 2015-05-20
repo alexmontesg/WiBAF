@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>usermodel</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+
+            <h2>The AHA! User Model</h2>
+
+            <p>
+                For every individual user AHA! maintains a <em>user model</em>,
+                consisting of <em>concepts</em> with <em>attributes</em>.
+                As an author you never deal with the user model directly,
+                but influence the possible updates to the model through the
+                <a href="concepts.xhtml" class="conditional">concept structure</a> and the
+                associated
+                <span class="DomainAdaptationModel-visited"> event-condition-action rules</span>.
+                Whether the user model is stored in the form of XML files or
+                in the mySQL database, it contains the same information:
+            </p>
+            <ul>
+                <li>
+                    There is a <em>pseudo concept</em> called <strong>personal</strong>
+                    which represents information about the user, independent of the
+                    application domain.
+                    It can have arbitrarily many attributes that are created through
+                    an application's registration form.
+                    If the registration form contains a form field:
+                    <pre>
+&lt; input type="hidden" name="myattribute" value="mystring" /&gt;
+</pre>
+                    then an attribute <tt>myattribute</tt> will be added to the
+                    concept <tt>personal</tt> and it will get the value <tt>mystring</tt>.
+                    Of course you can use any other type of field
+                    (e.g. text instead of hidden) to let the
+                    user enter information in the field.
+                    <br />
+                    The concept <tt>personal</tt> can be used like any other concept.
+                    Attribute values can be used in
+                    <span class="DomainAdaptationModel-visited"> event-condition-action rules</span>
+                    to create
+                    behavior that depends on the information a user entered in the
+                    registration form.
+                    But apart from author-chosen attributes that have no other meaning
+                    than their use in rules there are some predefined
+                    attributes of the <tt>personal</tt> concept that have a meaning for AHA!:
+                    <ul>
+                        <li>
+                            <tt>name</tt>: This is the end-user's name, entered in the registration form.
+                            The name can be included in a
+                            <a href="headerfooter.xhtml" class="conditional">header or footer</a>,
+                            using the <tt>&lt;username/&gt;</tt> variable.
+                            Anonymous users do not have a name, although a standard name can be
+                            created through the registration form.
+                        </li>
+                        <li>
+                            <tt>email</tt>: This is the end-user's email address,
+                            entered in the registration form.
+                            The address can be included in a header or footer using the
+                            <tt>&lt;email/&gt;</tt> variable.
+                            Anonymous users do not have an email address.
+                        </li>
+                        <li>
+                            <tt>id</tt>: This the login id chosen by the end-user or generated
+                            automatically for an anonymous user. The login id can be included
+                            in a header using the <tt>&lt;loginid&gt;</tt> variable.
+                        </li>
+                        <li>
+                            <tt>password</tt>: This is the end-user's password.
+                            In AHA! 2.0 the password is not stored in encrypted form.
+                            As a result access to the directory with the user models (in XML format)
+                            or to the mySQL database should be restricted.
+                            Anonymous users cannot have a password.
+                        </li>
+                        <li>
+                            <tt>university</tt>: This is one of the attributes that date back
+                            to the original application area: on-line courses offered to
+                            several universities. Of course it can be used to represent
+                            something else, like the end-user's company.
+                            This attribute can be included in a header using the
+                            <tt>&lt;university&gt;</tt> variable.
+                        </li>
+                        <li>
+                            <tt>department</tt>: This is the second attribute for courses.
+                            It can represent the end-user's department, course major,
+                            or anything else.
+                            This attribute can be included in a header using the
+                            <tt>&lt;department&gt;</tt> variable.
+                        </li>
+                        <li>
+                            <tt>course</tt>: Each AHA! application is identified as a "course"
+                            (for historical reasons). This attribute is also the name of the
+                            subdirectory of an AHA! server containing the application.
+                            This attribute can be included in a header using the
+                            <tt>&lt;course&gt;</tt> variable.
+                        </li>
+                        <li>
+                            <tt>title</tt>: Each AHA! application can be identified using a "title".
+                            This attribute can be included in a header using the
+                            <tt>&lt;coursename&gt;</tt> variable. (Not "title" for implementation
+                            reasons.)
+                            In this tutorial the header shows "knowledge of AHA! tutorial".
+                            The part "AHA! tutorial" is the title of this application.
+                        </li>
+                        <li>
+                            <tt>goodlink</tt>: This is the color used for links to <em>suitable</em>
+                            pages that have not been visited. It is a string value representing
+                            the RGB value of the color as a hexadecimal number.
+                        </li>
+                        <li>
+                            <tt>neutrallink</tt>: This is the color used for links to previously
+                            visited <em>suitable</em> pages.
+                        </li>
+                        <li>
+                            <tt>badlink</tt>: This is the color of links to <em>unsuitable</em> pages.
+                        </li>
+                        <li>
+                            <tt>activelink</tt>: This is the color of links while the mouse button
+                            is pressed to follow the link.
+                        </li>
+                        <li>
+                            <tt>externallink</tt>: This is the color of links to external
+                            pages that have not been visited.
+                        </li>
+                        <li>
+                            <tt>externalvisitedlink</tt>: This is the color of links to visited
+                            external pages.
+                        </li>
+                        <li>
+                            <tt>background</tt>: This is the name for the background image used
+                            on every page. (In the tutorial this is "/aha/AHAtutorialLS/icons/tuebg.gif".)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    All other concepts belong to the application domain.
+                    The <a href="concepts.xhtml" class="conditional">concept structure</a>
+                    determines which concepts exist and which attributes they have.
+                    For every attribute of a concept the user model stores: the <em>type</em>
+                    of the attribute (Boolean, integer or string), the <em>value</em>,
+                    and a Boolean to indicate whether the attribute value is <em>persistent</em>.
+                </li>
+            </ul>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

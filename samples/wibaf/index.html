@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>WiBAF: Within Browser Adaptation Framework</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../third-party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" href="../third-party-libs/foundation/css/foundation.min.css">
+        <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link rel="stylesheet" href="./style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../third-party-libs/foundation/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">WiBAF: Within Browser Adaptation Framework</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">Menu</a>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <li>
+                        <a href="./people.html">People &amp; Publications</a>
+                    </li>
+                    <li>
+                        <a href="./settings.html">Privacy settings</a>
+                    </li>
+                    <li>
+                        <a href="./tutorial.html">Tutorial</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <header>
+            <div class="row">
+                <h2>WiBAF: Within Browser Adaptation Framework</h2>
+            </div>
+        </header>
+
+        <main>
+<div class="row">
+                <div class="large-4 columns">
+                    <pre class="wibaf-pre">
+
+
+<code class="wibaf-code">
+<div class="code-container">#artworks {
+   <span class="comment"># Adaptive code</span>
+   <span class="comment"># CSS code is also valid</span>
+}</div></code>
+
+
+</pre>
+                    <div class="text-center">
+                        <h4>Select nodes as in CSS</h4>
+                        <p class="text-justify">
+                            Select the nodes where the adaptation should take place as you would do with CSS.
+                        </p>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user (min-art-knowledge: 50) {
+   @context (max-hour: 18.00) {
+      #artworks {
+         <span class="comment"># Adaptive code</span>
+         <span class="comment"># CSS code is also valid</span>
+      }
+   }
+}</div></code>
+</pre>
+                    <div class="text-center">
+                        <h4>Target users and contexts</h4>
+                        <p class="text-justify">
+                            Target specific users and / or contexts so the adaptation.
+                        </p>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <pre class="wibaf-pre">
+<code class="wibaf-code">
+<div class="code-container">@user (min-art-knowledge: 50) {
+   @context (max-hour: 18.00) {
+      #artworks {
+         reorder-nodes: data-order;
+         color: red;
+      }
+   }
+}</div></code>
+</pre>
+                    <div class="text-center">
+                        <h4>Select the adaptation effect</h4>
+                        <p class="text-justify">
+                            Select the nodes where the adaptation should take place as you would do with CSS.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="example-orbit-content" data-orbit>
+                    <li data-orbit-slide="distributed">
+                        <div class="orbit-panel">
+                            <div class="row">
+                                <div class="medium-4 large- hide-for-small columns">
+                                    <img src="../img/distributed.png" alt="Distributed User Model"/>
+                                </div>
+                                <div class="medium-8 large-8 columns">
+                                    <h3>Distributed User Model</h3>
+                                    <p>
+                                        User model distributed between server and client browser. Based on HTML5 standards so no special software is needed. Sensitive data is kept private.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-orbit-slide="balance">
+                        <div class="orbit-panel">
+                            <div class="row">
+                                <div class="medium-8 large-8 columns">
+                                    <h3>Balancing Privacy and Personalization</h3>
+                                    <p>
+                                        Users can freely send their data to the server. In exchange some personalization techniques such as collaborative filtering are anabled for them.
+                                    </p>
+                                </div>
+                                <div class="medium-4 large- hide-for-small columns">
+                                    <img src="../img/balance.png" alt="Balancing Privacy and Personalization"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-orbit-slide="transparent">
+                        <div class="orbit-panel">
+                            <div class="row">
+                                <div class="medium-4 large- hide-for-small columns">
+                                    <img src="../img/transparent.png" alt="Transparent and Flexible"/>
+                                </div>
+                                <div class="medium-8 large-8 columns">
+                                    <h3>Transparent and Flexible</h3>
+                                    <p>
+                                        A user-friendly interface is provided so the user is aware of all the information collected about her and can make decisions about that information.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <h3>What is this about?</h3>
+                    <hr/>
+                    <p>The world wide web is an enormous hyperspace where users face the problem of information overload. Adaptive web based systems try to tackle this problem by displaying only the information that is really meaningful for the user. These systems need to collect data from the user in order to personalize the information. The set of information that the system has collected about a user is called the User Model.</p>
+                    <p>User models in adaptive web base systems are typically stored on the server. However, this has some issues such as lack of privacy, server overload, band-width usage, limitation of events that can be tracked, lack of context awareness, etc... To solve this problem, some client side approaches have also been proposed. Still, client based user modeling has some other drawbacks. Typically the user has to install some piece of software, like a desktop application or a browser plugin, and techniques that rely on the comparison of several user profiles cannot be applied. P2P networks allow the analysis of several client user profiles at a time, but in that case the result will depend on the peers connected at the moment when the comparison is being performed.</p>
+                    <p>WiBAF aims to balance these two approaches in a way that the advantages of both are maximized and the drawbacks minimized.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="large-4 medium-6 small-12 medium-centered large-centered columns">
+                    <a href="./downloads/wibaf_latest.js" class="button expand">Download</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="row">
+                <h4>With the collaboration of</h4>
+                <a href="http://www.tue.nl/"><img src="../img/logo-tue.png" alt="TU Eindhoven"/></a>
+                <a href="http://adversitement.com/"><img src="../img/adversitement.png" alt="Adversitement"/></a>
+            </div>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+            $(function() {
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+    </body>
+</html>

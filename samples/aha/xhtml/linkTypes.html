@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>linkTypes</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Types of AHA! links</h2>
+            <p>
+                In AHA! there are two types of links: links to a page and links to a concept.
+            </p>
+            <p>
+                Since in DM pages are linked to concepts AHA! can find out which concept corresponds to a page and which page corresponds to a concept.
+            </p>
+            <p>
+                Linking to a concept results in <i>adaptive link destinations</i> technique.
+            </p>
+            <p>
+                When a link is bound to a concept (rather than directly leading to a page) the adaptation engine uses a rule to determine which page to show, depending on the user model instance.
+                A link to a concept may for instance lead to an introductory page for users who are missing some pre-requisite knowledge, whereas advanced users will see a more detailed description of the concept.
+                Such adaptation is quite drastic, and most likely very obvious to the user.
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

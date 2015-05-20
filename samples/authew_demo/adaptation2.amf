@@ -1,0 +1,9 @@
+section > p, section ul, section ol {
+	display: none;
+}
+
+@user(introt: 1) {
+	#intro > p {
+		display: block;
+	}
+}

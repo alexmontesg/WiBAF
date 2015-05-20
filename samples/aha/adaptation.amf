@@ -1,0 +1,229 @@
+.wibaf-not-working {
+    delete-node: true;
+}
+
+#contextvaluestext {
+    insert: url:contextvalues.html;
+}
+
+#menu {
+    insert: url:../menu.html;
+}
+
+@user (learning-style-path: global) {
+    @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) {
+        a[href="ahacontext.html"], a[href="firstconfig.html"], a[href="adaptation.html"], a[href="adaptationEngine.html"], a[href="users.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) or (ahacontext-accessed-lt: 1) or (firstconfig-accessed-lt: 1) or (adaptation-accessed-lt: 1) or (adaptationEngine-accessed-lt: 1) or (users-accessed-lt: 1]) {
+        a[href="conditionalObjects.html"], a[href="linkHidingAnnotations.html"], a[href="pageProcessing.html"], a[href="manager.html"], a[href="author.html"], a[href="end-user.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) or (ahacontext-accessed-lt: 1) or (firstconfig-accessed-lt: 1) or (adaptation-accessed-lt: 1) or (adaptationEngine-accessed-lt: 1) or (users-accessed-lt: 1]) or (conditionalObjects-accessed-lt: 1) or (linkHidingAnnotations-accessed-lt: 1) or (pageProcessing-accessed-lt: 1) or (manager-accessed-lt: 1) or (author-accessed-lt: 1,) or (end-user-accessed-lt: 1) {
+        a[href="potentialProblems.html"], a[href="linkTypes.html"], a[href="pages.html"], a[href="DomainAdaptationModel.html"], a[href="tools.html"], a[href="usermodel.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) or (ahacontext-accessed-lt: 1) or (firstconfig-accessed-lt: 1) or (adaptation-accessed-lt: 1) or (adaptationEngine-accessed-lt: 1) or (users-accessed-lt: 1]) or (conditionalObjects-accessed-lt: 1) or (linkHidingAnnotations-accessed-lt: 1) or (pageProcessing-accessed-lt: 1) or (manager-accessed-lt: 1) or (author-accessed-lt: 1,) or (end-user-accessed-lt: 1 ) or (potentialProblems-accessed-lt: 1) or (linkTypes-accessed-lt: 1) or (pages-accessed-lt: 1) or (DomainAdaptationModel-accessed-lt: 1) or (tools-accessed-lt: 1) or (usermodel-accessed-lt: 1) {
+        a[href="objectInclusion.html"], a[href="xhtml.html"], a[href="headerfooter.html"], a[href="fragments.html"], a[href="concepts.html"], a[href="rules.html"], a[href="concepteditor.html"], a[href="graphauthor.html"], a[href="formeditor.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) or (ahacontext-accessed-lt: 1) or (firstconfig-accessed-lt: 1) or (adaptation-accessed-lt: 1) or (adaptationEngine-accessed-lt: 1) or (users-accessed-lt: 1]) or (conditionalObjects-accessed-lt: 1) or (linkHidingAnnotations-accessed-lt: 1) or (pageProcessing-accessed-lt: 1) or (manager-accessed-lt: 1) or (author-accessed-lt: 1,) or (end-user-accessed-lt: 1 ) or (potentialProblems-accessed-lt: 1) or (linkTypes-accessed-lt: 1) or (pages-accessed-lt: 1) or (DomainAdaptationModel-accessed-lt: 1) or (tools-accessed-lt: 1) or (usermodel-accessed-lt: 1) or (objectInclusion-accessed-lt: 1) or (xhtml-accessed-lt: 1) or (headerfooter-accessed-lt: 1) or (fragments-accessed-lt: 1) or (concepts-accessed-lt: 1) or (rules-accessed-lt: 1) or (concepteditor-accessed-lt: 1) or (graphauthor-accessed-lt: 1) or (formeditor-accessed-lt: 1) {
+        a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+}
+
+@user (learning-style-path: analytic) {
+    @user(installation-accessed-lt: 1) {
+        a[href="ahacontext.html"], a[href="firstconfig.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(architecture-accessed-lt: 1) {
+        a[href="adaptation.html"], a[href="adaptationEngine.html"], a[href="users.html"], a[href="conditionalObjects.html"], a[href="linkHidingAnnotations.html"], a[href="pageProcessing.html"], a[href="manager.html"], a[href="author.html"], a[href="end-user.html"], a[href="potentialProblems.html"], a[href="linkTypes.html"], a[href="pages.html"], a[href="DomainAdaptationModel.html"], a[href="tools.html"], a[href="usermodel.html"], a[href="objectInclusion.html"], a[href="xhtml.html"], a[href="headerfooter.html"], a[href="fragments.html"], a[href="concepts.html"], a[href="rules.html"], a[href="concepteditor.html"], a[href="graphauthor.html"], a[href="formeditor.html"], a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(adaptation-accessed-lt: 1) {
+        a[href="conditionalObjects.html"], a[href="linkHidingAnnotations.html"], a[href="pageProcessing.html"], a[href="potentialProblems.html"], a[href="linkTypes.html"], a[href="objectInclusion.html"], a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(users-accessed-lt: 1) {
+        a[href="manager.html"], a[href="author.html"], a[href="end-user.html"], a[href="pages.html"], a[href="DomainAdaptationModel.html"], a[href="tools.html"], a[href="usermodel.html"], a[href="xhtml.html"], a[href="headerfooter.html"], a[href="fragments.html"], a[href="concepts.html"], a[href="rules.html"], a[href="concepteditor.html"], a[href="graphauthor.html"], a[href="formeditor.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(conditionalObjects-accessed-lt: 1) {
+        a[href="potentialProblems.html"], a[href="objectInclusion.html"], a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(potentialProblems-accessed-lt: 1) {
+        a[href="objectInclusion.html"], a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(objectInclusion-accessed-lt: 1) {
+        a[href="fragmentsObjectsXHTML.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(linkHidingAnnotations-accessed-lt: 1) {
+        a[href="linkTypes.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(author-accessed-lt: 1) {
+        a[href="pages.html"], a[href="DomainAdaptationModel.html"], a[href="tools.html"], a[href="xhtml.html"], a[href="headerfooter.html"], a[href="fragments.html"], a[href="concepts.html"], a[href="rules.html"], a[href="concepteditor.html"], a[href="graphauthor.html"], a[href="formeditor.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(pages-accessed-lt: 1) {
+        a[href="xhtml.html"], a[href="headerfooter.html"], a[href="fragments.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(DomainAdaptationModel-accessed-lt: 1) {
+        a[href="concepts.html"], a[href="rules.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(tools-accessed-lt: 1) {
+        a[href="concepteditor.html"], a[href="graphauthor.html"], a[href="formeditor.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    
+    @user(end-user-accessed-lt: 1) {
+        a[href="usermodel.html"] {
+            color: black;
+            text-decoration: none;
+        }
+    }
+}
+
+@user (learning-style-content: verbal) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Text.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_text.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_text.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_text.html;
+    }
+}
+
+@user (learning-style-content: visual) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Image.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_image.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_image.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_image.html;
+    }
+}
+
+@user (learning-style-content: neutral) {
+    #adaptationAHA {
+        insert: url:AHA_Adaptation_Text.html;
+        append: url:AHA_Adaptation_Image.html;
+    }
+    
+    #contextSteps {
+        insert: url:contextsteps_text.html;
+        append: url:contextsteps_image.html;
+    }
+    
+    #firstconfig {
+        insert: url:firstconfig_text.html;
+        append: url:firstconfig_image.html;
+    }
+    
+    #pageProcessing {
+        insert: url:pageProcessing_text.html;
+        append: url:pageProcessing_image.html;
+    }
+}
+
+@user (firstconfig-accessed-gt: 0) {
+    .hide-firstconfig-visited {
+        display: none;
+    }
+}
+
+@user (ahacontext-accessed-gt: 0) {
+    .hide-ahacontext-visited {
+        display: none;
+    }
+}
+
+@user (DomainAdaptationModel-accessed-gt: 1) {
+    .DomainAdaptationModel-visited {
+        insert: adaptation rules;
+    }
+}
+
+@user (DomainAdaptationModel-accessed-gt: 0) {
+    .DomainAdaptationModel-not-visited {
+        display: none;
+    }
+}
+
+@user (graphauthor-accessed-lt: 1) {
+    .hide-graphauthor-not-visited {
+        display: none;
+    }
+}

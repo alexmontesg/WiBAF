@@ -1,0 +1,6 @@
+event display = `document.getElementsByTagName('h4').click`
+			=> `{clicked: this.id;}`
+              
+on display {
+	init clicked, 1, "numeric", "http://www.example.org/click", "Click on a title", "clicks";
+}

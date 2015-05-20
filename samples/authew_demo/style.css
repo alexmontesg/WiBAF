@@ -1,0 +1,8 @@
+html {
+    display: none;
+}
+
+.question {
+    color: blue;
+    cursor: pointer;
+}

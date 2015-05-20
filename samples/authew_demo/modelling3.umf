@@ -1,0 +1,8 @@
+event question = `document.getElementsByClassName('question').click`
+			=> `{answer: this.getAttribute("data-answer");
+			question: this.getAttribute("data-question");}`
+              
+on question {
+	init question, answer, "text", "http://www.example.org/answer", "Answer", "ans";
+	update question, answer;
+}

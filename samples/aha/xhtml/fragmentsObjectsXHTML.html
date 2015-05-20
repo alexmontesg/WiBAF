@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>fragmentsObjectsXHTML</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Fragments and Objects in (X)HTML</h2>
+            <p>
+                In AHA! it is possible to use a special &lt;if&gt; tag for the conditional inclusion of fragments.
+            </p>
+            <code>
+                &lt; if expr="AHAtutorialLS.readme.knowledge&amp;gt;50"&gt;
+                    &lt;block&gt;
+                        here something for knowledgeable users
+                    &lt;/block&gt;
+                    &lt;block&gt;
+                        here something for beginners
+                    &lt;/block&gt;
+                &lt;/if&gt;
+            </code>
+            fragment is chosen depending on the "knowledge" attribute of concept "AHAtutorialLS.readme"
+
+            <li>
+                For HTML files AHA! has a parser that recognizes these &lt;if&gt; tags. Whereas the input files are not standard HTML AHA! produces output that is standard. (The &lt;if&gt; and &lt;block&gt; tags are removed.)
+            </li>
+            <li>
+                For XHTML files AHA! uses a special "xhtml+aha" dtd that consists of standard XHTML plus the &lt;if&gt; and &lt;block&gt; tags.
+            </li>
+            <li>
+                The &lt;if&gt; tag uses a Boolean expression. It is typical for an AHA! application to use the application's name as a prefix to the concept name, like in "tutorial.intro". The greater than and smaller than signs in the expressions must be escaped in order to not confuse the xml parser.
+            </li>
+            <li>
+                When conditional fragments are used the source format of a page is a non-standard format. This is not a problem for authors who write html using a text editor, but standard html and xhtml editors will not allow the use of the additional &lt;if&gt; tag.
+            </li>
+            <li>
+                Another drawback of the conditionally included fragments is that when the same fragment is included in several pages it must be replicated in each of these pages.
+            </li>
+            <li>
+                Finally, the expression to decide whether or not to include a fragment is a kind of adaptation rule. It really belongs in the adaptation model and not in the pages.
+            </li>
+            A more general solution is the use of the &lt;object&gt; or &lt;ref&gt; tag, together with fragments stored in separate files.
+            &lt; object name="tutorial.concept1" type="aha/text" /&gt;
+            -object is chosen by evaluating a casegroup for "tutorial.concept1" in the domain / adaptation model
+            -&lt;ref&gt; tag is used in SMIL, &lt;object&gt; in (X)HTML
+            <li>
+                AHA! only treats &lt;object&gt; tags of the type "aha/text". The name of the object is a concept, not a file. The expression used to decide which file to include is part of the domain and application model, which is conceptually where it should be.
+            </li>
+            <li>
+                A conditionally included object exists only once. Replication is thus avoided.
+            </li>
+            <li>
+                By including the file in the parsed input stream it becomes possible to have objects that include other objects. The introduction of the &lt;object&gt; tag and its meaning in AHA! has made the AHA! engine more powerful and versatile.
+            </li>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

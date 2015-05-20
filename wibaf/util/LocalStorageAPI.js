@@ -57,6 +57,19 @@ var LocalStorageAPI = function() {
 			callback(item, opt);
 		};
 		
+		function getDomain(domain, separator, collection, callback) {
+            var items = [];
+            var len = localStorage.length;
+            for (var i = 0; i < len; ++i) {
+                var item = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                if(item.collection === collection && item.domain == domain) {
+                    item.value = item.value.split(separator);
+                    items.push(item);
+                }
+            }
+            callback(items);
+        };
+		
 		function getAll(collection, callback) {
 			var items = [];
 			var len = localStorage.length;
@@ -84,6 +97,7 @@ var LocalStorageAPI = function() {
 			remove : remove,
 			update : update,
 			get : get,
+			getDomain : getDomain,
 			getAll : getAll,
 			removeAll : removeAll
 		};

@@ -122,6 +122,7 @@ var modellingParser = (function ModellingParser() {
 		}
 
 		function addEndFunctionCallToQueue(token, args) {
+			args.queue.push(", function(){wibaf.getInstance().refresh();}");
 			args.queue.push(");");
 			return 1;
 		}
@@ -229,7 +230,8 @@ var modellingParser = (function ModellingParser() {
 			    "inc" : new Transition(addFunctionNameToQueue, "op"),
 			    "dec" : new Transition(addFunctionNameToQueue, "op"),
 			    "update" : new Transition(addFunctionNameToQueue, "op"),
-			    "add_obs" : new Transition(addFunctionNameToQueue, "op")
+			    "add_obs" : new Transition(addFunctionNameToQueue, "op"),
+			    "init" : new Transition(addFunctionNameToQueue, "op")
 			}),
 			"op" : new State({
 			    ";" : new Transition(addEndFunctionCallToQueue, "on3"),
@@ -264,8 +266,16 @@ var modellingParser = (function ModellingParser() {
 					window[args.eventsToCall[i]].apply(window);        // The onLoad events are executed inmediately
 				}
 			}, 
-			addVisit : function() {
-			    userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
+			addVisit : function(callback) {
+			    var varName = (document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
+			    userModel.getInstance().get(varName, function(value) {
+			        if(value) {
+			            userModel.getInstance().inc(varName, callback);
+			        } else {
+			            // TODO Define proper use, domain and url
+			            userModel.getInstance().init(varName, 1, "numeric", document.URL, null, null, callback);
+			        }
+			    });
 			}
 		};
 	};

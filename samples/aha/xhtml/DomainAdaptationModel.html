@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>DomainAdaptationModel</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Domain/Adaptation Model</h2>
+            <h3>Concepts in AHA!</h3>
+
+            <p>
+                Each AHA! application consists of a set of <em>concepts</em>.
+                For each <a href="pages.xhtml" class="conditional">page</a> and each
+                conditionally included object
+                there should be a concept, but there may also be
+                many other concepts. The concept structure can be created using the
+                high level graph author tool, the low level concept editor
+                or by directly editing the XML file that contains the application's
+                concept structure.
+            </p>
+
+            <p>
+                <b>Note:</b> Even when you use a high-level authoring tool like
+                the graph author, we recommend that you study the structure of concepts in AHA!.
+            </p>
+
+            <p>
+                AHA! stores concepts in three formats: an authoring format (which
+                is XML) and two internal formats (one XML and one mySQL).
+                The structure of concepts is always the same and independent of
+                the representation format. Each concept contains the following elements:
+            </p>
+
+            <ul>
+                <li>
+                    <em>name</em>: Every concept must have a unique name, which in AHA! must
+                    be a single word (alphanumeric and starting with a letter).
+                    In expressions (as shown below) concepts are prefixed with the name
+                    of the AHA! application (like "tutorial") to make them unique
+                    on the server.
+                </li>
+                <li>
+                    <em>description</em>: It is possible to add a description to each concept.
+                    Currently the description can only be plain text, and is not used by
+                    AHA! in any way. It just serves for authors to remind themselves of
+                    the purpose for creating the concept.
+                </li>
+                <li>
+                    <em>resource</em>: Concepts can be <em>abstract</em> or <em>associated with a page</em>. For such page concepts a URL needs
+                    to be specified. For a local file such as the current page this URL
+                    looks like:
+                    <pre>
+file:/AHAtutorialLS/xml/concepts.xhtml
+</pre>
+                    (Note that all local file URLs are relative to the <em>document base</em>
+                    specified in the
+                    <a href="ahacontext.xhtml" class="conditional">AHA! context</a>.)
+                    <br />
+                    A resource can refer to a page on a different website,
+                    using the <tt>http</tt> protocol (instead of <tt>file</tt>).
+                    Accessing such a known remote page triggers
+                    <a href="usermodel.xhtml" class="conditional">user model</a> updates
+                    just like with local pages.
+                </li>
+                <li>
+                    <em>title</em>: This is the name used for this concept in automatically
+                    generated lists (usually of links).
+                </li>
+                <li>
+                    <em>hierarchy</em>: concepts can be part of a hierarchy, which has
+                    the application's "toplevel" concept as the root. The hierarchy has
+                    three sub-elements: <em>firstchild</em> is the name of the first
+                    child of the current concept, if that exists; <em>nextsib</em>
+                    is the name of the next sibling in the hierarchy, if that exists;
+                    <em>parent</em>is the name of the parent concept, if that exists.
+                </li>
+                <li>
+                    <em>attributes</em>: For each concept AHA! stores a number of attributes that
+                    may be different for every concept. Every attribute has a number of
+                    properties and a set of
+                    The properties are:
+                    <ul>
+                        <li>
+                            <em>name</em>: Each attribute has a name, like <em>access</em>, <em>suitability</em>, <em>knowledge</em>, <em>visited</em>, <em>interest</em>,
+                            etc.
+                        </li>
+                        <li>
+                            <em>type</em>: An attribute can be a Boolean, integer or string.
+                            While in a previous AHA! version only the type "integer" existed,
+                            with only values between 0 and 100, no such restriction exists in
+                            version 2.0 or later.
+                        </li>
+                        <li>
+                            <em>isPersistent</em>: Each time the end-user accesses a page some
+                            attributes of concepts are updated. Attributes can be used to store
+                            some value temporarily during the rule execution (isPersistent=false)
+                            or can be remembered in the user model (isPersistent=true).
+                        </li>
+                        <li>
+                            <em>isSystem</em>: While you can create arbitrarily many different
+                            attributes for each concept there are a few attributes that have
+                            a special function in AHA!, and that should be marked with
+                            isSystem=true. At the moment these attributes are: <em>access</em>,
+                            which is a non-persistent Boolean attribute that temporarily becomes
+                            true when the resource associated with the concept is accessed,
+                            <em>visited</em>, which is a persistent Boolean attribute that
+                            becomes true when the resource associated with the concept is accessed,
+                            <em>suitability</em>, which is a Boolean attribute (that can be
+                            persistent or not) that determines whether the concept is considered
+                            desirable (and linked to with GOOD or NEUTRAL color) or undesirable
+                            (and linked to with BAD color),
+                            and <em>showability</em>, which is an attribute used for selecting
+                            conditionally included objects.
+                        </li>
+                        <li>
+                            <em>isChangeable</em>: AHA! contains a
+                            form editor to create forms through which an end-user can update her user model.
+                            Only attribute of concepts marked as changeable can be included
+                            in such forms. The standard form to change knowledge values also
+                            uses the <em>isChangeable</em> property to decide which concepts to show.
+                        </li>
+                        <li>
+                            <em>description</em>: Like with concepts you can add a description
+                            to each attribute to indicate the meaning of the attribute.
+                            This description is not used by AHA! in any way.
+                        </li>
+                        <li>
+                            <em>default</em>: This field indicates the initial value of the attribute.
+                            It is assigned once for persistent attributes and repeatedly for
+                            non-persistent attributes. The attribute <em>suitability</em> is a good
+                            example of a volatile attribute that typically has an expression as default.
+                            An example would be:
+                            <pre>
+tutorial.enduser.knowledge &gt; 50 and tutorial.concepts.knowledge &lt; 40
+</pre>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <em>adaptation rules</em>:
+                    With every attribute of every concept
+                    you can associate arbitrarily many
+                    that define how a page access results in user model updates.
+                    These rules are actually <em>event-condition-action rules</em>.
+                    The rules are triggered by an <em>event</em> which is typically the
+                    access of a page.
+                    The rules contain a <em>condition</em> and an <em>action</em>.
+                    Writing these rules is non-trivial.
+                    The graph author tool can releave you of this task.
+                    The complete concept and rule structure for this AHA! tutorial
+                    is created using this graph author tool.
+                </li>
+            </ul>
+            <h3>Event-Condition-Action Rules</h3>
+
+            <p>
+                The updates to attributes of concepts
+                in the <a href="usermodel.xhtml">user model</a> are done through <em>event-condition-action rules</em>.
+                Every rule is associated with an attribute of a concept, and is
+                "triggered" whenever the value of that attribute changes.
+                Every page has an <em>access</em> attribute which is (virtually) "changed"
+                whenever the end-user visits that page.
+                This triggers the rules associated with this attribute.
+                Every rule consists of the following parts:
+            </p>
+            <ul>
+                <li>
+                    <em>propagation</em>: When a rule is executed it updates
+                    some attribute(s) of some concept(s).
+                    The <em>propagation</em> field indicates whether these updates
+                    will trigger the rules associted with the updated attribute(s).
+                    Setting the <em>propagation</em> field to false when possible is
+                    a good way to avoid inadverted infinite loops caused by rules that
+                    trigger each other repeatedly.
+                </li>
+                <li>
+                    <em>condition</em>: When the rule is triggered the condition is evaluated.
+                    It is an expression just like the ones for the
+                    <a href="fragments.xhtml" class="conditional">conditional inclusion
+                    of fragments</a>.
+                    The condition is Boolean, but an integer expression is allowed and
+                    the result interpreted as Boolean.
+                </li>
+                <li>
+                    <em>true-actions</em>: When the condition is true this set of
+                    actions is executed. Each action is an assignment,
+                    in which an attribute of a concept is assigned the result
+                    of an expression using attributes of concepts and constants.
+                    The expression may also use the attribute to which the
+                    event-condition-action rule belongs, preceded by an underscore (_).
+                    This means that instead of the value of that attribute the
+                    change of the attribute value (triggering the rule) is used.
+                    An example:
+                    <pre>
+tutorial.enduser.knowledge :=
+   tutorial.enduser.knowledge + 0.3 * _tutorial.usermodel.knowledge
+</pre>                    
+Such a rule can only be associated with
+the <tt>knowledge</tt> attribute of <tt>tutorial.usermodel</tt>,
+                    and adds 30% of the change to this attribute to
+                    the <tt>knowledge</tt> attribute of <tt>tutorial.enduser</tt>.
+                    Actions that use only attributes (without underscore to refer to
+                    an attribute update) need not use the attribute to which the rule belongs.
+                </li>
+                <li>
+                    <em>false-actions</em>: When the condition is false this set of
+                    actions is executed. The actions are just like the
+                    <em>true-actions</em>.
+                </li>
+            </ul>
+            <p>
+                Below is an example of a rule, taken from this tutorial's implementation:
+                This rule is generated by the
+                Graph Author tool
+                and is in the format used by the
+                Concept Editor.
+                <pre>
+    &lt;generateListItem isPropagating="true" &gt;
+
+&lt;requirement&gt;! tutorial.readme.suitability &amp;amp;&amp;amp; tutorial.readme.knowledge &amp;lt; 10&lt;/requirement&gt;
+
+&lt;trueActions&gt;
+
+ &lt;action&gt;
+
+  &lt;conceptName&gt;tutorial.readme&lt;/conceptName&gt;
+
+  &lt;attributeName&gt;knowledge&lt;/attributeName&gt;
+
+  &lt;expression&gt;35&lt;/expression&gt;
+
+ &lt;/action&gt;
+
+ &lt;action&gt;
+
+  &lt;conceptName&gt;tutorial.tutorial&lt;/conceptName&gt;
+
+  &lt;attributeName&gt;knowledge&lt;/attributeName&gt;
+
+  &lt;expression&gt;tutorial.tutorial.knowledge + (0.1111111111111111 * _tutorial.readme.knowledge)&lt;/expression&gt;
+
+ &lt;/action&gt;
+
+ &lt;action&gt;
+
+  &lt;conceptName&gt;tutorial.readme&lt;/conceptName&gt;
+
+  &lt;attributeName&gt;visited&lt;/attributeName&gt;
+
+  &lt;expression&gt;100&lt;/expression&gt;
+
+ &lt;/action&gt;
+
+&lt;/trueActions&gt;
+    &lt;/generateListItem&gt;
+</pre>
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

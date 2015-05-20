@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <title>headerfooter</title>
+    </head>
+    <body>
+        <header>
+            
+        </header>
+        <main>
+            <div>
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+
+            <h2>Headers and Footers</h2>
+
+            <p>
+                Headers and footers are contained in XML files (type="text/xml")
+                that are included in a page using the <tt>object</tt> tag.
+                They must conform to the "headerfooter" DTD that is located
+                in /aha/AHAstandard/headerfooter.dtd (where /aha is the
+                <em>path</em> parameter in the <a href="ahacontext.xhtml" class="conditional">AHA! configuration</a>).
+                The DTD mentions the tags that are allowed in headers and footers.
+                Besides the tags you can only add plain text. Any HTML tags must
+                be hidden inside <tt>&lt;![CDATA[...]]&gt;</tt> constructs.
+                The headers and footers of this tutorial should give some idea
+                of what to do with headers and footers. Below is a brief list of the
+                (meaning of the) tags that can appear in headers and footers:
+            </p>
+            <ul>
+                <li>
+                    A first group of tags consists of <em>variables</em>.
+                    In the header shown to the end-user the variable will be replaced by
+                    its value. (These variables are actually attributes of a "personal"
+                    pseudo-concept in the
+                    <a href="usermodel.xhtml" class="conditional">user model</a>.
+                    The possible variables are:
+                    <ul>
+                        <li>
+                            <em>username</em>: The name of the end-user (if this is a field present
+                            in the registration form. The variable is used as follows:
+                            <pre>
+&lt;variable&gt;&lt;username/&gt;&lt;/variable&gt;
+</pre>
+                        </li>
+                        <li>
+                            <em>loginid</em>: The user id entered in the registration form.
+                            (Anonymous users are assigned a special unique anonymous id.)
+                        </li>
+                        <li>
+                            <em>university</em>: This field is used for on-line courses offered
+                            to students from different institutes. When available this user model
+                            variable can not just be printed in the header or footer but also be
+                            used to conditionally include fragments of information that are
+                            relevant only for students of a certain university.
+                        </li>
+                        <li>
+                            <em>department</em>: Like university this field can be used to distinguish
+                            between groups of users.
+                        </li>
+                        <li>
+                            <em>course</em>: The name of the current application (named "course" for
+                            historical reasons).
+                        </li>
+                        <li>
+                            <em>coursename</em>: In the registration form the application can be given
+                            a "title" that is displayed in the header or footer.
+                            (The tag "title" is already used in XHTML so we had to use a different
+                            name for implementation reasons.)
+                        </li>
+                        <li>
+                            <em>numberdone</em>: The number of pages in this application which the
+                            user has visited.
+                        </li>
+                        <li>
+                            <em>numbertodo</em>: The number of pages in this application which the
+                            user has not yet visited.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    The second group of tags are called <em>handlers</em>.
+                    They create a link anchor through which the end-user can access
+                    specially generated pages.
+                    <ul>
+                        <li>
+                            <em>logout</em>: When the end-user clicks on this link the session is ended.
+                            The handler is used as follows:
+                            <pre>
+&lt;handler&gt;
+&lt;handlername&gt;&lt;logout/&gt;&lt;/handlername&gt;
+&lt; linkdescription&gt; Logout (or any other text)&lt;/linkdescription&gt;
+&lt;/handler&gt;
+</pre>
+                        </li>
+                        <li>
+                            <em>colorsettings</em>: This link will access a form through which the
+                            end-user can change the color scheme for links.
+                        </li>
+                        <li>
+                            <em>knowledgesettings</em>: This link will access a form that lets the
+                            end-user change the "knowledge" user model attribute of all concepts that
+                            have such attribute and for which that attribute is not marked as read-only.
+                        </li>
+                        <li>
+                            <em>passwordsettings</em>: This link will access a form to change the
+                            end-user's password. Anonymous users cannot have a password.
+                        </li>
+                        <li>
+                            <em>done</em>: This link will access a page showing all the pages the
+                            end-user has read. Each page name is a link to that page.
+                        </li>
+                        <li>
+                            <em>todo</em>: This link will access a page showing all the pages the
+                            end-user has not (yet) read. Each page name is a link to that page.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>
+                <b>Note</b>: The syntax for headers and footers is considered <em>deprecated</em>. Headers and footers will most likely be defined
+                in different ways in future versions of AHA!.
+            </p>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                new wibaf().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>
