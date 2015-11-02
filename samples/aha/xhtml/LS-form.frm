@@ -60,8 +60,8 @@ If you are not sure about your preferences, enter "50" (none). <br />
 <p><input type="submit" value="Effectuate the changes."></input> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Reset values in this form."></input>
  </p>
 </form>
-</main>
+</div></main>
 </body>
-</main>
+</div></main>
 </body>
 </html>

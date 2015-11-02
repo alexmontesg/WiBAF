@@ -38,18 +38,54 @@
 
         <div class="row">
 
-            <div class="large-9 push-3 columns">
+            <div class="large-9 large-push-3 columns">
 
                 <h3>Scenario 1</h3>
-                
+
                 <hr />
-                
+
                 <div class="row">
-                	<p>If you had autism, would you disclose that information to the university? <span class="question" data-question="question1" data-answer="y">Yes</span> | <span href="#" class="question" data-question="question1" data-answer="n">No</span></p>
-                	<p>Do you want more info on advantages of the disclosure process? <span class="question" data-question="question2" data-answer="y">Yes</span> | <span class="question" data-question="question2" data-answer="n">No</span></p>
-                	<p>Do you have a diagnosis? <span class="question" data-question="question3" data-answer="y">Yes</span> | <span class="question" data-question="question3" data-answer="n">No</span></p>
-                	<p>Would you like to see some real-life testimony before the theory? <span class="question" data-question="question4" data-answer="y">Yes</span> | <span class="question" data-question="question4" data-answer="n">No</span></p>
-                	<p><a id="next" href="theory.html">Next</a></p>
+                    <p>
+                        If you had autism, would you disclose that information to the university?
+                    </p>
+                    <form>
+                        <input class="question" name="question1" type="radio" value="y" />
+                        Yes
+                        <input class="question" name="question1" type="radio" value="n" />
+                        No
+                    </form>
+                    <p>
+                        Do you want more info on advantages of the disclosure process?
+                    </p>
+                    <form>
+                        <input class="question" name="question2" type="radio" value="y" />
+                        Yes
+                        <input class="question" name="question2" type="radio" value="n" />
+                        No
+                    </form>
+                    <p>
+                        Do you have a diagnosis?
+                    </p>
+                    <form>
+                        <input class="question" name="question3" type="radio" value="y" />
+                        Yes
+                        <input class="question" name="question3" type="radio" value="n" />
+                        No
+                    </form>
+                    <p>
+                        Would you like to see some real-life testimony before the theory?
+                    </p>
+                    <form>
+                        <input class="question" name="question4" type="radio" value="y" />
+                        Yes
+                        <input class="question" name="question4" type="radio" value="n" />
+                        No
+                    </form>
+                </div>
+                <div class="large-3 large-push-9 columns">
+                    <p>
+                        <a class="button expand small" id="next" href="theory.html">Next >></a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -74,7 +110,7 @@
         <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/ServerAPI.js"></script>
-        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script><script type="text/javascript" src="../../../wibaf/util/ServerAPI.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>

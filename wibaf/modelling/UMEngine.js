@@ -128,15 +128,24 @@ var userModel = (function UMEngine() {
         }
 
         function inc(UMvar, callback) {
-            doUpdate(UMvar, callback, 1, "+");
+            add(UMvar, 1, callback);
         }
 
         function dec(UMvar, callback) {
-            doUpdate(UMvar, callback, 1, "-");
+            sub(UMvar, 1, callback);
         }
 
         function update(UMvar, newVal, callback) {
             doUpdate(UMvar, callback, newVal);
+        }
+
+
+        function add(UMvar, val, callback) {
+            doUpdate(UMvar, callback, val, "+");
+        }
+        
+        function sub(UMvar, val, callback) {
+            doUpdate(UMvar, callback, val, "-");
         }
 
         function addObs(UMvar, value, callback) {
@@ -161,8 +170,26 @@ var userModel = (function UMEngine() {
         }
 
         function removeAll(callback) {
-            serverAPI.removeAll(itemName);
+            serverAPI.removeAll();
             database.removeAll("user_model", callback);
+        }
+        
+        function initUpdate(name, value, type, url, feedback, domain, callback) {
+            get(name, function(item, opt) {
+                if(item) {
+                    update(name, value, callback);
+                } else {
+                    init(name, value, type, url, feedback, domain, callback);
+                }
+            });
+        }
+        
+        function initIfBlank(name, value, type, url, feedback, domain, callback) {
+            get(name, function(item, opt) {
+                if(!item) {
+                    init(name, value, type, url, feedback, domain, callback);
+                }
+            });
         }
 
         function updateServerValues(callback) {
@@ -195,6 +222,8 @@ var userModel = (function UMEngine() {
         return {
             inc : inc,
             dec : dec,
+            add : add,
+            sub : sub,
             update : update,
             add_obs : addObs,
             get : get,
@@ -203,6 +232,8 @@ var userModel = (function UMEngine() {
             remove : remove,
             removeAll : removeAll,
             init : init,
+            init_update : initUpdate,
+            init_if_blank : initIfBlank,
             updateServerValues : updateServerValues
         };
     }

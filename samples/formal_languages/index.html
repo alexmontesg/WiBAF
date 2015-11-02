@@ -81,7 +81,7 @@
             </div>
         </header>
 
-        <main>
+        <main class="row">
 <div class="row">
                 <div class="large-4 columns">
                     <pre class="wibaf-pre">
@@ -205,7 +205,7 @@
                     <a href="./downloads/wibaf_latest.js" class="button expand">Download</a>
                 </div>
             </div>
-        </main>
+        </div></main>
 
         <footer>
             <div class="row">
@@ -237,7 +237,7 @@
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
             $(function() {
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     $(document).foundation();
                 });
             });

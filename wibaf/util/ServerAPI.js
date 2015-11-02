@@ -24,8 +24,8 @@ var ServerAPI = function() {
 			    name: name
 			}, function(result) {
 			    if(callback) {
-			        callback(result, opt);
-			    }
+                    callback(result, opt);
+                }
             });
 		};
 

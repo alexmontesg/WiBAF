@@ -42,7 +42,7 @@ function addItem() {
     $url = getPost('url');
     $use = getPost('use');
     $user = getSession('user');
-    $query = $db -> query("INSERT INTO data(user, name, type, value, url, use) VALUES ('$user', '$name', '$type', '$value', '$url', '$use)");
+    $query = $db -> query("INSERT INTO data(user, name, type, value, url, use) VALUES ('$user', '$name', '$type', '$value', '$url', '$use')");
     renderGenericResult($query, 'ADD_SINGLE_ERROR');
 }
 

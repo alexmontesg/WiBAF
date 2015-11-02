@@ -56,7 +56,7 @@
             </div>
         </header>
 
-        <!-- Should change this div into <main></main> but shows warning in Aptana -->
+        <!-- Should change this div into <main class="row"></div></main> but shows warning in Aptana -->
         <div id="main">
             <div class="row">
                 <p>
@@ -141,7 +141,7 @@
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
             $(function() {
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     $(document).foundation();
                     document.getElementById('submit-pre-questionnaire').addEventListener('click', function(e) {
                         document.getElementsByTagName('form')[0].style.display = 'none';

@@ -61,7 +61,7 @@
             </div>
         </header>
 
-        <!-- Should change this div into <main></main> but shows warning in Aptana -->
+        <!-- Should change this div into <main class="row"></div></main> but shows warning in Aptana -->
         <div id="main">
             <div class="row">
                 <div class="large-3 small-4 columns panel">
@@ -123,7 +123,7 @@
         <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
-        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script><script type="text/javascript" src="../../../wibaf/util/ServerAPI.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
         <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
@@ -151,7 +151,7 @@
 
             $(function() {
                 restore();
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     $(document).foundation();
                 });
             });

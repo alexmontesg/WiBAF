@@ -10,6 +10,11 @@
     insert: url:../menu.html;
 }
 
+#menu a[href="#{document.title.replace(/\s+/g, "-").replace(/[\.\(\);;,\"]/g, "").trim().toLowerCase()}.html"] {
+    font-weight: bold;
+    color: black;
+}
+
 @user (learning-style-path: global) {
     @user(readme-accessed-lt: 1) or (installation-accessed-lt: 1) or (architecture-accessed-lt: 1) {
         a[href="ahacontext.html"], a[href="firstconfig.html"], a[href="adaptation.html"], a[href="adaptationEngine.html"], a[href="users.html"] {
@@ -225,5 +230,192 @@
 @user (graphauthor-accessed-lt: 1) {
     .hide-graphauthor-not-visited {
         display: none;
+    }
+}
+
+
+@user (AHAtutorialLS8-accessed-gt: 0) {
+    a[href="AHAtutorialLS8.html"] {
+        color: #609;
+    }
+}
+
+@user (readme-accessed-gt: 0) {
+    a[href="readme.html"] {
+        color: #609;
+    }
+}
+
+@user (installation-accessed-gt: 0) {
+    a[href="installation.html"] {
+        color: #609;
+    }
+}
+
+@user (ahacontext-accessed-gt: 0) {
+    a[href="ahacontext.html"] {
+        color: #609;
+    }
+}
+
+@user (firstconfig-accessed-gt: 0) {
+    a[href="firstconfig.html"] {
+        color: #609;
+    }
+}
+
+@user (architecture-accessed-gt: 0) {
+    a[href="architecture.html"] {
+        color: #609;
+    }
+}
+
+@user (adaptation-accessed-gt: 0) {
+    a[href="adaptation.html"] {
+        color: #609;
+    }
+}
+
+@user (conditionalObjects-accessed-gt: 0) {
+    a[href="conditionalObjects.html"] {
+        color: #609;
+    }
+}
+
+@user (potentialProblems-accessed-gt: 0) {
+    a[href="potentialProblems.html"] {
+        color: #609;
+    }
+}
+
+@user (objectInclusion-accessed-gt: 0) {
+    a[href="objectInclusion.html"] {
+        color: #609;
+    }
+}
+
+@user (fragmentsObjectsXHTML-accessed-gt: 0) {
+    a[href="fragmentsObjectsXHTML.html"] {
+        color: #609;
+    }
+}
+
+@user (linkHidingAnnotations-accessed-gt: 0) {
+    a[href="linkHidingAnnotations.html"] {
+        color: #609;
+    }
+}
+
+@user (linkTypes-accessed-gt: 0) {
+    a[href="linkTypes.html"] {
+        color: #609;
+    }
+}
+
+@user (pageProcessing-accessed-gt: 0) {
+    a[href="pageProcessing.html"] {
+        color: #609;
+    }
+}
+
+@user (adaptationEngine-accessed-gt: 0) {
+    a[href="adaptationEngine.html"] {
+        color: #609;
+    }
+}
+
+@user (users-accessed-gt: 0) {
+    a[href="users.html"] {
+        color: #609;
+    }
+}
+
+@user (manager-accessed-gt: 0) {
+    a[href="manager.html"] {
+        color: #609;
+    }
+}
+
+@user (author-accessed-gt: 0) {
+    a[href="author.html"] {
+        color: #609;
+    }
+}
+
+@user (pages-accessed-gt: 0) {
+    a[href="pages.html"] {
+        color: #609;
+    }
+}
+
+@user (xhtml-accessed-gt: 0) {
+    a[href="xhtml.html"] {
+        color: #609;
+    }
+}
+
+@user (headerfooter-accessed-gt: 0) {
+    a[href="headerfooter.html"] {
+        color: #609;
+    }
+}
+
+@user (fragments-accessed-gt: 0) {
+    a[href="fragments.html"] {
+        color: #609;
+    }
+}
+
+@user (DomainAdaptationModel-accessed-gt: 0) {
+    a[href="DomainAdaptationModel.html"] {
+        color: #609;
+    }
+}
+
+@user (concepts-accessed-gt: 0) {
+    a[href="concepts.html"] {
+        color: #609;
+    }
+}
+
+@user (rules-accessed-gt: 0) {
+    a[href="rules.html"] {
+        color: #609;
+    }
+}
+
+@user (tools-accessed-gt: 0) {
+    a[href="tools.html"] {
+        color: #609;
+    }
+}
+
+@user (concepteditor-accessed-gt: 0) {
+    a[href="concepteditor.html"] {
+        color: #609;
+    }
+}
+
+@user (graphauthor-accessed-gt: 0) {
+    a[href="graphauthor.html"] {
+        color: #609;
+    }
+}
+
+@user (formeditor-accessed-gt: 0) {
+    a[href="formeditor.html"] {
+        color: #609;
+    }
+}
+
+@user (end-user-accessed-gt: 0) {
+    a[href="end-user.html"] {
+        color: #609;
+    }
+}
+
+@user (usermodel-accessed-gt: 0) {
+    a[href="usermodel.html"] {
+        color: #609;
     }
 }

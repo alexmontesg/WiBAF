@@ -3,6 +3,6 @@ event initum = `document.getElementById('submit-pre-questionnaire').click`
                 lspath:document.getElementById('lspath').value}`
                 
 on initum {
-    init "learning-style-content", lscontent, "text", "http://www.example.org/learning/content", "Used so that we adapt the content to your taste", "learning";
-    init "learning-style-path", lspath, "text", "http://www.example.org/learning/path", "Used so that we guide you as you like", "learning";
+    init_update "learning-style-content", lscontent, "text", "http://www.example.org/learning/content", "Used so that we adapt the content to your taste", "learning";
+    init_update "learning-style-path", lspath, "text", "http://www.example.org/learning/path", "Used so that we guide you as you like", "learning";
 }

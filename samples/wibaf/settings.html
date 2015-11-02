@@ -57,7 +57,7 @@
             </div>
         </header>
 
-        <main>
+        <main class="row">
             <div class="row">
                 <h3>Your current configuration</h3>
                 <div class="large-8 medium-10 columns large-centered medium-centered">
@@ -66,7 +66,9 @@
                         <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="3"/>
                         Personalization
                     </form>
-                    <p id="privacyExplanation"></p>
+                    <p id="privacyExplanation">
+                        
+                    </p>
                 </div>
             </div>
             <div id="divToServer" class="row">
@@ -248,6 +250,7 @@
         <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
         <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
         <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/ServerAPI.js"></script>
         <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
         <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
         <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
@@ -452,7 +455,7 @@
             }
 
             $(function() {
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     $(document).foundation();
                     $(".dateTimePicker").datetimepicker({
                         format : 'd/m/Y H:i',
@@ -470,7 +473,7 @@
                     document.getElementById("privacyvspersonalization").onchange = function(e) {
                         save(updateMainSlider);
                     };
-                });
+                }, null, '../../server_code/update_um.php');
             });
         </script>
     </body>

@@ -178,6 +178,53 @@ var AdaptationEngine = function() {
 			$(selector).text($(selector).text().trim().slice(0, parseInt(arg)));
 		},
 		
+		stretchtext : function(selector, arg) {
+		    args = arg.split(',');
+		    amount = parseInt(args[0].trim());
+		    handlerMore = args[1].trim();
+		    handlerLess = args[2].trim();
+		    classname = args[3].trim();
+		    var children = $(selector).children();
+		    for(var i = 0; i < children.length; i++) {
+		        children[i].className = children[i].className + ' wibaf-stretchtext-' + classname;
+		        children[i].style.display = 'none';
+		    }
+
+		    var shortText = $(selector).text();
+		    while (shortText.charAt(amount) != ' ') {
+                amount++;
+            }
+            shortText = shortText.trim().slice(0, amount);
+            var p = document.createElement('p');
+            p.className = 'wibaf-short-stretchtext-' + classname;
+            p.innerHTML = shortText;
+		    var a = document.createElement('a');
+		    a.setAttribute('data-altText', handlerLess);
+		    a.setAttribute('data-handlerFor', classname);
+		    a.innerHTML = handlerMore;
+		    a.href = '#';
+		    a.onclick = function() {
+		        var items = document.getElementsByClassName('wibaf-stretchtext-' + this.dataset.handlerfor);
+		        var shortItem = document.getElementsByClassName('wibaf-short-stretchtext-' + this.dataset.handlerfor)[0];
+		        if(items[0].style.display == 'none') {
+		            for(var i = 0; i < items.length; i++) {
+		                items[i].style.display = 'initial';
+		            }
+		            shortItem.style.display = 'none';
+		        } else {
+		            for(var i = 0; i < items.length; i++) {
+                        items[i].style.display = 'none';
+                    }
+		            shortItem.style.display = 'initial';
+		        }
+		        altText = this.dataset.alttext;
+		        a.setAttribute('data-altText', this.innerHTML);                
+                this.innerHTML = altText;
+		    };
+		    p.appendChild(a);
+		    $(selector).append(p);
+		},
+		
 		/**
          * Sets the degree-of-interest of the selected nodes
          * @param {Object} selector

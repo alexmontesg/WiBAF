@@ -1,0 +1,16 @@
+#menu ul {
+    list-style-type: none;
+    font-size: 10pt;
+}
+
+.wibafGenerated>ul {
+    margin-left: 0;
+}
+
+.panel {
+    padding: 0.75rem;
+}
+
+main {
+    padding-top: 2.0rem;
+}

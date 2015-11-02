@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Aha Tutorial</title>
+        <title>AHA Tutorial</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width"/>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -29,23 +29,17 @@
 
         </header>
 
-        <main>
+        <main class="row">
             <div class="row">
                 <form>
                     <fieldset>
                         <legend>Please fill in some data about you</legend>
-                        <label>Do you prefer to learn with images or with text?
-                            <select id="lscontent">
-                                <option value="neutral">I do not know</option>
-                                <option value="visual">With images</option>
-                                <option value="verbal">With text</option>
-                            </select>
-                        </label>
-                        <label>Do you prefer to first see the overall picture or to examine every topic to the detail before moving on?
-                            <select id="lspath">
-                                <option value="neutral">I do not know</option>
-                                <option value="global">See the overall picture</option>
-                                <option value="analytic">Go to the details</option>
+                        <input type="hidden" id="lscontent" value="verbal" />
+                        <input type="hidden" id="lspath" value="global" />
+                        <label>Are you autistic?
+                            <select name="autistic">
+                                <option value="n">No</option>
+                                <option value="y">Yes</option>
                             </select>
                         </label>
                         <a href="#" id="submit-pre-questionnaire" class="button">Submit</a>
@@ -69,6 +63,7 @@
         <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
         <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
         <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/ServerAPI.js"></script>
         <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
         <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
         <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
@@ -77,10 +72,22 @@
         <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
         <script>
             $(function() {
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     document.getElementById('submit-pre-questionnaire').addEventListener('click', function(e) {
                         alert("Data saved");
                     }, false);
+                    
+                    document.getElementsByTagName('select')[0].addEventListener('change', function(e) {
+                        if(this.selectedIndex == 0) {
+                            document.getElementById('lscontent').value = 'verbal';
+                            document.getElementById('lspath').value = 'global';
+                        }
+                        
+                        if(this.selectedIndex == 1) {
+                            document.getElementById('lscontent').value = 'visual';
+                            document.getElementById('lspath').value = 'analytic';
+                        }
+                    })
                 });
             });
         </script>

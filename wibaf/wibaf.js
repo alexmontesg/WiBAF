@@ -87,12 +87,12 @@ var wibaf = (function() {
 	         * @param {String} conceptURL: URL to the jsonld file containing the
 	         * domain model
 	         */
-	        init : function(callback, conceptURL) {
+	        init : function(callback, conceptURL, serverURL) {
 	            stringManipulator.addStringMethods();
 	            database = databaseFactory.getInstance().createDatabase({
 	                useIndexedDB : supportIndexedDB(),
 	                callback : function() {
-	                    window.serverAPI = ServerAPI().getInstance("../server_code/update_um.php", function() {
+	                    window.serverAPI = ServerAPI().getInstance(serverURL, function() {
 	                        if (conceptURL) {
 	                            domainParser.getInstance().loadData(conceptURL, function() {
 	                                /*

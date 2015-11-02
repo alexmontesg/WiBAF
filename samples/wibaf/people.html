@@ -56,7 +56,7 @@
             </div>
         </header>
 
-       <main>
+       <main class="row">
             <div class="row">
                 <div class="large-12 column">
                     <h3>People</h3>
@@ -115,7 +115,7 @@
                     </p>
                 </div>
             </div>
-        </main>
+        </div></main>
 
         <footer>
             <div class="row">
@@ -147,7 +147,7 @@
         <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
         <script>
             $(function() {
-                new wibaf().init(function() {
+                wibaf.getInstance().init(function() {
                     $(document).foundation();
                 });
             });

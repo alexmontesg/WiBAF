@@ -86,8 +86,8 @@ var modellingParser = (function ModellingParser() {
 		
 		function addConditionOrCollection(toAdd, isCondition) {
 		    if (toAdd && toAdd.trim().length > 0) {
-                toAdd = toAdd.replace(/(^|[\s+\.])this./g, function(str) {
-                    return str.replace("this", "e.currentTarget");
+                toAdd = toAdd.replace(/(^|[\s+\.\[\]])this./g, function(str) {
+                    return str.replace(/this/g, "e.currentTarget");
                 }).trim();
                 return isCondition ? "if(!(" + toAdd + ")) return;" : toAdd.replace(/:/g, "=") + ";";
             }
@@ -231,7 +231,11 @@ var modellingParser = (function ModellingParser() {
 			    "dec" : new Transition(addFunctionNameToQueue, "op"),
 			    "update" : new Transition(addFunctionNameToQueue, "op"),
 			    "add_obs" : new Transition(addFunctionNameToQueue, "op"),
-			    "init" : new Transition(addFunctionNameToQueue, "op")
+			    "init" : new Transition(addFunctionNameToQueue, "op"),
+			    "init_if_blank" : new Transition(addFunctionNameToQueue, "op"),
+			    "init_update" : new Transition(addFunctionNameToQueue, "op"),
+			    "add" : new Transition(addFunctionNameToQueue, "op"),
+			    "sub" : new Transition(addFunctionNameToQueue, "op"),
 			}),
 			"op" : new State({
 			    ";" : new Transition(addEndFunctionCallToQueue, "on3"),
@@ -272,8 +276,8 @@ var modellingParser = (function ModellingParser() {
 			        if(value) {
 			            userModel.getInstance().inc(varName, callback);
 			        } else {
-			            // TODO Define proper use, domain and url
-			            userModel.getInstance().init(varName, 1, "numeric", document.URL, null, null, callback);
+			            // TODO Define proper use and url
+			            userModel.getInstance().init(varName, 1, "numeric", document.URL, null, "access", callback);
 			        }
 			    });
 			}
