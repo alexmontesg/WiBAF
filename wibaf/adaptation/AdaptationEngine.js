@@ -184,9 +184,19 @@ var AdaptationEngine = function() {
 		    handlerMore = args[1].trim();
 		    handlerLess = args[2].trim();
 		    classname = args[3].trim();
-		    var children = $(selector).children();
+		    var item = $(selector)[0];
+		    if(!item || item.children.length == 0) {
+		        return;
+		    }
+		    var children = item.children;
 		    for(var i = 0; i < children.length; i++) {
-		        children[i].className = children[i].className + ' wibaf-stretchtext-' + classname;
+		        var classNameToAdd = 'wibaf-stretchtext-' + classname;
+		        if(children[i].classList.contains(classNameToAdd) || children[i].classList.contains('wibaf-short-stretchtext-' + classname)) {
+		            return;
+		        } else if(children[i].className.length > 0) {
+                    classNameToAdd = ' ' + classNameToAdd;
+                }
+		        children[i].className = children[i].className + classNameToAdd;
 		        children[i].style.display = 'none';
 		    }
 
@@ -194,6 +204,7 @@ var AdaptationEngine = function() {
 		    while (shortText.charAt(amount) != ' ') {
                 amount++;
             }
+            amount++;
             shortText = shortText.trim().slice(0, amount);
             var p = document.createElement('p');
             p.className = 'wibaf-short-stretchtext-' + classname;
@@ -208,21 +219,21 @@ var AdaptationEngine = function() {
 		        var shortItem = document.getElementsByClassName('wibaf-short-stretchtext-' + this.dataset.handlerfor)[0];
 		        if(items[0].style.display == 'none') {
 		            for(var i = 0; i < items.length; i++) {
-		                items[i].style.display = 'initial';
+		                items[i].style.display = '';
 		            }
 		            shortItem.style.display = 'none';
 		        } else {
 		            for(var i = 0; i < items.length; i++) {
                         items[i].style.display = 'none';
                     }
-		            shortItem.style.display = 'initial';
+		            shortItem.style.display = '';
 		        }
 		        altText = this.dataset.alttext;
 		        a.setAttribute('data-altText', this.innerHTML);                
                 this.innerHTML = altText;
 		    };
-		    p.appendChild(a);
 		    $(selector).append(p);
+		    $(selector).append(a);
 		},
 		
 		/**

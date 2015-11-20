@@ -100,7 +100,7 @@ var modellingParser = (function ModellingParser() {
                 for (var i = 0; i < domNode.length; i++) {
                     args.queue.push(jsSelector + "[" + i + "].addEventListener(" + eventListener + ");");
                 }
-            } else {
+            } else if (Object.prototype.toString.call(domNode) !== "[object Null]") {
                 args.queue.push(jsSelector + ".addEventListener(" + eventListener + ");");
             }
 		}
@@ -109,7 +109,8 @@ var modellingParser = (function ModellingParser() {
 			var arr = args.currentEvent.trigger.split(".");
 			var eventTrigger = arr.pop().trim();         // E.g. click, mouseover, load, etc...
 			var jsSelector = arr.join(".");              // Javascript selector
-			args.eventFunctionName = ("_event" + (jsSelector + eventTrigger).hashCode()).replace("-", "_");
+			args.eventFunctionName = ("_event" + (jsSelector + eventTrigger).hashCode() + "_" + args.nEvents).replace("-", "_");
+			args.nEvents++;
 			addEventListenerToNode(jsSelector, args, "'" + eventTrigger + "', function(e){" + args.eventFunctionName + "(e);}, false");
 			args.queue.push("var " + args.eventFunctionName + " = function(e){");
 			var toPush = [addConditionOrCollection(args.currentEvent.condition, true), addConditionOrCollection(args.currentEvent.valCollection, false)];
@@ -255,7 +256,8 @@ var modellingParser = (function ModellingParser() {
 					currentEvent : null,
 					eventFunctionName : null,
 					eventsToCall : [],
-					script : script
+					script : script,
+					nEvents : 0
 				};
 				while (args.tokens.length > 0) {
 					var token = args.tokens[0];
