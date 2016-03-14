@@ -1,9 +1,13 @@
 #WiBAF: Within Browser Adaptation Framework
 
 [Introduction](#introduction)
+
 [Documentation](#documentation)
+
 &nbsp;&nbsp;[Adaptation Model](#adaptation-model)
+
 &nbsp;&nbsp;&nbsp;&nbsp;[Targeting](#targeting)
+
 &nbsp;&nbsp;&nbsp;&nbsp;[Adaptation rules](#adaptation-rules)
 
 ##Introduction
@@ -87,6 +91,7 @@ If some rules are to be applied only for specific contexts **or** specific users
 
 ####Adaptation rules
 Once the DOM nodes (and optionally users and contexts) are targeted, it is the time to define the adaptation rules to achieve the desired adaptation effect. This is also done with CSS syntax i.e. `property: value;`. Any [CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) is valid. However these have some limitations, that is why we are extending this list of properties with the ones shown in the following table:
+
 Property Name | Possible Values | Description
 ----------|----------|----------
 `add-class`|class|Adds the specified class to the selected nodes.
