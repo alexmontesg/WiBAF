@@ -1,0 +1,100 @@
+@context(min-hour: 08.00 and max-hour: 11.59) {
+    #lunchtime,#evening {
+        display: initial;
+    }
+    #contextImg {
+        update-attribute: src,img/coffee.png;
+    }
+}
+
+@user(vegetarian: t) {
+    .not-vegetarian {
+        display: none;
+    }
+    
+    .vegetarian {
+        display: initial;
+    }
+    
+    #vegetarian-option {
+        insert: rice with eggs and tomato;
+    }
+}
+
+@user(vegetarian: f) {
+    .vegetarian {
+        display: none;
+    }
+    
+    .not-vegetarian {
+        display: initial;
+    }
+}
+
+@context(min-hour: 12.00 and max-hour: 14.59) {
+    #morning,#evening {
+        display: none;
+    }
+    @user(vegetarian: f) {
+        #contextImg {
+            update-attribute: src,img/fabada.jpg;
+        }
+    }
+    @user(vegetarian: t) {
+        #contextImg {
+            update-attribute: src,img/rice.jpg;
+        }
+    }
+}
+
+@context(min-hour: 15.00 and max-hour: 23.59) {
+    #morning,#lunchtime {
+        display: none;
+    }
+}
+
+@context(min-hour: 00.00 and max-hour: 07.59) {
+    #morning,#lunchtime {
+        display: none;
+    }
+}
+
+@user(lang: spanish) {
+    #lang {
+        insert: Spanish;
+    }
+    
+    #greeting {
+        insert: Hola;
+    }
+}
+
+@user(lang: english) {
+    #lang {
+        insert: English;
+    }
+    
+    #greeting {
+        insert: Hello;
+    }
+}
+
+@user(lang: russian) {
+    #lang {
+        insert: Russian;
+    }
+    
+    #greeting {
+        insert: Privet;
+    }
+}
+
+@user(lang: chinese) {
+    #lang {
+        insert: Chinese;
+    }
+    
+    #greeting {
+        insert: Nihao;
+    }
+}

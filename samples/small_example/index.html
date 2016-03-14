@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+    <head>
+        <title>WiBAF single page example</title>
+        <link href="./wibaf/modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link href="./wibaf/adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <link href="./style.css" type="text/css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>WiBAF single page example</h1>
+        </header>
+        <div>
+            <article>
+                <section id="intro">
+                    <p>
+                        This is a small example to demonstrate WiBAF capabilities. Depending on your interactions with this page, its content will change.
+                        For instance, this introduction will not be shown to you anymore, unless you want. Now refresh the page, you will see a different
+                        content.
+                    </p>
+                </section>
+                <section id="context">
+                    <header>
+                        <p>
+                            This section shows an example of adaptation based on the time. It represents a canteen, depending on what time you check it, the
+                            content will be different.
+                        </p>
+                    </header>
+                    <p id="morning">
+                        I see that it is very early, I recommend you to have a cup of coffee to start the morning. Come back at 12:00 am. Lunch will be ready.
+                    </p>
+                    <p id="lunchtime">
+                        As promised, lunch is ready. We have <span class="not-vegetarian">a bean stew with meat</span>
+                        <span id="vegetarian-option" class="vegetarian"></span> today.
+                        <span class="not-vegetarian">We offer also a vegetarian option. Click the buttons below if you are vegetarian.</span>
+                        The canteen will be opened until 15:00.
+                    </p>
+                    <p id="evening">
+                        The canteen is closed. Come back tomorrow at 8:00.
+                    </p>
+                    <img id="contextImg" />
+                </section>
+                <section id="user">
+                    <header>
+                        <p>
+                            This section shows an example of adaptation based on the user model. You have some buttons below, depending on which one you click,
+                            your user model will change and different content will be shown below.
+                        </p>
+                    </header>
+                    <p>Hello in <span id="lang"></span> is: <span id="greeting"></span></p>
+                </section>
+            </article>
+            <nav>
+                <ul>
+                    <li class="not-vegetarian"><input type="button" value="I am vegetarian"  id="vegBtn"/></li>
+                    <li class="vegetarian"><input type="button" value="I am not vegetarian" id="notVegBtn"/></li>
+                    <li class="english"><input class="lang" type="button" value="Greet me in English" id="englishBtn" data-lang="english" /></li>
+                    <li class="spanish"><input class="lang" type="button" value="Greet me in Spanish" id="spanishBtn" data-lang="spanish"/></li>
+                    <li class="chinese"><input class="lang" type="button" value="Greet me in Chinese" id="chineseBtn" data-lang="chinese"/></li>
+                    <li class="russian"><input class="lang" type="button" value="Greet me in Russian" id="russianBtn" data-lang="russian"/></li>
+                </ul>
+            </nav>
+        </div>
+        <script src="./wibaf/wibaf.js"></script>
+        <script>
+            $(function() {
+                wibaf.getInstance().init(function() {
+                    
+                });
+            });
+        </script>
+    </body>
+</html>

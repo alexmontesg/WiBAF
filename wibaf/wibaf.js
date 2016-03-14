@@ -14,7 +14,8 @@ var wibaf = (function() {
 	
 	function init() {
 		function supportIndexedDB() {
-	        return window.indexedDB;
+		    var isSafari = navigator.vendor.indexOf("Apple")==0 && /\sSafari\//.test(navigator.userAgent);
+	        return window.indexedDB && !isSafari;
 	    };
 	
 	    function parseAdaptationFile(srcs, callback) {

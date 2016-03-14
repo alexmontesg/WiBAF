@@ -42,7 +42,7 @@ var userModel = (function UMEngine() {
         function toServerProperties(object, callback) {
             rules.getInstance().getRule("default", function(generalRule) {
                 if (generalRule) {
-                    switch (generalRule.value) {
+                    switch (generalRule.value.toString()) {
                     case "1":
                         object["server"] = false;
                         if (callback) {
@@ -100,7 +100,7 @@ var userModel = (function UMEngine() {
         }
 
         function init(name, value, type, url, feedback, domain, callback) {
-            name = name.replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
+            name = name.replace(/\s+/g, "-").replace(/[^a-z0-9-]/gmi, "").trim().toLowerCase();
             database.get(name, "user_model", function(stored) {
                 if (!stored || stored === null) {
                     var object = {
@@ -191,6 +191,19 @@ var userModel = (function UMEngine() {
                 }
             });
         }
+        
+        function setServer(UMvar, value, callback) {
+            database.update(UMvar, "server", value, "user_model", callback);
+            if(value) {
+                database.get(UMvar, "user_model", function(item) {
+                    if (item) {
+                        serverAPI.add(item);
+                    }
+                });
+            } else {
+                serverAPI.remove(UMvar);
+            }
+        }
 
         function updateServerValues(callback) {
             getAll(function(vars) {
@@ -218,6 +231,10 @@ var userModel = (function UMEngine() {
                 }
             });
         }
+        
+        function setUnchanged(item) {
+            database.update(item, "changed", false, "user_model");
+        }
 
         return {
             inc : inc,
@@ -234,7 +251,9 @@ var userModel = (function UMEngine() {
             init : init,
             init_update : initUpdate,
             init_if_blank : initIfBlank,
-            updateServerValues : updateServerValues
+            updateServerValues : updateServerValues,
+            setServer : setServer,
+            setUnchanged: setUnchanged
         };
     }
 

@@ -16,7 +16,7 @@ var databaseFactory = (function DatabaseFactory() {
 		     */
 			createDatabase: function(options) {
 			    if(!options.useIndexedDB) {
-			        database = LocalStorageAPI().getInstance(options.callback);
+			        database = LocalStorageAPI().getInstance();
 			    }
 				return options.useIndexedDB ? IndexedDBAPI().getInstance(options.callback) : LocalStorageAPI().getInstance(options.callback);
 			}

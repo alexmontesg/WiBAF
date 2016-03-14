@@ -1,0 +1,7 @@
+.entry-content {
+    slide_view: intro, background, voice, cachopo, relevance, call-to-action, tips, additional;
+}
+
+a[href=#background] {
+    delete_class: test;
+}

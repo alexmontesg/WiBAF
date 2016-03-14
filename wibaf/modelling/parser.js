@@ -96,7 +96,7 @@ var modellingParser = (function ModellingParser() {
 		
 		function addEventListenerToNode(jsSelector, args, eventListener) {
 		    var domNode = new Function("return " + jsSelector + ";").call();
-		    if (Object.prototype.toString.call(domNode) === "[object HTMLCollection]") {
+		    if (Object.prototype.toString.call(domNode) === "[object HTMLCollection]" || Object.prototype.toString.call(domNode) === "[object NodeList]") {
                 for (var i = 0; i < domNode.length; i++) {
                     args.queue.push(jsSelector + "[" + i + "].addEventListener(" + eventListener + ");");
                 }
@@ -273,7 +273,7 @@ var modellingParser = (function ModellingParser() {
 				}
 			}, 
 			addVisit : function(callback) {
-			    var varName = (document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase();
+			    var varName = (document.title + "-accessed").replace(/\s+/g, "-").replace(/[^a-z0-9-]/gmi, "").trim().toLowerCase();
 			    userModel.getInstance().get(varName, function(value) {
 			        if(value) {
 			            userModel.getInstance().inc(varName, callback);
