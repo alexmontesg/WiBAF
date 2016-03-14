@@ -44,12 +44,15 @@ function getFeatures(featureString) {
 	});
 	var features = {};
 	for (var i = 0; i < featuresArray.length; i++) {
-		var feature = featuresArray[i].toLowerCase().split(":");
-		if (feature.length === 2) {
-			features[feature[0].trim()] = feature[1].trim();
-		} else {
-			console.warn("Invalid feature detected: " + featuresArray[i]);
-		}
+	    var andFeatures = featuresArray[i].toLowerCase().split(" and ");
+	    for (var j = 0; j < andFeatures.length; j++) {
+	        var feature = andFeatures[j].toLowerCase().split(":");
+            if (feature.length === 2) {
+                features[feature[0].trim()] = feature[1].trim();
+            } else {
+                console.warn("Invalid feature detected: " + featuresArray[i]);
+            }
+	    }
 	}
 	return features;
 }
@@ -93,6 +96,12 @@ function correctTest(formId) {
 		}
 		e.parentNode.appendChild(feedback);
 	});
-	userModel.getInstance().update(formId, (correct / total).toFixed(2));
+	userModel.getInstance().get(formId, function(item, value) {
+                if(item) {
+                    userModel.getInstance().update(formId, value);
+                } else {
+                    userModel.getInstance().init(formId, value, "numeric"); //TODO Add the other parameters
+                }
+            }, (correct / total).toFixed(2));
 	return false;
 }

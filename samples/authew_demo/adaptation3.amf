@@ -1,0 +1,47 @@
+@user(question1: y) {
+	.notDisclose {
+		display: none;
+	}
+}
+
+@user(question1: n) {
+	.notDisclose {
+		display: block;
+	}
+}
+
+@user(question2: y) {
+	.moreInfo {
+		display: block;
+	}
+}
+
+@user(question2: n) {
+	.moreInfo {
+		display: none;
+	}
+}
+
+@user(question3: y) {
+	#diagnosis {
+		display: none;
+	}
+}
+
+@user(question3: n) {
+	#diagnosis {
+		display: block;
+	}
+}
+
+@user(question4: y) {
+	#next {
+		update-attribute: href,interview.html;
+	}
+}
+
+@user(question4: n) {
+	#next {
+		update-attribute: href,theory.html;
+	}
+}

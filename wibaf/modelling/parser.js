@@ -86,8 +86,8 @@ var modellingParser = (function ModellingParser() {
 		
 		function addConditionOrCollection(toAdd, isCondition) {
 		    if (toAdd && toAdd.trim().length > 0) {
-                toAdd = toAdd.replace(/(^|[\s+\.])this./g, function(str) {
-                    return str.replace("this", "e.currentTarget");
+                toAdd = toAdd.replace(/(^|[\s+\.\[\]])this./g, function(str) {
+                    return str.replace(/this/g, "e.currentTarget");
                 }).trim();
                 return isCondition ? "if(!(" + toAdd + ")) return;" : toAdd.replace(/:/g, "=") + ";";
             }
@@ -96,11 +96,11 @@ var modellingParser = (function ModellingParser() {
 		
 		function addEventListenerToNode(jsSelector, args, eventListener) {
 		    var domNode = new Function("return " + jsSelector + ";").call();
-		    if (Object.prototype.toString.call(domNode) === "[object HTMLCollection]") {
+		    if (Object.prototype.toString.call(domNode) === "[object HTMLCollection]" || Object.prototype.toString.call(domNode) === "[object NodeList]") {
                 for (var i = 0; i < domNode.length; i++) {
                     args.queue.push(jsSelector + "[" + i + "].addEventListener(" + eventListener + ");");
                 }
-            } else {
+            } else if (Object.prototype.toString.call(domNode) !== "[object Null]") {
                 args.queue.push(jsSelector + ".addEventListener(" + eventListener + ");");
             }
 		}
@@ -109,7 +109,8 @@ var modellingParser = (function ModellingParser() {
 			var arr = args.currentEvent.trigger.split(".");
 			var eventTrigger = arr.pop().trim();         // E.g. click, mouseover, load, etc...
 			var jsSelector = arr.join(".");              // Javascript selector
-			args.eventFunctionName = ("_event" + (jsSelector + eventTrigger).hashCode()).replace("-", "_");
+			args.eventFunctionName = ("_event" + (jsSelector + eventTrigger).hashCode() + "_" + args.nEvents).replace("-", "_");
+			args.nEvents++;
 			addEventListenerToNode(jsSelector, args, "'" + eventTrigger + "', function(e){" + args.eventFunctionName + "(e);}, false");
 			args.queue.push("var " + args.eventFunctionName + " = function(e){");
 			var toPush = [addConditionOrCollection(args.currentEvent.condition, true), addConditionOrCollection(args.currentEvent.valCollection, false)];
@@ -122,6 +123,7 @@ var modellingParser = (function ModellingParser() {
 		}
 
 		function addEndFunctionCallToQueue(token, args) {
+			args.queue.push(", function(){wibaf.getInstance().refresh();}");
 			args.queue.push(");");
 			return 1;
 		}
@@ -229,7 +231,12 @@ var modellingParser = (function ModellingParser() {
 			    "inc" : new Transition(addFunctionNameToQueue, "op"),
 			    "dec" : new Transition(addFunctionNameToQueue, "op"),
 			    "update" : new Transition(addFunctionNameToQueue, "op"),
-			    "add_obs" : new Transition(addFunctionNameToQueue, "op")
+			    "add_obs" : new Transition(addFunctionNameToQueue, "op"),
+			    "init" : new Transition(addFunctionNameToQueue, "op"),
+			    "init_if_blank" : new Transition(addFunctionNameToQueue, "op"),
+			    "init_update" : new Transition(addFunctionNameToQueue, "op"),
+			    "add" : new Transition(addFunctionNameToQueue, "op"),
+			    "sub" : new Transition(addFunctionNameToQueue, "op"),
 			}),
 			"op" : new State({
 			    ";" : new Transition(addEndFunctionCallToQueue, "on3"),
@@ -249,7 +256,8 @@ var modellingParser = (function ModellingParser() {
 					currentEvent : null,
 					eventFunctionName : null,
 					eventsToCall : [],
-					script : script
+					script : script,
+					nEvents : 0
 				};
 				while (args.tokens.length > 0) {
 					var token = args.tokens[0];
@@ -264,8 +272,16 @@ var modellingParser = (function ModellingParser() {
 					window[args.eventsToCall[i]].apply(window);        // The onLoad events are executed inmediately
 				}
 			}, 
-			addVisit : function() {
-			    userModel.getInstance().inc((document.title + "-accessed").replace(/\s+/g, "-").replace(/[()]/g, "").trim().toLowerCase(), callback);
+			addVisit : function(callback) {
+			    var varName = (document.title + "-accessed").replace(/\s+/g, "-").replace(/[^a-z0-9-]/gmi, "").trim().toLowerCase();
+			    userModel.getInstance().get(varName, function(value) {
+			        if(value) {
+			            userModel.getInstance().inc(varName, callback);
+			        } else {
+			            // TODO Define proper use and url
+			            userModel.getInstance().init(varName, 1, "numeric", document.URL, null, "access", callback);
+			        }
+			    });
 			}
 		};
 	};

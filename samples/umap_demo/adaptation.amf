@@ -1,0 +1,143 @@
+@user(disclosure: n) {
+    a[href$="disclosure.html"] {
+        color: black !important;
+    }
+}
+
+@user(vis-verb: verbal) {
+    .visual-only {
+        display: none;
+    }
+}
+
+@user(vis-verb: visual) {
+    .verbal-only {
+        display: none;
+    }
+}
+
+@user(diagnosis: y) {
+    a[href$="diagnosis.html"] {
+        color: black !important;
+    }
+    
+    .next.theoryII {
+        update-attribute: href,./theoryIII.html;
+    }
+}
+
+@user(act-refl: active) {
+
+    @user(ana-glob: analytic) {
+        @user(disclosure: n) {
+            .next.interview {
+                update-attribute: href,theoryI.html;
+            }
+            
+            @user(ana-glob: global) {
+                .next.needs {
+                    update-attribute: href,../disclosure/theoryI.html;
+                }
+            }
+        }
+        
+        @user(disclosure: y) {
+            .next.interview {
+                update-attribute: href,disclosure.html;
+            }
+            
+            @user(ana-glob: global) {
+                .next.needs {
+                    update-attribute: href,../disclosure/disclosure.html;
+                }
+            }
+        }
+        
+        .next.theoryIII {
+            update-attribute: href,../needs_assesment/needs.html;
+        }
+    }
+    
+    .next.start {
+        update-attribute: href,disclosure/interview.html;
+    }
+    
+}
+
+@user(act-refl: reflective) {
+
+    @user(ana-glob: global) {
+        .next.interview {
+                update-attribute: href,../end.html;
+        }
+        
+        .next.needs {
+                update-attribute: href,../disclosure/theoryII.html;
+        }
+    }
+
+    @user(disclosure: y) {
+        .next.start {
+            update-attribute: href,disclosure/disclosure.html;
+        }
+    }
+    
+    .next.theoryIII {
+        update-attribute: href,./interview.html;
+    }
+    
+}
+
+@user(ana-glob: global) {
+    .next.theoryI {
+        update-attribute: href,../needs_assesment/needs.html;
+    }
+}
+
+@user(introduction-accessed-gt: 0) {
+    ul a[href$="course.html"] {
+        color: purple !important;
+    }
+}
+
+@user(diagnosis-accessed-gt: 0) {
+    ul a[href$="diagnosis.html"] {
+        color: purple !important;
+    }
+}
+
+@user(theory-i-accessed-gt: 0) {
+    ul a[href$="theoryI.html"] {
+        color: purple !important;
+    }
+}
+
+@user(theory-ii-accessed-gt: 0) {
+    ul a[href$="theoryII.html"] {
+        color: purple !important;
+    }
+}
+
+@user(theory-iii-accessed-gt: 0) {
+    ul a[href$="theoryIII.html"] {
+        color: purple !important;
+    }
+}
+
+@user(disclosure-accessed-gt: 0) {
+    ul a[href$="disclosure.html"] {
+        color: purple !important;
+    }
+}
+
+@user(interview-accessed-gt: 0) {
+    ul a[href$="interview.html"] {
+        color: purple !important;
+    }
+}
+
+@user(needs-assesment-accessed-gt: 0) {
+    a[href$="needs.html"] {
+        color: purple !important;
+    }
+}

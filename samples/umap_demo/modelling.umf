@@ -1,0 +1,15 @@
+event question = `document.getElementsByClassName('question').click`
+            => `{answer: this.getAttribute("value");
+            question: this.getAttribute("name");}`
+            
+event dropdownQuestion = `document.getElementsByClassName('dropdownQuestion').change`
+            => `{answer: this.options[this.selectedIndex].value;
+            question: this.getAttribute("name");}`
+              
+on question {
+    init_update question, answer, "text", "http://www.example.org/answer", "Answer", "ans";
+}
+
+on dropdownQuestion {
+    init_update question, answer, "text", "http://www.example.org/answer", "Answer", "medical";
+}

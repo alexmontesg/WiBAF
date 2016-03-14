@@ -1,0 +1,24 @@
+event load = `document.load`
+
+event click_veg = `document.getElementById("vegBtn").click`
+
+event click_not_veg = `document.getElementById("notVegBtn").click`
+
+event click_lang = `document.getElementsByClassName("lang").click` => `{new_lang: this.getAttribute("data-lang")}`
+
+on load {
+    init_if_blank "vegetarian", "f", "boolean", "", "", "personal";
+    init_if_blank "lang", "english", "text", "", "", "demographic";
+}
+
+on click_veg {
+    update "vegetarian", "t";
+}
+
+on click_not_veg {
+    update "vegetarian", "f";
+}
+
+on click_lang {
+    update "lang", new_lang;
+}

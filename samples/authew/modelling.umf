@@ -1,0 +1,16 @@
+event initum = `document.getElementById('submit-pre-questionnaire').click`
+            => `{name:document.getElementById('name').value;
+                language:document.getElementById('language').value;
+                age:document.getElementById('age').value}`
+
+event a = `document.getElementsByClassName('a').mouseover`
+                
+on initum {
+    init "name", name, "text", "http://www.example.org/name", "Used so that we know how to call you", "personal";
+    init "language", language, "text", "http://www.example.org/language", "Used so that we change the text to your language", "demographic";
+    init "age", age, "numeric", "http://www.example.org/age", "Used so that we adapt the images to your age", "demographic";
+}
+
+on a {
+    inc "b";
+}

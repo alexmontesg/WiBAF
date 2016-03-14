@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+   <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+</head>
+<body>
+<header>
+</header>
+<main class="row">
+    <div class="large-8 medium-8 columns">
+<div class="wibaf-not-working">
+        <p><strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF</p>
+    </div>
+
+<h2>Conditional Inclusion of Objects</h2>
+
+<p>
+AHA! 3.0 introduces a new use of the standard XHTML
+<tt>object</tt> tag: the conditional inclusion of (XML) files.
+Unlike with the <a href="headerfooter.xhtml" class="conditional">headers
+and footers</a> that are unconditionally included, the
+<tt>object</tt> tag with <tt>aha/text</tt> type.
+An example:
+<pre>
+&lt;object name="tutorial.conditionalobject" type="aha/text"&gt;
+</pre>
+</p>
+
+<p>
+The <tt>conditionalobject</tt> must be the name of a concept
+belonging to the application <tt>tutorial</tt>.
+Using the authoring tools you can create Boolean expressions
+that determine which file will be included in the page,
+at the place where the
+<tt>object</tt> tag appears in the source.
+</p>
+
+<p>
+A conditionally included file (through the <tt>object</tt> tag)
+must be an XML fragment with one root element. It is inserted
+into the parse stream of the page in which it is included.
+The file may contain <tt>object</tt> tags itself, causing more
+conditionally included objects to be considered.
+</p>
+
+<p>
+When an object is included, the access to its concept causes the
+<if expr="AHAtutorialLS.DomainAdaptationModel.knowledge&gt;50">
+<block>
+event-condition-action rules
+</block>
+<block>
+adaptation rules
+</block>
+</if>
+associated with that concept to be triggered.
+This generates <a href="usermodel.xhtml" class="conditional">user model</a>
+updates, that in turn influence how the remainder of the page is adapted.
+When these rules not only evaluate which file to include but indeed do
+generate user model updates, it can cause strange adaptation effects
+because the part of the page above the object and the part below
+the object are adapted to a different user model state.
+</p>
+</div></main>
+</body>
+</html>

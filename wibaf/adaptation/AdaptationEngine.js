@@ -5,7 +5,7 @@
  */
 var AdaptationEngine = function() {
 	function getContent(arg) {
-		var div = $("<div>", {
+		var div = $("<span>", {
 			class : "wibafGenerated"
 		});
 		if (isUrl(arg)) {
@@ -36,11 +36,32 @@ var AdaptationEngine = function() {
          * @param {Object} selector
          * @param {Object} arg - Name of the user model variable
          */
-		insert_um : function(selector, arg) {
-			userModel.getInstance().get(arg, function(item) {
-				$(selector).html(item.value);
-			});
-		},
+        insert_um : function(selector, arg) {
+            userModel.getInstance().get(arg, function(item) {
+                $(selector).html(item.value);
+            });
+        },
+        
+        /**
+         * Inserts the user model value of the specified variable in the selected node
+         * 
+         * @param {Object} selector
+         * @param {Object} arg - domain col_separator
+         */
+        insert_um_table : function(selector, arg) {
+            arg = arg.split(" ");
+            userModel.getInstance().getDomain(arg[0], arg[1], function(items) {
+                var table = $(selector)[0];
+                for(var i = 0; i < items.length; i++) {
+                    var row = table.insertRow(-1);
+                    var item = items[i];
+                    for(var j = 0; j < item.value.length; j++) {
+                        var cell = row.insertCell(-1);
+                        cell.innerHTML = item.value[j];
+                    }
+                }
+            });
+        },
 		
         /**
          * Appends HTML code to the selected node.
@@ -120,26 +141,25 @@ var AdaptationEngine = function() {
 		reorder_nodes : function(selector, arg) {
 			var strategies = {
 				data_order : function(selector) {
-					for (var i = 0; i < $(selector).length; i++) {
-						var nodes = [];
-						var unorderedNodes = [];
-						$($(selector)[i]).children().each(function(index) {
-							if ($(this).data("order")) {
-								nodes[parseInt($(this).data("order")) - 1] = this.outerHTML;
-							} else {
-								unorderedNodes.push(this.outerHTML);
-							}
-						});
-						var html = "";
-						nodes.forEach(function(item) {
-							html += item;
-						});
-						unorderedNodes.forEach(function(item) {
-							html += item;
-						});
-						$($(selector)[i]).html(html);
-					}
-				}
+                    for (var i = 0; i < $(selector).length; i++) {
+                        var nodes = [];
+                        var unorderedNodes = [];
+                        $($(selector)[i]).children().each(function(index) {
+                            if ($(this).data("order")) {
+                                nodes[parseInt($(this).data("order")) - 1] = this;
+                            } else {
+                                unorderedNodes.push(this);
+                            }
+                        });
+                        $($(selector)[i]).empty();
+                        nodes.forEach(function(item) {
+                          $($(selector)[i]).append(item);
+                        });
+                        unorderedNodes.forEach(function(item) {
+                          $($(selector)[i]).append(item);
+                        });
+                    }
+                }
 			};
 			
 			var strategy = arg.trim().toLowerCase().replace(/-/g, "_");
@@ -157,6 +177,95 @@ var AdaptationEngine = function() {
 			$(selector).text($(selector).text().trim().slice(0, parseInt(arg)));
 		},
 		
+		stretchtext : function(selector, arg) {
+            args = arg.split(',');
+            amount = parseInt(args[0].trim());
+            handlerMore = args[1].trim();
+            handlerLess = args[2].trim();
+            classname = args[3].trim();
+            hashAnchor = args[4].trim();
+            var item = $(selector)[0];
+            if(!item || item.children.length == 0) {
+                return;
+            }
+            var children = item.children;
+            for(var i = 0; i < children.length; i++) {
+                var classNameToAdd = 'wibaf-stretchtext-' + classname;
+                if(children[i].classList.contains(classNameToAdd) || children[i].classList.contains('wibaf-short-stretchtext-' + classname)) {
+                    return;
+                } else if(children[i].className.length > 0) {
+                    classNameToAdd = ' ' + classNameToAdd;
+                }
+                children[i].className = children[i].className + classNameToAdd;
+                children[i].style.display = 'none';
+            }
+
+            var shortText = $(selector).text();
+            while (shortText.charAt(amount) != ' ') {
+                amount++;
+            }
+            amount++;
+            shortText = shortText.trim().slice(0, amount);
+            var p = document.createElement('p');
+            p.className = 'wibaf-short-stretchtext-' + classname;
+            p.innerHTML = shortText;
+            var a = document.createElement('a');
+            a.setAttribute('data-altText', handlerLess);
+            a.setAttribute('data-handlerFor', classname);
+            a.innerHTML = handlerMore;
+            a.href = '#' + hashAnchor;
+            a.onclick = function() {
+                var items = document.getElementsByClassName('wibaf-stretchtext-' + this.dataset.handlerfor);
+                var shortItem = document.getElementsByClassName('wibaf-short-stretchtext-' + this.dataset.handlerfor)[0];
+                if(items[0].style.display == 'none') {
+                    for(var i = 0; i < items.length; i++) {
+                        items[i].style.display = '';
+                    }
+                    shortItem.style.display = 'none';
+                } else {
+                    for(var i = 0; i < items.length; i++) {
+                        items[i].style.display = 'none';
+                    }
+                    shortItem.style.display = '';
+                }
+                altText = this.dataset.alttext;
+                a.setAttribute('data-altText', this.innerHTML);                
+                this.innerHTML = altText;
+            };
+            $(selector).append(p);
+            $(selector).append(a);
+        },
+        
+        slide_view : function(selector, arg) {
+            var nodes = [];
+            var slides = arg.split(",");
+            slides.forEach(function(val) {
+                var node = $(selector + " #" + val.trim());
+                if (node.length === 1) {
+                    nodes.push(node);
+                }
+            });
+            nodes.forEach(function(val, i) {
+                if(nodes[i - 1]) {
+                    val.hide();
+                    if(val.children('.wibaf_slide_link_.prev').length === 0) {
+                        val.append("<a href='#" + nodes[i - 1].attr('id') + "' class='wibaf_slide_link_ prev'>Previous</a>");
+                    }
+                }
+                if(nodes[i + 1]) {
+                    if(val.children('.wibaf_slide_link_.next').length === 0) {
+                        val.append("<a href='#" + nodes[i + 1].attr('id') + "' class='wibaf_slide_link_ next'>Next</a>");
+                    }
+                }
+            });
+            $('.wibaf_slide_link_').click(function() {
+                nodes.forEach(function(val) {
+                    val.hide();
+                });
+                $($(this).attr('href')).show();
+            });
+        },
+		
 		/**
          * Sets the degree-of-interest of the selected nodes
          * @param {Object} selector
@@ -172,9 +281,17 @@ var AdaptationEngine = function() {
          * @param {Object} arg - attribute_name, new_value
          */
 		update_attribute : function(selector, arg) {
-			arg = arg.split(",");
-			$(selector).attr(arg[0].trim(), arg[1].trim());
-		},
+            arg = arg.split(",");
+            $(selector).attr(arg[0].trim(), arg[1].trim());
+        },
+        
+        add_class : function(selector, arg) {
+            $(selector).addClass(arg.trim());
+        },
+        
+        delete_class : function(selector, arg) {
+            $(selector).removeClass(arg.trim());
+        },
 		
 		/**
          * Deletes the selected node
@@ -190,6 +307,29 @@ var AdaptationEngine = function() {
 				$(selector).remove();
 			}
 		},
+		
+        check_prerequisites : function(selector, arg) {
+            arg = arg.split(",");
+            selector = selector.trim();
+            sel = arg[0].trim();
+            suffix = arg[1].trim();
+            var i = 0;
+            $.makeArray($(sel)).forEach(function(link) {
+                i++;
+                link.id = "pre_req_link-" + i;
+                link = $(link);
+                linkText = link.text().trim().toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/gmi, "") + suffix + "-accessed";
+                userModel.getInstance().get(linkText, function(val, arr) {
+                    if(val && val.value > 0) {
+                        $("#" + arr[0].trim()).remove();
+                        if($(arr[1] + " " + arr[2]).length === 0) {
+                            $(arr[1]).remove();
+                        }
+                    }
+                }, [link.attr('id'), selector, sel]);
+                
+            });
+        },
 		
 		/**
          * Inserts a test in the selected node
@@ -232,6 +372,7 @@ var AdaptationEngine = function() {
 					for (a in data[q].a) {
 						if(data[q].a[a].c && one) {
 								multi = true;
+								break;
 						} else if(data[q].a[a].c) {
 								one = true;
 						}

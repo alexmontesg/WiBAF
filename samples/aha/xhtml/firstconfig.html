@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../../third-party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" href="../../third-party-libs/foundation/css/foundation.min.css">
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <link rel="stylesheet" href="../style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../../third-party-libs/foundation/js/vendor/modernizr.js"></script>
+        <title>firstconfig</title>
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <main class="row">
+            <div class="panel large-4 medium-4 columns">
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="large-8 medium-8 columns">
+<div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>Configuring AHA! (for the first time)</h2>
+            <p>
+                We assume that you have the TomCat server
+                <span class="hide-ahacontext-visited"> (for instance Sun's version JWDSP from <a href="http://java.sun.com/webservices/downloads/webservicespack.html"
+                    target="_blank">http://java.sun.com/webservices/downloads/webservicespack.html</a>) </span>
+                installed and running, and that you have
+                <a href="ahacontext.xhtml" class="conditional">created a "context"</a>
+                for AHA!, with "/aha" as pathname.
+            </p>
+            <p>
+                Configuring AHA! consists of the following steps:
+            </p>
+            <div id="firstconfig">
+
+            </div>
+            <p>
+                After these steps AHA! is ready to be used. AHA! is now ready to be used. It contains this <a href="/aha/AHAtutorialLS/" target="_blank"
+                class="unconditional">AHA! tutorial</a> as an example
+                adaptive hyperdocument. It uses a set of XML files to store the concept information and the
+                user profiles. To change the AHA! configuration so that it uses
+                the <a href="http://www.mysql.com/" target="_blank">mySQL</a>
+                you can click on the "Configure Database" link to create
+                the database.
+            </p>
+        </div></main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script><script type="text/javascript" src="../../../wibaf/util/ServerAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                wibaf.getInstance().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

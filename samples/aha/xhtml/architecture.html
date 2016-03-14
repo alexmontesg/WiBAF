@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="../../third-party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" href="../../third-party-libs/foundation/css/foundation.min.css">
+        <link href="../adaptation.amf" rel="prefetch" type="text/amf" title="AM" />
+        <link rel="stylesheet" href="../style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../../third-party-libs/foundation/js/vendor/modernizr.js"></script>
+        <title>architecture</title>
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <main class="row">
+            <div class="panel large-4 medium-4 columns">
+                <nav id="menu">
+                </nav>
+            </div>
+            <div class="large-8 medium-8 columns">
+<div class="wibaf-not-working">
+                <p>
+                    <strong>Warning: </strong> If you see this text, it means you are not viewing the page with WiBAF
+                </p>
+            </div>
+            <h2>AHA! Adaptive Hypermedia Architecture</h2>
+            <h3>Main characteristics:</h3>
+            The AHA! system, developed in our university, is a general-purpose adaptive web server extension. It offers adaptive presentation as well as adaptive navigation support.
+            <li>
+                The adaptive presentation is done through the conditional inclusion of fragments or objects. This is a low level but very powerful adaptation technique.
+            </li>
+            <li>
+                Adaptive navigation support is offered by changing the colors of link anchors. This results in link hiding or link annotation depending on the choice of colors
+            </li>
+            <li>
+                AHA! can not only perform adaptation on pages that are stored on the local server but also on pages from other servers.
+            </li>
+            <li>
+                The pages can be in html, xhtml or other xml formats. In this course we will use xhtml and smil as page formats.
+            </li>
+            <li>
+                The user model in AHA! is flexible in the sense that it can contain arbitrarily many concepts and each concept can have arbitrarily many attributes. But the attributes are of simple types, so recursive structures are not possible.
+            </li>
+            <li>
+                AHA! uses event-condition-action rules to perform user model updates. The rules can optionally trigger each other. This results in a powerful rule system, with the additional danger of termination and confluence problems.
+            </li>
+            <li>
+                Defining the user model updates and adaptation through these low level rules is difficult. AHA! therefore offers a graphical authoring tool to define concept relationships like prerequisites. These relationships are translated into the ECA rules by a compiler.
+            </li>
+            <li>
+                AHA! also contains some extra functionality, like a forms editor and the ability to generate multiple-choice tests. These features only work with html-based applications.
+            </li>
+            <li>
+                We will discuss all the aspects of the AHA! system in detail, first of all because this tells you everything about how this adaptive hypermedia system works, but also because you should learn how to create an adaptive hypermedia application using the AHA! system.
+            </li>
+            AHA! architecture is presented on the figure:
+            <img src="../images/AHA_architecture.gif" />
+            <p>
+                The following users are interacting with the system:
+            </p>
+            <li>
+                <b>Manager</b>
+            </li>
+            <li>
+                <b>Author</b>
+            </li>
+            <li>
+                <b>End-user</b>
+            </li>
+            <p>
+                AHA! provides two authoring tools for creating the Domain/Adaptation model:
+            </p>
+            <li>
+                low-level ConceptEditor
+            </li>
+            <li>
+                high-level GraphAuthor
+            </li>
+        </div></main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/LocalStorageAPI.js"></script><script type="text/javascript" src="../../../wibaf/util/ServerAPI.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="../../third-party-libs/foundation/js/foundation/foundation.accordion.js"></script>
+        <script>
+
+
+            $(function() {
+
+                wibaf.getInstance().init(function() {
+                    $(document).foundation();
+                });
+            });
+        </script>
+
+    </body>
+</html>

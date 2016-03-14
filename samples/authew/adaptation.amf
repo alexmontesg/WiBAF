@@ -1,0 +1,24 @@
+#quizz {
+    insert-test: ../questions.php 1 test-friendship Submit;
+}
+
+@user(age-lt: 16) {
+    img[alt="People jumping"] {
+        update-attribute: src, ../../img/authew/kids_jumping.jpg;
+    }
+}
+
+@user(language: es) {
+    .ember {
+        insert: Aida;
+    }
+    .crane {
+        insert: Pelayo;
+    }
+}
+
+@user(start-here---the-teenage-years-accessed-gt: 1) {
+    .hide-start-more-than-one {
+        display: none;
+    }
+}

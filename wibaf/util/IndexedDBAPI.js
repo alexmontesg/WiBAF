@@ -17,8 +17,11 @@ var IndexedDBAPI = function() {
 
 		function add(args, collection, callback) {
 			args.times_updated = 1;
+			args.change = true;
 			args.last_updated = new Date().getTime();
-			db.transaction([collection], "readwrite").objectStore(collection).add(args).onsuccess = function() {
+			var trans = db.transaction([collection], "readwrite");
+			trans.objectStore(collection).add(args);
+			trans.oncomplete = function() {
 				if (callback) {
 					callback();
 				}
@@ -39,6 +42,7 @@ var IndexedDBAPI = function() {
 			get(name, collection, function(data) {
 				data[field] = new_value;
 				data.times_updated++;
+				data.changed = field != "changed";
 				data.last_updated = new Date().getTime();
 				trans = db.transaction([collection], "readwrite");
 				trans.objectStore(collection).put(data);
@@ -49,6 +53,25 @@ var IndexedDBAPI = function() {
 				};
 			});
 		};
+		
+		function getDomain(domain, separator, collection, callback) {
+            if (callback) {
+                var items = [];
+                db.transaction([collection], "readonly").objectStore(collection).openCursor().onsuccess = function(e) {
+                    var cursor = e.target.result;
+                    if (cursor) {
+                        var item = cursor.value;
+                        if(item.domain === domain) {
+                            item.value = item.value.split(separator);
+                            items.push(item);
+                        }
+                        cursor.continue();
+                    } else {
+                        callback(items);
+                    }
+                };
+            }
+        };
 		
 		function getAll(collection, callback) {
 			if (callback) {
@@ -79,8 +102,8 @@ var IndexedDBAPI = function() {
 		};
 		
 		function createDB(callback) {
-			var req = indexedDB.open("WiBAF", 1);
-			req.onsuccess = function(e) {
+			var req = window.indexedDB.open("WiBAF", 1);
+			req.onsuccess = function(event) {
 				db = req.result;
 				db.onerror = onError;
 				callback();
@@ -88,7 +111,6 @@ var IndexedDBAPI = function() {
 			req.onupgradeneeded = function(e) {
 				if (!db) {
 					db = req.result;
-					callback();
 				}
 				var collections = ["user_model", "settings"];
 				for(var i = 0; i < collections.length; i++) {
@@ -110,6 +132,7 @@ var IndexedDBAPI = function() {
 			remove : remove,
 			update : update,
 			get : get,
+			getDomain : getDomain,
 			getAll : getAll,
 			removeAll : removeAll
 		};

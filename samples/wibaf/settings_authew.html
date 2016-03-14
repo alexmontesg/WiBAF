@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Scrutability and privacy settings</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <h1>Settings</h1>
+
+        <main>
+            <div>
+                <h2>Your current configuration</h2>
+                <form>
+                    Privacy
+                    <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="3"/>
+                    Personalization
+                </form>
+                    <p id="privacyExplanation">
+                        
+                    </p>
+            </div>
+            <div>
+                <h2>This is what we know about you</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> Variable </th>
+                            <th> Value </th>
+                            <th> Feedback </th>
+                            <th> Stored in </th>
+                            <th> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>visual</td>
+                            <td>1</td>
+                            <td>This is used to indicate whether the user is visual (values bigger than 0) or verbal (values lower than 0)</td>
+                            <td> </td>
+                            <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                        </tr>
+                        <tr>
+                            <td>global</td>
+                            <td>-5</td>
+                            <td>This is used to indicate whether the user is global (values bigger than 0) or analytic (values lower than 0)</td>
+                            <td> </td>
+                            <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                        </tr>
+                        <tr>
+                            <td>active</td>
+                            <td>3</td>
+                            <td>This is used to indicate whether the user is active (values bigger than 0) or reflective (values lower than 0)</td>
+                            <td> </td>
+                            <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#"> Delete all </a>
+            </div>
+        </main>
+
+        <script>
+            privacyLevels = ["No data is tracked. No personalization is offered. (You can delete your current user model using the button below).", "Data is stored in your machine. Some personalization is offered.", "Custom. Data is stored on both sides depending on the rules you define below", "Data is stored in our servers. Full personalization is offered."];
+            
+            function updateMainSlider() {
+                var level = document.getElementById("privacyvspersonalization").value;
+                document.getElementById("privacyExplanation").innerText = privacyLevels[level];
+                var rows = document.getElementsByTagName("tbody")[0].children;
+                for(var i = 0; i < rows.length; i++) {
+                    if(level == 1) {
+                        rows[i].children[3].innerHTML = "Client";
+                    } else if (level == 2) {
+                        if(Math.random() > 0.5) {
+                            rows[i].children[3].innerHTML = "Client <a href='#'>Move to server</a>";
+                        } else {
+                            rows[i].children[3].innerHTML = "Server <a href='#'>Move to client</a>";
+                        }
+                    } else if (level == 3) {
+                        rows[i].children[3].innerHTML = "Server";
+                    }
+                }
+            }
+            
+            (function() {
+                updateMainSlider();
+                document.getElementById("privacyvspersonalization").onchange = function(e) {
+                    updateMainSlider();
+                };
+            })();
+        </script>
+    </body>
+</html>

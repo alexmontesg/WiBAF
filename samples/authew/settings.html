@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Scrutability and privacy settings</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/datetimepicker/jquery.datetimepicker.css"/ >
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/foundation/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../third-party-libs/foundation/css/foundation.min.css">
+        <link href="modelling.umf" rel="prefetch" type="text/umf" title="UM" />
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Laila' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:700' rel='stylesheet' type='text/css'>
+        <script src="../third-party-libs/foundation/js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="./">The Teenage Years</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">Menu</a>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <section class="top-bar-section">
+                <ul class="right">
+                    <li>
+                        <a href="./start_here/">Start Here</a>
+                    </li>
+                    <li>
+                        <a href="./all_change/">All Change!</a>
+                    </li>
+                    <li>
+                        <a href="#">Settings</a>
+                    </li>
+                </ul>
+            </section>
+                </ul>
+            </section>
+        </nav>
+
+        <header>
+            <div class="row">
+                <h2>Privacy settings</h2>
+            </div>
+        </header>
+
+        <div id="main">
+            <div class="row">
+                <h3>Your current configuration</h3>
+                <div class="large-8 medium-10 columns large-centered medium-centered">
+                    <form>
+                        Privacy
+                        <input type="range" id="privacyvspersonalization" name="privacyvspersonalization" min="0" max="3"/>
+                        Personalization
+                    </form>
+                    <p id="privacyExplanation"></p>
+                </div>
+            </div>
+            <div id="divToServer" class="row">
+                <div id="panelAdvanced" class="content">
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="row">
+                                <fieldset>
+                                    <legend>
+                                        Send some data to the server
+                                    </legend>
+                                    <div class="small-12 large-7 columns">
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Type of data
+                                            </div>
+                                            <div class="row">
+                                                <select id="type" name="type">
+                                                    <option value="music">Data from the music domain</option>
+                                                    <option value="art">Data from the art domain</option>
+                                                    <option value="demographic">Demographic data</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Accuracy
+                                            </div>
+                                            <div class="row collapse">
+                                                <div class="small-9 columns">
+                                                    <input type="number" id="accuracy" name="accuracy" min="0" max="100" value="100"/>
+                                                </div>
+                                                <div class="small-3 columns">
+                                                    <span class="postfix">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 large-4 columns">
+                                            <div class="row">
+                                                Use of data
+                                            </div>
+                                            <div class="row">
+                                                <select id="use" name="use">
+                                                    <option value="1">Personalization of content inside this website</option>
+                                                    <option value="2">Personalization of advertisment inside this website</option>
+                                                    <option value="3">Uses different than personalization inside this website</option>
+                                                    <option value="4">Sharing with third parties</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                            <a href="javascript:void(addRule())" class= "tiny button expand"> Add rule </a>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 large-5 columns">
+                                        <div class="panel callout radius">
+                                            <h4>Current rules</h4>
+                                            <ul id="toServer">
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="divTracking" class="row">
+                <div id="panelTracking" class="content">
+                    <div class="row">
+                        <div class="small-12 large-12 columns">
+                            <div class="row">
+                                <fieldset>
+                                    <legend>
+                                        Do not track me in the following situations
+                                    </legend>
+                                    <div class="small-12 large-7 columns">
+                                        <div class="small-12 large-6 medium-6 columns">
+                                            <label for="from">From</label>
+                                            <input id="from" class="dateTimePicker" type="text" >
+                                        </div>
+                                        <div class="small-12 large-6 medium-6 columns">
+                                            <label for="to">To</label>
+                                            <input id="to" class="dateTimePicker" type="text" >
+                                        </div>
+                                        <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                            <a href="javascript:void(addNotTrackRule())" class= "tiny button expand"> Add rule </a>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="small-12 large-6 medium-6 columns">
+                                                <input type="checkbox" value="su" id="su" />
+                                                <label for="su">Sunday</label>
+                                                <br/>
+                                                <input type="checkbox" value="m" id="m" />
+                                                <label for="m">Monday</label>
+                                                <br/>
+                                                <input type="checkbox" value="tu" id="tu" />
+                                                <label for="tu">Tuesday</label>
+                                                <br/>
+                                                <input type="checkbox" value="w" id="w" />
+                                                <label for="w">Wednesday</label>
+                                                <br/>
+                                                <input type="checkbox" value="th" id="th" />
+                                                <label for="th">Thursday</label>
+                                                <br/>
+                                                <input type="checkbox" value="f" id="f" />
+                                                <label for="f">Friday</label>
+                                                <br/>
+                                                <input type="checkbox" value="sa" id="sa" />
+                                                <label for="sa">Saturday</label>
+                                            </div>
+                                            <div class="small-12 large-6 medium-6 columns">
+                                                <label for="fromPeriod">From</label>
+                                                <input id="fromPeriod" class="timePicker" type="text" >
+                                                <label for="toPeriod">To</label>
+                                                <input id="toPeriod" class="timePicker" type="text" >
+                                            </div>
+                                            <div class="small-12 medium-8 large-4 large-offset-8 medium-offset-4 columns">
+                                                <a href="javascript:void(addNotTrackPeriodRule())" class= "tiny button expand"> Add rule </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="small-12 large-5 columns">
+                                        <div class="panel callout radius">
+                                            <h4>Current rules</h4>
+                                            <ul id="notTrackList">
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3>This is what we know about you</h3>
+                <table id="userModel">
+                    <thead>
+                        <tr>
+                            <th> Variable </th>
+                            <th> Value </th>
+                            <th> Stored in </th>
+                            <th> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="small-12 medium-4 large-2 large-offset-10 medium-offset-8 columns">
+                    <a href="#" class= "button expand" onclick="deleteAll()"> Delete all </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="row">
+                <h4>With the collaboration of</h4>
+                <a href="http://www.tue.nl/"><img src="../img/logo-tue.png" alt="TU Eindhoven"/></a>
+                <a href="http://adversitement.com/"><img src="../img/adversitement.png" alt="Adversitement"/></a>
+            </div>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../third-party-libs/datetimepicker/jquery.datetimepicker.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/util.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/AdaptationEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/ContextHelper.js"></script>
+        <script type="text/javascript" src="../../wibaf/adaptation/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/domain/loadDomain.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/parser.js"></script>
+        <script type="text/javascript" src="../../wibaf/modelling/UMEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/DatabaseFactory.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/IndexedDBAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/LocalStorageAPI.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/rule.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/RulesManager.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/SettingsEngine.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/state.js"></script>
+        <script type="text/javascript" src="../../wibaf/util/stringManipulation.js"></script>
+        <script type="text/javascript" src="../../wibaf/wibaf.js"></script>
+        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="../third-party-libs/foundation/js/foundation/foundation.topbar.js"></script>
+        <script>
+            privacyLevels = ["No data is tracked. No personalization is offered. (You can delete your current user model using the button below).", "Data is stored in your machine. Some personalization is offered.", "Custom. Data is stored on both sides depending on the rules you define below", "Data is stored in our servers. Full personalization is offered."];
+
+            function deleteUM(itemName) {
+                userModel.getInstance().remove(itemName, updateTable);
+            }
+
+            function editUM(itemName) {
+                userModel.getInstance().update(itemName, document.getElementById("newValue").value, updateTable);
+            }
+
+            function displayInput(itemName) {
+                var td = document.getElementById("row_" + itemName).lastChild;
+                while (td.firstChild) {
+                    td.removeChild(td.firstChild);
+                }
+                var input = document.createElement("input");
+                // TODO If numeric???
+                input.setAttribute("type", "text");
+                input.id = "newValue";
+                td.appendChild(input);
+                td.appendChild(createLinkButton("Save", "editUM", itemName));
+            }
+
+            function deleteAll(itemName) {
+                userModel.getInstance().removeAll(updateTable);
+            }
+
+            function save(callback) {
+                rules.getInstance().addRule(new Rule("default", document.getElementById("privacyvspersonalization").value, "default"), callback);
+            }
+
+            function updateRuleList() {
+                rules.getInstance().getRulesByType("toServer", function(rules) {
+                    var list = document.getElementById("toServer");
+                    while (list.firstChild) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < rules.length; i++) {
+                        var rule = rules[i];
+                        var domain = rule.value.domain;
+                        var accuracy = rule.value.accuracy;
+                        var use = rule.value.use;
+                        var element = document.createElement("li");
+                        element.innerText = "Data from the " + domain + " domain sent to the server with " + accuracy + "% accuracy for use " + use + " ";
+                        var deleteButton = document.createElement("a");
+                        deleteButton.setAttribute("href", "#");
+                        deleteButton.className = "tiny button round";
+                        deleteButton.setAttribute("onclick", "rules.getInstance().deleteRule('" + rule.name + "', deleteRuleCallback);");
+                        deleteButton.innerText = "Delete";
+                        element.appendChild(deleteButton);
+                        list.appendChild(element);
+                    }
+                });
+            }
+
+            function deleteRuleCallback() {
+                updateRuleList();
+                userModel.getInstance().updateServerValues(updateTable);
+            }
+
+            function addRule() {
+                var domain = document.getElementById("type").value;
+                var accuracy = document.getElementById("accuracy").value;
+                var use = parseInt(document.getElementById("use").value);
+                rules.getInstance().addRule(new Rule("toServer_" + domain, {
+                    domain : domain,
+                    accuracy : accuracy,
+                    use : use
+                }, "toServer"), function() {
+                    updateRuleList();
+                    userModel.getInstance().updateServerValues(updateTable);
+                });
+            }
+
+            function addNotTrackRule() {
+                var from = document.getElementById("from").value;
+                var to = document.getElementById("to").value;
+                rules.getInstance().addRule(new Rule(from + to, {
+                    from : from,
+                    to : to
+                }, "doNotTrack"), updateTrackList);
+            }
+
+            function addNotTrackPeriodRule() {
+                var from = document.getElementById("fromPeriod").value;
+                var to = document.getElementById("toPeriod").value;
+                var selectedWeekdays = [];
+                var weekdaysArray = ["su", "m", "tu", "w", "th", "f", "sa"];
+                for (var i = 0; i < weekdaysArray.length; i++) {
+                    var current = weekdaysArray[i];
+                    if (document.getElementById(current).checked) {
+                        selectedWeekdays.push(current);
+                    }
+                }
+                if (selectedWeekdays.length > 0) {
+                    rules.getInstance().addRule(new Rule(from + to + selectedWeekdays.join(""), {
+                        from : from,
+                        to : to,
+                        weekdays : selectedWeekdays
+                    }, "doNotTrack"), updateTrackList);
+                }
+            }
+
+            function updateTrackList() {
+                rules.getInstance().getRulesByType("doNotTrack", function(rules) {
+                    var list = document.getElementById("notTrackList");
+                    while (list.firstChild) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < rules.length; i++) {
+                        var rule = rules[i];
+                        var from = rule.value.from;
+                        var to = rule.value.to;
+                        var weekdays = rule.value.weekdays;
+                        var element = document.createElement("li");
+                        element.innerText = "Do not track me from " + from + " to " + to + " ";
+                        if (weekdays) {
+                            element.innerText += "on " + weekdays.join(",") + " ";
+                        }
+                        var deleteButton = document.createElement("a");
+                        deleteButton.setAttribute("href", "#");
+                        deleteButton.className = "tiny button round";
+                        deleteButton.setAttribute("onclick", "rules.getInstance().deleteRule('" + rule.name + "', updateTrackList);");
+                        deleteButton.innerText = "Delete";
+                        element.appendChild(deleteButton);
+                        list.appendChild(element);
+                    }
+                });
+            }
+
+            function updateTable() {
+                var tbody = document.getElementById("userModel").getElementsByTagName("tbody")[0];
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                userModel.getInstance().getAll(function(items) {
+                    for (var i in items) {
+                        var item = items[i];
+                        var row = document.createElement("tr");
+                        row.id = "row_" + item.name;
+                        var name = document.createElement("td");
+                        var value = document.createElement("td");
+                        var stored = document.createElement("td");
+                        var actions = document.createElement("td");
+                        name.textContent = item.name;
+                        value.textContent = item.value;
+                        stored.textContent = item.server.send ? "Server: " + item.server.accuracy + "% accuracy and use " + item.server.use : "Your computer";
+                        actions.appendChild(createLinkButton("Edit", "displayInput", item.name));
+                        actions.appendChild(createLinkButton("Delete", "deleteUM", item.name));
+                        row.appendChild(name);
+                        row.appendChild(value);
+                        row.appendChild(stored);
+                        row.appendChild(actions);
+                        tbody.appendChild(row);
+                    }
+                });
+            }
+
+            function createLinkButton(text, javascriptFunction, itemName) {
+                var btn = document.createElement("a");
+                btn.className = "tiny radius button umButton";
+                btn.setAttribute("href", "javascript:void(0)");
+                btn.textContent = text;
+                btn.setAttribute("onclick", javascriptFunction + "('" + itemName + "')");
+                return btn;
+            }
+
+            function updateMainSlider() {
+                var slider = document.getElementById("privacyvspersonalization");
+                rules.getInstance().getRule("default", function(value) {
+                    if (value && value != null) {
+                        slider.value = value.value;
+                    } else {
+                        value = 1;
+                        slider.value = value;
+                        save();
+                    }
+                    document.getElementById("privacyExplanation").textContent = privacyLevels[slider.value];
+                    var rulesDiv = document.getElementById("divToServer");
+                    var trackingDiv = document.getElementById("divTracking");
+                    if (slider.value == 0) {
+                        rulesDiv.style.display = "none";
+                        trackingDiv.style.display = "none";
+                    } else if (slider.value == 2) {
+                        rulesDiv.style.display = "block";
+                        trackingDiv.style.display = "block";
+                    } else {
+                        rulesDiv.style.display = "none";
+                        trackingDiv.style.display = "block";
+                    }
+                    userModel.getInstance().updateServerValues(updateTable);
+                });
+            }
+
+            $(function() {
+                wibaf.getInstance().init(function() {
+                    $(document).foundation();
+                    $(".dateTimePicker").datetimepicker({
+                        format : 'd/m/Y H:i',
+                        mask : true
+                    });
+                    $(".timePicker").datetimepicker({
+                        datepicker : false,
+                        format : 'H:i',
+                        mask : true
+                    });
+                    updateTable();
+                    updateMainSlider();
+                    updateRuleList();
+                    updateTrackList();
+                    document.getElementById("privacyvspersonalization").onchange = function(e) {
+                        save(updateMainSlider);
+                    };
+                });
+            });
+        </script>
+    </body>
+</html>
