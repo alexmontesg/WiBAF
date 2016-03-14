@@ -1,6 +1,10 @@
 #WiBAF: Within Browser Adaptation Framework
 
-[TOC]
+[Introduction](#introduction)
+[Documentation](#documentation)
+&nbsp;&nbsp;[Adaptation Model](#adaptation-model)
+&nbsp;&nbsp;&nbsp;&nbsp;[Targeting](#targeting)
+&nbsp;&nbsp;&nbsp;&nbsp;[Adaptation rules](#adaptation-rules)
 
 ##Introduction
 
@@ -80,3 +84,19 @@ If some rules are to be applied only for specific contexts **and** specific user
     }
 
 If some rules are to be applied only for specific contexts **or** specific users, the selections of users and contexts can be separated by commas.
+
+####Adaptation rules
+Once the DOM nodes (and optionally users and contexts) are targeted, it is the time to define the adaptation rules to achieve the desired adaptation effect. This is also done with CSS syntax i.e. `property: value;`. Any [CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) is valid. However these have some limitations, that is why we are extending this list of properties with the ones shown in the following table:
+Property Name | Possible Values | Description
+----------|----------|----------
+`add-class`|class|Adds the specified class to the selected nodes.
+`append`|HTML code or a url preceeded by `url:` that contains a valid HTML code|Appends HTML code to the selected node.
+`check_prerequisites`|prerequisiteSelector, suffix|For each node selected by prerequisiteSelector, checks if its textual content + suffix has been accessed and if so it is removed.
+`delete-class`|class|Deletes the specified class from the selected nodes.
+`delete-node`|boolean|Deletes the selected node, the boolean indicate whether the content inside the node should be kept (`true`) or deleted (`false`).
+`insert`|HTML code or a url preceeded by `url:` that contains a valid HTML code|Similar to `append`, but it replaces the previous content of the node.
+`insert-um`|Name of the user model variable|Inserts the user model value of the specified variable in the selected node.
+`reorder-nodes`|Nodes reordering strategy|Reorders the subnodes of the selected node according to a strategy.
+`stretchtext`|Integer, handlerMore, handlerLess, classname, hashAnchor|Applies stretchtext to the selected node. It takes one number of characters to show in the first parameter, then it requires two handlers in which the user can click to expand or contract the rest of the content. It also requires a classname to add to the hidden content so that the system can automatically hide/show it. Finally it needs the hash part of the url that will be linked by the handler.
+`trim-at`|Integer|Trims the text contained in the node at a specified position.
+`update-attribute`|attr, val|Sets the attribute named `attr` to be equal to `val` in the selected node.
