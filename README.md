@@ -158,4 +158,19 @@ After a event is defined, the operations that should be done when such event is 
     }
 The operation `init` has two alternatives: `init_if_blank`, which will only initialize the variable if it does not exist or `init_update`, which will initialize the variable if it does not exist or update it if it does. In real applications, you will prefer `init_if_blank` or `init_update` over `init` because of its more expressive power.
 
+####Other important considerations
+After the user modelling file has been coded, it has to be linked to the HTML. To do so the following line has to be added before `</head>`
 
+    <head>
+        ...
+        <link href="modelling.umf" rel="prefetch" type="text/umf" />
+        ...
+    </head>
+
+As it happened with adaptation files, several adaptation files could be linked to one webpage and those would be interpreted in order.
+
+If a `document.load` event is defined, this will be executed as soon as possible, but its execution is not guaranteed to finish before the adaptation starts. However, if you need to keep track of the accessed webpages, you do not need to do it in the user modelling file, as this is done automatically by `wibaf.js` , and it is guaranteed to be updated before the adaptation starts.
+
+The user model is stored in the IndexedDB of your browser or in the local storage if IndexedDB is not supported. You can check it at everytime using your browser's developer tools.
+
+The modelling file is cached by the browser. Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
