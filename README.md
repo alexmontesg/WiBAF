@@ -174,3 +174,47 @@ If a `document.load` event is defined, this will be executed as soon as possible
 The user model is stored in the IndexedDB of your browser or in the local storage if IndexedDB is not supported. You can check it at everytime using your browser's developer tools.
 
 The modelling file is cached by the browser. Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+
+###Domain Model
+The definition of a domain model is not yet fully developed, nor in functionality neither integrated with `wibaf.js`. If you take a look at the milkyway example, you can see all the functionality that is currently implemented but we pretend to go further.
+
+To express the domain model any JSON file would work for now. However, you are encouraged to use [JSON-LD](http://www.w3.org/TR/json-ld/) as it extends the capabilities of JSON and is recommended by the [W3C](http://www.w3.org/).
+
+In the HTML template you can use `{{JSON_key}}`. This will be replaced by the value of that key in the JSON file. If that value is a URL to another jsonld file, you can use the . operator to access to a property of that jsonld file, for instance `parent.title`.
+
+Conditional fragments are also allowed as well as the operators `!` , `==` , `!=` , `&gt;` and `&lt;` . The following piece of code will check if the key `description_advanced` exists. If it does it will be inserted, otherwise the key `description` will be placed. Notice the question mark before the curly brackets to open the condition and the slash and question mark to close it.
+
+    {{?description_advanced}}
+        {{description_advanced}}
+    {{/?description_advanced}}
+    {{?!description_advanced}}
+        {{description}}
+    {{/?description_advanced}}
+
+Similarly, loops can be inserted using a hash simbol instead of a question mark. They have the limitation of being only possible to iterate over lists of URLs to other jsonld files. The tags inside a loop will refer to the jsonld file contained in the list, not to the global one. The code below will create a list with the titles of the jsonld files contained in the list `hasPart`.
+
+    <ul>
+        {{#hasPart}}
+            <li>{{title}}</li>
+        {{/#hasPart}}
+    </ul>
+
+It is intended loops and conditions could be nested in the future. However, this is not yet possible with the exception of nesting a loop inside of a condition.
+
+For the domain model to be loaded you will need to specify the path to the jsonld file (without the file extension) and call the function `fill_from_dm`. In this function you can also specify what to do after the data from the domain has been loaded in the template. Usually, it is interesting to initialize `wibaf.js` in this point and not before. If you take a look at the milkyway example there is more code, which is used to create the reading data from another file. However, the simplest piece of code to initialize `wibaf.js` when using templates is the following one.
+
+    <body>
+        ...
+        <!-- Notice that wibaf.js depends on jQuery -->
+        <script type="text/javascript" src=//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="wibaf.js"></script>
+        <script>
+            ( function() {
+                fill_from_dm(concept, function() {
+                    wibaf.getInstance().init(function() {
+                        <!-- Code to be executed after the adaptation -->
+                    });
+                }
+            }());
+        </script>
+    </body>
