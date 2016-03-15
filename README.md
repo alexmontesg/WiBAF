@@ -110,6 +110,10 @@ After the adaptation file has been defined, it has to be linked to the HTML. To 
         <link href="adaptation.amf" rel="prefetch" type="text/amf" />
         ...
     </head>
+Several adaptation files could be linked to one webpage. As with CSS, they would be interpreted in order.
+
+The adaptation files are cached by the browser. Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+
 Javascript code can be inserted into the adaptation file. To do so it should be placed between curly brackets and with a hash as a prefix. The code will be executed before the interpretation of the file starts and the fragment code will be replaced for its result.
 
     @user(#{document.title.replace(/\s+/g, "-").replace(/[\.\(\);;,\"]/g, "").trim().toLowerCase()}-accessed-lt: 2) {
@@ -120,7 +124,38 @@ This code would be interpreted in a page with title *Hello world* as
     @user(hello-world-accessed-lt: 2) {
         # Code
     }
-Several adaptation files could be linked to one webpage. As with CSS, they would be interpreted in order.
 
-The adaptation file is cached by the browser. Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+###User Model
+To create a user model, a different file is used. To express how the user model should be built, a extended subset of [DiMML](http://www.dimml.io/) is used. In this tutorial we will distinguish two parts namely, event definition and event operations.
+####Event definition
+The most basic definition of an event will consist on the keyword `event` followed by the javascript code to select where the event will be applied and the name of the event.
+
+    event simple_click = `document.getElementsByTagName('button').click`
+Sometimes, the value of a variable has to be collected, in the code below we show how to capture, for instance, the id of the clicked button.
+
+    event collection_click = `document.getElementsByTagName('button').click` => `{btn_id: this.id}`
+Finally, conditional execution of events can also be specified if and only if no variables are collected. This is done as shown in the code below (notice that there are no curly brackets).
+
+    event condition_click = `document.getElementsByTagName('button').click` => `this.id == 'button1'`
+####Event operations
+After a event is defined, the operations that should be done when such event is triggered can be coded. This is done as shown in the example below.
+
+    on collection_click {
+        inc btn_id; # Increments by one the UM variable with the name collected in btn_id
+        add #var, 15; # Increments the UM variable named "var" by 15
+        sub #var, 15; # Decrements the UM variable named "var" by 15
+        dec #var1; # Decrements by 1 the UM variable named "var1"
+        update #var2, 2; # Sets to 2 the value of the UM variable named "var2"
+        add_obs #var3, 3; # Adds the ovservation 3 to the UM variable named "var3".
+                          # The value of "var3" is the average of all the observations.
+        init #var4, btn_id, "text", "http://example.com/wibaf", "Feedback", "Group";
+            # Initializes the variable named "var4"
+            # to the value collected in btn_id".
+            # "text" is the type of variable.
+            # The url is an identifier.
+            # "Feedback" represents feedback given to the user about the variable
+            # "Group" is the domain of the variable.
+    }
+The operation `init` has two alternatives: `init_if_blank`, which will only initialize the variable if it does not exist or `init_update`, which will initialize the variable if it does not exist or update it if it does. In real applications, you will prefer `init_if_blank` or `init_update` over `init` because of its more expressive power.
+
 
