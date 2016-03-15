@@ -1,15 +1,5 @@
 #WiBAF: Within Browser Adaptation Framework
 
-[Introduction](#introduction)
-
-[Documentation](#documentation)
-
-&nbsp;&nbsp;[Adaptation Model](#adaptation-model)
-
-&nbsp;&nbsp;&nbsp;&nbsp;[Targeting](#targeting)
-
-&nbsp;&nbsp;&nbsp;&nbsp;[Adaptation rules](#adaptation-rules)
-
 ##Introduction
 
 The world wide web is an enormous hyperspace where users face the problem of information overload. Adaptive web based systems try to tackle this problem by displaying only the information that is really meaningful for the user. These systems need to collect data from the user in order to personalize the information. The set of information that the system has collected about a user is called the User Model.
@@ -105,3 +95,32 @@ Property Name | Possible Values | Description
 `stretchtext`|Integer, handlerMore, handlerLess, classname, hashAnchor|Applies stretchtext to the selected node. It takes one number of characters to show in the first parameter, then it requires two handlers in which the user can click to expand or contract the rest of the content. It also requires a classname to add to the hidden content so that the system can automatically hide/show it. Finally it needs the hash part of the url that will be linked by the handler.
 `trim-at`|Integer|Trims the text contained in the node at a specified position.
 `update-attribute`|attr, val|Sets the attribute named `attr` to be equal to `val` in the selected node.
+
+The following table explains the reordering strategies implemented so far.
+
+Strategy Name | Description
+----------|----------
+`data-order`|Reorders using a numeric value specified in the data-order attribute of the elements to be reordered. Notice that the [data-* attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes) are valid for every element since HTML5.
+
+####Other important considerations
+After the adaptation file has been defined, it has to be linked to the HTML. To do so the following line has to be added before `</head>`
+
+    <head>
+        ...
+        <link href="adaptation.amf" rel="prefetch" type="text/amf" />
+        ...
+    </head>
+Javascript code can be inserted into the adaptation file. To do so it should be placed between curly brackets and with a hash as a prefix. The code will be executed before the interpretation of the file starts and the fragment code will be replaced for its result.
+
+    @user(#{document.title.replace(/\s+/g, "-").replace(/[\.\(\);;,\"]/g, "").trim().toLowerCase()}-accessed-lt: 2) {
+        # Code
+    }
+This code would be interpreted in a page with title *Hello world* as
+
+    @user(hello-world-accessed-lt: 2) {
+        # Code
+    }
+Several adaptation files could be linked to one webpage. As with CSS, they would be interpreted in order.
+
+The adaptation file is cached by the browser. Keep it in mind when you are developing, if you make any changes and they do not appear when you refresh the webpage, you can refresh or clear the cache.
+
